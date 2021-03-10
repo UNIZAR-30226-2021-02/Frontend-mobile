@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
+import React, { Component, useState } from "react";
 import {
   View,
   SafeAreaView,
@@ -13,8 +14,11 @@ import {
   ScrollView,
 } from "react-native";
 
+import { Login } from "../util/Login";
 import Colors from "../constants/colors";
 const screen = Dimensions.get("window");
+var username;
+var password;
 
 export default ({ navigation }) => {
   return (
@@ -26,7 +30,11 @@ export default ({ navigation }) => {
         />
         <View style={styles.container}>
           <Text style={styles.textH1}>Username</Text>
-          <TextInput style={styles.textView} placeholder="Username" />
+          <TextInput
+            style={styles.textView}
+            placeholder="Username"
+            //onChangeText={(username) => (username = username)}
+          />
         </View>
         <View style={styles.container}>
           <Text style={styles.textH1}>Password</Text>
@@ -40,6 +48,8 @@ export default ({ navigation }) => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
+              console.log(username);
+
               navigation.navigate("HomeScreen");
             }}
           >
