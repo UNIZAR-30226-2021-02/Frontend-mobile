@@ -9,9 +9,11 @@ import {
   Dimensions,
   TouchableOpacity,
   StatusBar,
+  TextInput,
 } from "react-native";
 
 import HomeScreen from "./Home";
+import RegisterScreen from "./Register";
 import Colors from "../constants/colors";
 const screen = Dimensions.get("window");
 
@@ -19,18 +21,13 @@ export default ({ navigation }) => {
   return (
     <SafeAreaView style={styles.backgrdContainer}>
       <StatusBar backgroundColor={Colors.background} barstyle="dark-content" />
-      <Image
-        source={require("../assets/images/loging_img.png")}
-        //source={require("../assets/images/16139197173879735.png")}
-        style={styles.image}
-        resizeMode="contain"
-      />
-      <Text style={styles.textH1}>Chatea y colabora</Text>
       <View style={styles.container}>
-        <Text style={styles.textH2}>
-          Une tus conversaciones, amigos y archivos, todo en una única red
-          social. Una nueva forma de mejorar tu productividad y organización
-        </Text>
+        <Text style={styles.textH1}>Username</Text>
+        <TextInput style={styles.textView}>Username</TextInput>
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.textH1}>Password</Text>
+        <TextInput style={styles.textView}>Password</TextInput>
       </View>
       <TouchableOpacity
         style={styles.button}
@@ -39,6 +36,14 @@ export default ({ navigation }) => {
         }}
       >
         <Text style={styles.textButton}>Sign in</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("HomeScreen");
+        }}
+      >
+        <Text style={styles.textButton}>Register</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -71,10 +76,9 @@ const styles = StyleSheet.create({
     width: 200,
   },
   textH1: {
-    top: -130,
-    fontWeight: "bold",
+    top: 10,
     color: Colors.white,
-    fontSize: 32,
+    fontSize: 20,
     paddingVertical: 16,
   },
   textH2: {
@@ -82,6 +86,10 @@ const styles = StyleSheet.create({
     color: Colors.tranparentwhite,
     fontSize: 14,
     paddingVertical: 16,
+  },
+  textView: {
+    color: Colors.grey,
+    backgroundColor: Colors.white,
   },
   textButton: {
     fontSize: 20,
