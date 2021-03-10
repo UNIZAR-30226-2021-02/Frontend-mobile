@@ -49,8 +49,9 @@ export default ({ navigation }) => {
             style={styles.button}
             onPress={() => {
               console.log(username);
-
-              navigation.navigate("HomeScreen");
+              if (Login("admin", "1234")) {
+                navigation.navigate("HomeScreen");
+              }
             }}
           >
             <Text style={styles.textButton}>Sign in</Text>

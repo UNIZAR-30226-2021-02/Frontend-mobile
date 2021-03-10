@@ -12,10 +12,10 @@ const checkUser = (usr, pwd) => {
   return false;
 };
 
-const login = async (usr, pwd) => {
+const Login = async (usr, pwd) => {
   if (checkUser(usr, pwd)) {
     try {
-      await AsyncStorage.setItem("apiKey", 1);
+      await AsyncStorage.setItem("apiKey", "1");
       alert("Logged in");
       return true;
     } catch (e) {
@@ -27,7 +27,7 @@ const login = async (usr, pwd) => {
   }
 };
 
-const checkLogged = async () => {
+const CheckLogged = async () => {
   try {
     const isLoggedIn = await AsyncStorage.getItem("apiKey");
     if (value !== null) {
@@ -39,7 +39,7 @@ const checkLogged = async () => {
   }
 };
 
-const logout = () => {
+const Logout = () => {
   removeValue = async () => {
     try {
       await AsyncStorage.removeItem("apiKey");
@@ -50,4 +50,4 @@ const logout = () => {
     console.log("Done.");
   };
 };
-export { login, checkLogged, logout };
+export { Login, CheckLogged, Logout };
