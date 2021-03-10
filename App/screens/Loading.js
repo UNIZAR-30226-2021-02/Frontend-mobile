@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import HomeScreen from "./Home";
 import LoginScreen from "./Login";
+import { CheckLogged } from "../util/Login";
 import Colors from "../constants/colors";
 
 class LoadingScreen extends Component {
@@ -15,13 +16,11 @@ class LoadingScreen extends Component {
   }
 
   checkIfLoggedIn = () => {
-    /*
-    firebase.auth().onAuthStateChanged(
-      function (user) {
-        if (user) {
-          this.props.navigation.navigate("HomeScreen");
-        } else {*/
-    this.props.navigation.navigate("LoginScreen");
+    if (CheckLogged()) {
+      this.props.navigation.navigate("HomeScreen");
+    } else {
+      this.props.navigation.navigate("LoginScreen");
+    }
   }; /*
       }.bind(this)
     );

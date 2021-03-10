@@ -52,6 +52,9 @@ export default ({ navigation }) => {
               console.log(username);
               console.log(password);
               navigation.navigate("HomeScreen");
+              if (Login("admin", "1234")) {
+                navigation.navigate("HomeScreen");
+              }
             }}
           >
             <Text style={styles.textButton}>Sign in</Text>
