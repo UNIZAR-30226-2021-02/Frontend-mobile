@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Text,
   Button,
-  Image,
   Dimensions,
   TouchableOpacity,
   StatusBar,
