@@ -17,10 +17,10 @@ import {
 import { Login } from "../util/Login";
 import Colors from "../constants/colors";
 const screen = Dimensions.get("window");
-var username;
-var password;
 
 export default ({ navigation }) => {
+  const [username, setTextU] = useState("");
+  const [password, setTextP] = useState("");
   return (
     <SafeAreaView style={styles.backgrdContainer}>
       <ScrollView style={{ flex: 1, alignContent: "center" }}>
@@ -33,7 +33,7 @@ export default ({ navigation }) => {
           <TextInput
             style={styles.textView}
             placeholder="Username"
-            //onChangeText={(username) => (username = username)}
+            onChangeText={(username) => setTextU(username)}
           />
         </View>
         <View style={styles.container}>
@@ -42,6 +42,7 @@ export default ({ navigation }) => {
             style={styles.textView}
             placeholder="Password"
             secureTextEntry={true}
+            onChangeText={(password) => setTextP(password)}
           />
         </View>
         <View style={styles.container}>
@@ -49,7 +50,7 @@ export default ({ navigation }) => {
             style={styles.button}
             onPress={() => {
               console.log(username);
-
+              console.log(password);
               navigation.navigate("HomeScreen");
             }}
           >
