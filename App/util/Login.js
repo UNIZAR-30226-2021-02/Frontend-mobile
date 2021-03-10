@@ -5,14 +5,20 @@ const userInfo = { username: "admin", password: "1234" };
 
 //comprueba que el usuario es válido
 const checkUser = (usr, pwd) => {
+  console.log("holi");
+  console.log("holsssssi");
+  console.log(usr);
   //TODO llamada a la api
   if (usr === userInfo.username && pwd === userInfo.password) {
+    console.log(`debe entrar ${usr} ${userInfo.username}`);
     return true;
   }
+  console.log("false");
   return false;
 };
 
 const Login = async (usr, pwd) => {
+  console.log("hude3ibwh");
   if (checkUser(usr, pwd)) {
     try {
       await AsyncStorage.setItem("apiKey", "1");
@@ -24,6 +30,7 @@ const Login = async (usr, pwd) => {
     }
   } else {
     alert(":c");
+    return false;
   }
 };
 
