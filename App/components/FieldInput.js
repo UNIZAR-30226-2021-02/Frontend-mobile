@@ -34,18 +34,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export const ConversionInput = ({ text, value, onButtonPress, ...props }) => {
-  const contStyles = [styles.container];
-  if (props.editable === false) {
-    contStyles.push(styles.containerDisabled);
+const isHiden = (hide) => {
+  if (hide) {
+    return (
+      <TouchableOpacity>
+        <Text>Changeee</Text>
+      </TouchableOpacity>
+    );
   }
+  return null;
+};
+
+export const FieldInput = ({ title, icon, onButtonPress, secure }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onButtonPress} style={styles.button}>
-        <Text style={styles.buttonText}>{text}</Text>
-      </TouchableOpacity>
-      <TextInput style={styles.input} value={value} {...props} />
+      <TextInput style={styles.input} value={value} secureTextEntry={secure} />
+      isHidden(secure)
     </View>
   );
 };
