@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   StatusBar,
   TextInput,
+  ScrollView,
 } from "react-native";
 
 import Colors from "../constants/colors";
@@ -18,31 +19,44 @@ const screen = Dimensions.get("window");
 export default ({ navigation }) => {
   return (
     <SafeAreaView style={styles.backgrdContainer}>
-      <StatusBar backgroundColor={Colors.background} barstyle="dark-content" />
-      <View style={styles.container}>
-        <Text style={styles.textH1}>Username</Text>
-        <TextInput style={styles.textView}>Username</TextInput>
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.textH1}>Password</Text>
-        <TextInput style={styles.textView}>Password</TextInput>
-      </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate("HomeScreen");
-        }}
-      >
-        <Text style={styles.textButton}>Sign in</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate("RegisterScreen");
-        }}
-      >
-        <Text style={styles.textButton}>Register</Text>
-      </TouchableOpacity>
+      <ScrollView style={{ flex: 1, alignContent: "center" }}>
+        <StatusBar
+          backgroundColor={Colors.background}
+          barstyle="dark-content"
+        />
+        <View style={styles.container}>
+          <Text style={styles.textH1}>Username</Text>
+          <TextInput style={styles.textView} placeholder="Username" />
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.textH1}>Password</Text>
+          <TextInput
+            style={styles.textView}
+            placeholder="Password"
+            secureTextEntry={true}
+          />
+        </View>
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate("HomeScreen");
+            }}
+          >
+            <Text style={styles.textButton}>Sign in</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate("RegisterScreen");
+            }}
+          >
+            <Text style={styles.textButton}>Register</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -56,19 +70,14 @@ const styles = StyleSheet.create({
   },
   container: {
     width: screen.width * 0.75,
-  },
-  image: {
-    top: -50,
-    //justifyContent: "center",
-    //position: "absolute",
-    width: screen.width * 0.65,
-    height: screen.height * 0.65,
+    height: screen.height * 0.15,
   },
   button: {
+    position: "absolute",
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "space-evenly",
-    top: -60,
+    top: 10,
     backgroundColor: Colors.white,
     height: 40,
     width: 200,

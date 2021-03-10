@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Text,
   useState,
+  ScrollView,
 } from "react-native";
 
 const screen = Dimensions.get("window");
@@ -14,26 +15,20 @@ const state = { text: "Ususario" };
 export default ({ navigation }) => {
   return (
     <SafeAreaView style={styles.backgrdContainer}>
-      <TextInput
-        style={styles.input}
-        onFocus={() => {
-          console.log("UWU");
-          state.text = "";
-        }}
-      >
-        {state.text}
-      </TextInput>
-      <TextInput secureTextEntry={true}>Contraseña</TextInput>
-      <TextInput secureTextEntry={true}>Contraseña</TextInput>
-      <TextInput>Mail</TextInput>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate("LoginScreen");
-        }}
-      >
-        <Text style={styles.text}>Go to login</Text>
-      </TouchableOpacity>
+      <ScrollView style={{ flex: 1, alignContent: "center" }}>
+        <TextInput placeholder="Mail" />
+        <TextInput placeholder="Username" />
+        <TextInput secureTextEntry={true} placeholder="Password" />
+        <TextInput secureTextEntry={true} placeholder="Repeat Password" />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("LoginScreen");
+          }}
+        >
+          <Text style={styles.text}>Go to login</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </SafeAreaView>
   );
 };
