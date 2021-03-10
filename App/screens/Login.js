@@ -12,7 +12,6 @@ import {
   TextInput,
 } from "react-native";
 
-import FieldInput from "../components/FieldInput";
 import Colors from "../constants/colors";
 const screen = Dimensions.get("window");
 
