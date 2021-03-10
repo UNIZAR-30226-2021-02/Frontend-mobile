@@ -12,8 +12,7 @@ import {
   TextInput,
 } from "react-native";
 
-import HomeScreen from "./Home";
-import RegisterScreen from "./Register";
+import FieldInput from "../components/FieldInput";
 import Colors from "../constants/colors";
 const screen = Dimensions.get("window");
 
@@ -40,7 +39,7 @@ export default ({ navigation }) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          navigation.navigate("HomeScreen");
+          navigation.navigate("RegisterScreen");
         }}
       >
         <Text style={styles.textButton}>Register</Text>
