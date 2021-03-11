@@ -53,7 +53,6 @@ export default ({ navigation }) => {
               const res = Login(username, password);
               console.log(res);
               if (res) {
-                console.log("k haces aki sapo");
                 navigation.navigate("HomeScreen");
               }
             }}

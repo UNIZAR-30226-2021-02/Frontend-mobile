@@ -1,6 +1,6 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, Button } from "react-native";
-import { Logout } from "../util/Login";
+import { Logout, getProtectedQuote } from "../util/Login";
 
 const styles = StyleSheet.create({
   container: {
@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
 export default ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
+      <Button title="get" onPress={() => getProtectedQuote()} />
       <Button
         title="Sign out"
         onPress={() => {

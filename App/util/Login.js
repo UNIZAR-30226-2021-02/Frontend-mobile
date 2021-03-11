@@ -6,32 +6,79 @@ const userInfo = { username: "admin", password: "1234" };
 //comprueba que el usuario es válido
 const checkUser = (usr, pwd) => {
   console.log("holi");
-  console.log("holsssssi");
+
   console.log(usr);
   //TODO llamada a la api
-  if (usr === userInfo.username && pwd === userInfo.password) {
+  /* if (usr === userInfo.username && pwd === userInfo.password) {
     console.log(`debe entrar ${usr} ${userInfo.username}`);
     return true;
-  }
+  }*/
+
   console.log("false");
   return false;
 };
 
-const Login = async (usr, pwd) => {
+const userLogin = async () => {
+  //const value = 1;
+  //if (value == 1) {
+  // if validation fails, value will be null
   console.log("hude3ibwh");
-  if (checkUser(usr, pwd)) {
-    try {
-      await AsyncStorage.setItem("apiKey", "1");
-      alert("Logged in");
-      return true;
-    } catch (e) {
-      alert("error saving data");
-      return false;
-    }
-  } else {
-    alert(":c");
-    return false;
+  fetch("http://83.40.114.7:8082/api/login", {
+    method: "POST",
+    headers: {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      nombre: "pablo",
+      password: "1234",
+    }),
+  })
+    .then((response) => {
+      console.log(
+        "he mandado " +
+          JSON.stringify({
+            nombre: "pablo",
+            password: "1234",
+          })
+      );
+
+      return response.json();
+    })
+    .then(async (responseData) => {
+      try {
+        console.log(responseData);
+        await AsyncStorage.setItem("apiKey", responseData.token);
+      } catch (e) {
+        console.log(e);
+      }
+    })
+    .done();
+  // }
+};
+
+const getProtectedQuote = async () => {
+  var DEMO_TOKEN = await AsyncStorage.getItem("apiKey");
+  console.log();
+  fetch("http://83.40.114.7:8082/api/all", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + DEMO_TOKEN,
+    },
+  })
+    .then((response) => response.text())
+    .then((responseData) => {
+      console.log(responseData);
+    })
+    .done();
+};
+
+const Login = async (usr, pwd) => {
+  userLogin();
+  if (CheckLogged()) {
+    return true;
   }
+  return false;
 };
 
 const CheckLogged = async () => {
@@ -57,4 +104,4 @@ const Logout = () => {
     console.log("Done.");
   };
 };
-export { Login, CheckLogged, Logout };
+export { Login, CheckLogged, Logout, getProtectedQuote };
