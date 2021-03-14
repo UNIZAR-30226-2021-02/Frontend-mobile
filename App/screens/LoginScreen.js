@@ -54,9 +54,12 @@ export default ({ navigation }) => {
                 navigation.navigate("HomeScreen");
               }
               */
-            Login(username, password);
+            //Login(username, password);
 
-            if (CheckLogged()) {
+            /* if (CheckLogged()) {
+              navigation.navigate("HomeScreen");
+            }*/
+            if (Login(username, password)) {
               navigation.navigate("HomeScreen");
             }
           }}

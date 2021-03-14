@@ -1,10 +1,11 @@
 import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import apiConst from "../constants/apiConst";
+import apiUris from "../constants/apiUris";
+import apiStatus from "../constants/apiStatus";
 
 //Pide el token al servidor para el usuario "usr" con contraseña "pswd"
 const userRegister = async (usr, pswd, mail) => {
-  fetch(apiConst.register, {
+  fetch(apiUris.register, {
     method: "POST",
     headers: {
       Accept: "*/*",
@@ -40,7 +41,7 @@ const userRegister = async (usr, pswd, mail) => {
 
 //Pide el token al servidor para el usuario "usr" con contraseña "pswd"
 const userLogin = async (usr, pswd) => {
-  fetch(apiConst.login, {
+  fetch(apiUris.login, {
     method: "POST",
     headers: {
       Accept: "*/*",
@@ -52,10 +53,13 @@ const userLogin = async (usr, pswd) => {
     }),
   })
     .then((response) => {
-      if (!response.ok) {
-        catchError(response);
+      console.log("respuesta " + response.status);
+      if (response.status != apiStatus.ok) {
+        console.log("No es ok :c");
+        return null;
       } else {
         console.log("Iniciando sesión como " + usr);
+
         return response.json();
       }
     })
@@ -87,20 +91,22 @@ const Register = async (usr, pwd, mail) => {
 
 //Función que permite iniciar sesión
 const Login = async (usr, pwd) => {
-  console.log("holi");
-  userLogin(
-    usr,
-    pwd
-  ); /*
-    .then((v) => {
-      if (CheckLogged()) {
-        return true;
-      }
-    })
-    .catch((reason) => {
-      console.log(reason);
-      return false;
-    });*/
+  try {
+    console.log("holi");
+    userLogin(usr, pwd)
+      .then((v) => {
+        if (CheckLogged()) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .catch((reason) => {
+        console.log(reason);
+        return false;
+      });
+  } catch (error) {}
+  return false;
 };
 
 //comprueba si el usuario tiene una sesión activa
@@ -109,6 +115,7 @@ const CheckLogged = async () => {
     const isLoggedIn = await AsyncStorage.getItem("apiKey");
     if (value !== null) {
       // value previously stored
+      console.log("tenemos token");
       return true;
     } else {
       return false;
