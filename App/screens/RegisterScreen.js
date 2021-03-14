@@ -80,11 +80,12 @@ export default ({ navigation }) => {
             console.log(username);
             console.log(passwordA);
             console.log(passwordB);
-            const res = Register(username, passwordA, mail);
-            console.log(res);
-            if (res) {
-              navigation.navigate("HomeScreen");
-            }
+            Register(username, passwordA, mail).then((v) => {
+              console.log(v);
+              if (v) {
+                navigation.navigate("HomeScreen");
+              }
+            });
           }}
         >
           <Text style={styles.text}>Register</Text>

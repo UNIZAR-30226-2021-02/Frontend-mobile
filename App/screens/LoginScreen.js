@@ -22,35 +22,31 @@ export default ({ navigation }) => {
   const [password, setTextP] = useState("");
   return (
     <SafeAreaView style={styles.backgrdContainer}>
-      <ScrollView style={{ flex: 1, alignContent: "center" }}>
-        <StatusBar
-          backgroundColor={Colors.background}
-          barstyle="dark-content"
+      <StatusBar backgroundColor={Colors.background} barstyle="dark-content" />
+      <View style={styles.container}>
+        <Text style={styles.textH1}>Username</Text>
+        <TextInput
+          style={styles.textView}
+          placeholder="Username"
+          onChangeText={(username) => setTextU(username)}
         />
-        <View style={styles.container}>
-          <Text style={styles.textH1}>Username</Text>
-          <TextInput
-            style={styles.textView}
-            placeholder="Username"
-            onChangeText={(username) => setTextU(username)}
-          />
-        </View>
-        <View style={styles.container}>
-          <Text style={styles.textH1}>Password</Text>
-          <TextInput
-            style={styles.textView}
-            placeholder="Password"
-            secureTextEntry={true}
-            onChangeText={(password) => setTextP(password)}
-          />
-        </View>
-        <View style={styles.container}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              console.log(username);
-              console.log(password);
-              /*
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.textH1}>Password</Text>
+        <TextInput
+          style={styles.textView}
+          placeholder="Password"
+          secureTextEntry={true}
+          onChangeText={(password) => setTextP(password)}
+        />
+      </View>
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            console.log(username);
+            console.log(password);
+            /*
               const res = Login(username, password);
               
               console.log(res);
@@ -58,28 +54,27 @@ export default ({ navigation }) => {
                 navigation.navigate("HomeScreen");
               }
               */
-              Login(username, password).then((v) => {
-                console.log(v);
-                if (v) {
-                  navigation.navigate("HomeScreen");
-                }
-              });
-            }}
-          >
-            <Text style={styles.textButton}>Sign in</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.container}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate("RegisterScreen");
-            }}
-          >
-            <Text style={styles.textButton}>Register</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+            Login(username, password).then((v) => {
+              console.log(v);
+              if (v) {
+                navigation.navigate("HomeScreen");
+              }
+            });
+          }}
+        >
+          <Text style={styles.textButton}>Sign in</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("RegisterScreen");
+          }}
+        >
+          <Text style={styles.textButton}>Register</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };

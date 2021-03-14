@@ -72,20 +72,32 @@ const userLogin = async (usr, pswd) => {
 
 //Función que permite registrarse
 const Register = async (usr, pwd, mail) => {
-  userRegister(usr, pwd, mail);
-  if (CheckLogged()) {
-    return true;
-  }
-  return false;
+  console.log("holaaa");
+  userRegister(usr, pwd, mail)
+    .then((v) => {
+      if (CheckLogged()) {
+        return true;
+      }
+    })
+    .catch((reason) => {
+      console.log(reason);
+      return false;
+    });
 };
 
 //Función que permite iniciar sesión
 const Login = async (usr, pwd) => {
-  userLogin(usr, pwd);
-  if (CheckLogged()) {
-    return true;
-  }
-  return false;
+  console.log("holi");
+  userLogin(usr, pwd)
+    .then((v) => {
+      if (CheckLogged()) {
+        return true;
+      }
+    })
+    .catch((reason) => {
+      console.log(reason);
+      return false;
+    });
 };
 
 //comprueba si el usuario tiene una sesión activa
