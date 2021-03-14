@@ -1,5 +1,6 @@
 import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import apiConst from "../constants/apiConst";
 
 const userInfo = { username: "admin", password: "1234" };
 
@@ -23,7 +24,7 @@ const userLogin = async () => {
   //if (value == 1) {
   // if validation fails, value will be null
   console.log("hude3ibwh");
-  fetch("http://83.40.114.7:8082/api/login", {
+  fetch(apiConst.login, {
     method: "POST",
     headers: {
       Accept: "*/*",
@@ -60,7 +61,7 @@ const userLogin = async () => {
 const getProtectedQuote = async () => {
   var DEMO_TOKEN = await AsyncStorage.getItem("apiKey");
   console.log();
-  fetch("http://83.40.114.7:8082/api/all", {
+  fetch(apiConst.all, {
     method: "GET",
     headers: {
       Authorization: "Bearer " + DEMO_TOKEN,
