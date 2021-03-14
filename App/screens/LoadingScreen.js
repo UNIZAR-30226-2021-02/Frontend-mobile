@@ -5,8 +5,8 @@ import {
   Text,
   ActivityIndicator,
 } from "react-native";
-import HomeScreen from "./Home";
-import LoginScreen from "./Login";
+import HomeScreen from "./HomeScreen";
+import LoginScreen from "./LoginScreen";
 import { CheckLogged } from "../util/Login";
 import Colors from "../constants/colors";
 
