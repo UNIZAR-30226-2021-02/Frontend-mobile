@@ -33,7 +33,7 @@ export default ({ navigation }) => {
   const [username, setTextU] = useState("");
   const [passwordA, setTextPA] = useState("");
   const [passwordB, setTextPB] = useState("");
-  const [isHidden, setHide] = useState("");
+  const [isnotHidden, setShow] = useState(true);
   return (
     <SafeAreaView style={styles.backgrdContainer}>
       <ScrollView style={{ flex: 1, alignContent: "center" }}>
@@ -48,9 +48,9 @@ export default ({ navigation }) => {
           onChangeText={(passwordA) => {
             setTextPA(passwordA);
             if (passwordA === passwordB) {
-              setHide(true);
+              setShow(true);
             } else {
-              setHide(false);
+              setShow(false);
             }
           }}
         />
@@ -60,15 +60,15 @@ export default ({ navigation }) => {
           onChangeText={(passwordB) => {
             setTextPB(passwordB);
             if (passwordB === passwordA) {
-              setHide(true);
+              setShow(true);
             } else {
-              setHide(false);
+              setShow(false);
             }
           }}
         />
         <DiffPWD
-          hide={isHidden}
-          onValueChange={(value) => this.setState({ isHidden: value })}
+          hide={isnotHidden}
+          onValueChange={(value) => this.setState({ isnotHidden: value })}
         >
           <Text>Nooo son diferentessss</Text>
         </DiffPWD>
