@@ -3,6 +3,39 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiConst from "../constants/apiConst";
 
 //Pide el token al servidor para el usuario "usr" con contraseña "pswd"
+const userRegister = async (usr, pswd, mail) => {
+  fetch(apiConst.register, {
+    method: "POST",
+    headers: {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      correo: mail,
+      nombre: usr,
+      password: pswd,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        catchError(response);
+      } else {
+        console.log("Registrando " + usr + " " + mail);
+        return response.json();
+      }
+    })
+    .then(async (responseData) => {
+      try {
+        await AsyncStorage.setItem("apiKey", responseData.token);
+        console.log("Sesión inciada correctamente");
+      } catch (e) {
+        console.log(e);
+      }
+    })
+    .done();
+};
+
+//Pide el token al servidor para el usuario "usr" con contraseña "pswd"
 const userLogin = async (usr, pswd) => {
   fetch(apiConst.login, {
     method: "POST",
@@ -19,19 +52,28 @@ const userLogin = async (usr, pswd) => {
       if (!response.ok) {
         catchError(response);
       } else {
-        console.log("iniciando sesión como " + usr);
+        console.log("Iniciando sesión como " + usr);
         return response.json();
       }
     })
     .then(async (responseData) => {
       try {
         await AsyncStorage.setItem("apiKey", responseData.token);
-        console.log("sesión inciada correctamente");
+        console.log("Sesión inciada correctamente");
       } catch (e) {
         console.log(e);
       }
     })
     .done();
+};
+
+//Función que permite registrarse
+const Register = async (usr, pwd, mail) => {
+  userRegister(usr, pwd, mail);
+  if (CheckLogged()) {
+    return true;
+  }
+  return false;
 };
 
 //Función que permite iniciar sesión
@@ -68,4 +110,4 @@ const Logout = () => {
     console.log("Done.");
   };
 };
-export { Login, CheckLogged, Logout };
+export { Login, Register, CheckLogged, Logout };

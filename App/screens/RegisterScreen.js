@@ -13,6 +13,7 @@ import {
   View,
 } from "react-native";
 
+import { Register } from "../util/Login";
 const screen = Dimensions.get("window");
 const state = { text: "Ususario" };
 
@@ -79,6 +80,18 @@ export default ({ navigation }) => {
             console.log(username);
             console.log(passwordA);
             console.log(passwordB);
+            const res = Register(username, passwordA, mail);
+            console.log(res);
+            if (res) {
+              navigation.navigate("HomeScreen");
+            }
+          }}
+        >
+          <Text style={styles.text}>Register</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
             navigation.navigate("LoginScreen");
           }}
         >
