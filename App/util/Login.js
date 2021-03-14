@@ -2,28 +2,8 @@ import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiConst from "../constants/apiConst";
 
-const userInfo = { username: "admin", password: "1234" };
-
-//comprueba que el usuario es válido
-const checkUser = (usr, pwd) => {
-  console.log("holi");
-
-  console.log(usr);
-  //TODO llamada a la api
-  /* if (usr === userInfo.username && pwd === userInfo.password) {
-    console.log(`debe entrar ${usr} ${userInfo.username}`);
-    return true;
-  }*/
-
-  console.log("false");
-  return false;
-};
-
-const userLogin = async () => {
-  //const value = 1;
-  //if (value == 1) {
-  // if validation fails, value will be null
-  console.log("hude3ibwh");
+//Pide el token al servidor para el usuario "usr" con contraseña "pswd"
+const userLogin = async (usr, pswd) => {
   fetch(apiConst.login, {
     method: "POST",
     headers: {
@@ -31,57 +11,39 @@ const userLogin = async () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      nombre: "pablo",
-      password: "1234",
+      nombre: usr,
+      password: pswd,
     }),
   })
     .then((response) => {
-      console.log(
-        "he mandado " +
-          JSON.stringify({
-            nombre: "pablo",
-            password: "1234",
-          })
-      );
-
-      return response.json();
+      if (!response.ok) {
+        catchError(response);
+      } else {
+        console.log("iniciando sesión como " + usr);
+        return response.json();
+      }
     })
     .then(async (responseData) => {
       try {
-        console.log(responseData);
         await AsyncStorage.setItem("apiKey", responseData.token);
+        console.log("sesión inciada correctamente");
       } catch (e) {
         console.log(e);
       }
     })
     .done();
-  // }
 };
 
-const getProtectedQuote = async () => {
-  var DEMO_TOKEN = await AsyncStorage.getItem("apiKey");
-  console.log();
-  fetch(apiConst.all, {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + DEMO_TOKEN,
-    },
-  })
-    .then((response) => response.text())
-    .then((responseData) => {
-      console.log(responseData);
-    })
-    .done();
-};
-
+//Función que permite iniciar sesión
 const Login = async (usr, pwd) => {
-  userLogin();
+  userLogin(usr, pwd);
   if (CheckLogged()) {
     return true;
   }
   return false;
 };
 
+//comprueba si el usuario tiene una sesión activa
 const CheckLogged = async () => {
   try {
     const isLoggedIn = await AsyncStorage.getItem("apiKey");
@@ -94,6 +56,7 @@ const CheckLogged = async () => {
   }
 };
 
+//sale de la sesión
 const Logout = () => {
   removeValue = async () => {
     try {
@@ -105,4 +68,4 @@ const Logout = () => {
     console.log("Done.");
   };
 };
-export { Login, CheckLogged, Logout, getProtectedQuote };
+export { Login, CheckLogged, Logout };
