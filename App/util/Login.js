@@ -88,7 +88,10 @@ const Register = async (usr, pwd, mail) => {
 //Función que permite iniciar sesión
 const Login = async (usr, pwd) => {
   console.log("holi");
-  userLogin(usr, pwd)
+  userLogin(
+    usr,
+    pwd
+  ); /*
     .then((v) => {
       if (CheckLogged()) {
         return true;
@@ -97,7 +100,7 @@ const Login = async (usr, pwd) => {
     .catch((reason) => {
       console.log(reason);
       return false;
-    });
+    });*/
 };
 
 //comprueba si el usuario tiene una sesión activa

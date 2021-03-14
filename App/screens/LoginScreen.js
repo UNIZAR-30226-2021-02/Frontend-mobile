@@ -13,7 +13,7 @@ import {
   ScrollView,
 } from "react-native";
 
-import { Login } from "../util/Login";
+import { Login, CheckLogged } from "../util/Login";
 import Colors from "../constants/colors";
 const screen = Dimensions.get("window");
 
@@ -54,12 +54,11 @@ export default ({ navigation }) => {
                 navigation.navigate("HomeScreen");
               }
               */
-            Login(username, password).then((v) => {
-              console.log(v);
-              if (v) {
-                navigation.navigate("HomeScreen");
-              }
-            });
+            Login(username, password);
+
+            if (CheckLogged()) {
+              navigation.navigate("HomeScreen");
+            }
           }}
         >
           <Text style={styles.textButton}>Sign in</Text>
