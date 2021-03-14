@@ -50,11 +50,20 @@ export default ({ navigation }) => {
             onPress={() => {
               console.log(username);
               console.log(password);
+              /*
               const res = Login(username, password);
+              
               console.log(res);
               if (res) {
                 navigation.navigate("HomeScreen");
               }
+              */
+              Login(username, password).then((v) => {
+                console.log(v);
+                if (v) {
+                  navigation.navigate("HomeScreen");
+                }
+              });
             }}
           >
             <Text style={styles.textButton}>Sign in</Text>

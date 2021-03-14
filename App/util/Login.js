@@ -19,6 +19,7 @@ const userRegister = async (usr, pswd, mail) => {
     .then((response) => {
       if (!response.ok) {
         catchError(response);
+        return null;
       } else {
         console.log("Registrando " + usr + " " + mail);
         return response.json();
@@ -26,8 +27,10 @@ const userRegister = async (usr, pswd, mail) => {
     })
     .then(async (responseData) => {
       try {
-        await AsyncStorage.setItem("apiKey", responseData.token);
-        console.log("Sesión inciada correctamente");
+        if (responseData != null) {
+          await AsyncStorage.setItem("apiKey", responseData.token);
+          console.log("Sesión inciada correctamente");
+        }
       } catch (e) {
         console.log(e);
       }
@@ -92,6 +95,8 @@ const CheckLogged = async () => {
     if (value !== null) {
       // value previously stored
       return true;
+    } else {
+      return false;
     }
   } catch (e) {
     // error reading value
