@@ -96,6 +96,7 @@ const Login = async (usr, pwd) => {
     userLogin(usr, pwd)
       .then((v) => {
         if (CheckLogged()) {
+          console.log("true");
           return true;
         } else {
           return false;
@@ -106,6 +107,7 @@ const Login = async (usr, pwd) => {
         return false;
       });
   } catch (error) {}
+  console.log("false");
   return false;
 };
 

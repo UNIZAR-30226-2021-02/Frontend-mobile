@@ -43,7 +43,7 @@ export default ({ navigation }) => {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => {
+          onPress={async () => {
             console.log(username);
             console.log(password);
             /*
@@ -59,7 +59,8 @@ export default ({ navigation }) => {
             /* if (CheckLogged()) {
               navigation.navigate("HomeScreen");
             }*/
-            if (Login(username, password)) {
+            const succes = await Login(username, password);
+            if (succes) {
               navigation.navigate("HomeScreen");
             }
           }}
