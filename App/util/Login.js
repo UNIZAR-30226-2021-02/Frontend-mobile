@@ -41,37 +41,42 @@ const createToken = async (usr, pswd, mail) => {
 
 //Pide el token al servidor para el usuario "usr" con contraseña "pswd"
 const getToken = async (usr, pswd) => {
-  fetch(apiUris.login, {
-    method: "POST",
-    headers: {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      nombre: usr,
-      password: pswd,
-    }),
-  })
-    .then((response) => {
-      console.log("respuesta " + response.status);
-      if (response.status != apiStatus.ok) {
-        console.log("No es ok :c");
-        return null;
-      } else {
-        console.log("Iniciando sesión como " + usr);
+  try {
+    fetch(apiUris.login, {
+      method: "POST",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nombre: usr,
+        password: pswd,
+      }),
+    })
+      .then((response) => {
+        console.log("respuesta " + response.status);
+        if (response.status != apiStatus.ok) {
+          console.log("No es ok :c");
+          return null;
+        } else {
+          console.log("Iniciando sesión como " + usr);
 
-        return response.json();
-      }
-    })
-    .then(async (responseData) => {
-      try {
-        await AsyncStorage.setItem("apiKey", responseData.token);
-        console.log("Sesión inciada correctamente");
-      } catch (e) {
-        console.log(e);
-      }
-    })
-    .done("token");
+          return response.json();
+        }
+      })
+      .then(async (responseData) => {
+        try {
+          await AsyncStorage.setItem("apiKey", responseData.token);
+          console.log("Sesión inciada correctamente");
+        } catch (e) {
+          console.log(e);
+        }
+      })
+      .done("token");
+  } catch (error) {
+    console.error();
+    "error en peticion http: " + error;
+  }
 };
 
 //comprueba si el usuario tiene una sesión activa
@@ -80,7 +85,7 @@ const checkToken = async () => {
   console.log("comprobamos token");
   try {
     const isLoggedIn = await AsyncStorage.getItem("apiKey");
-    if (value !== null) {
+    if (isLoggedIn !== null) {
       // value previously stored
       console.log("tenemos token");
       res = true;
@@ -88,7 +93,7 @@ const checkToken = async () => {
       console.log("no tenemos token");
     }
   } catch (e) {
-    console.log("error al comprobamos token");
+    console.error("error al comprobar token: " + e);
     // error reading value
   }
   return res;

@@ -47,7 +47,7 @@ export default ({ navigation }) => {
             console.log(username);
             console.log(password);
 
-            Login(username, password);
+            Login(username, password, navigation);
           }}
         >
           <Text style={styles.textButton}>Sign in</Text>
@@ -68,12 +68,12 @@ export default ({ navigation }) => {
 };
 
 //Función que permite iniciar sesión
-const Login = async (usr, pwd) => {
+const Login = async (usr, pwd, nav) => {
   try {
     const tok = getToken(usr, pwd);
     const isLogged = tok.then(() => checkToken());
     isLogged.then((v) => {
-      if (v) navigation.navigate("HomeScreen");
+      if (v) nav.navigate("HomeScreen");
 
       console.log("fin " + v);
     });
