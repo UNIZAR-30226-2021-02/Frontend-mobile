@@ -4,7 +4,7 @@ import apiUris from "../constants/apiUris";
 import apiStatus from "../constants/apiStatus";
 
 //Pide el token al servidor para el usuario "usr" con contraseña "pswd"
-const userRegister = async (usr, pswd, mail) => {
+const createToken = async (usr, pswd, mail) => {
   fetch(apiUris.register, {
     method: "POST",
     headers: {
@@ -40,7 +40,7 @@ const userRegister = async (usr, pswd, mail) => {
 };
 
 //Pide el token al servidor para el usuario "usr" con contraseña "pswd"
-const userLogin = async (usr, pswd) => {
+const getToken = async (usr, pswd) => {
   fetch(apiUris.login, {
     method: "POST",
     headers: {
@@ -71,72 +71,39 @@ const userLogin = async (usr, pswd) => {
         console.log(e);
       }
     })
-    .done();
-};
-
-//Función que permite registrarse
-const Register = async (usr, pwd, mail) => {
-  console.log("holaaa");
-  userRegister(usr, pwd, mail)
-    .then((v) => {
-      if (CheckLogged()) {
-        return true;
-      }
-    })
-    .catch((reason) => {
-      console.log(reason);
-      return false;
-    });
-};
-
-//Función que permite iniciar sesión
-const Login = async (usr, pwd) => {
-  try {
-    console.log("holi");
-    userLogin(usr, pwd)
-      .then((v) => {
-        if (CheckLogged()) {
-          console.log("true");
-          return true;
-        } else {
-          return false;
-        }
-      })
-      .catch((reason) => {
-        console.log(reason);
-        return false;
-      });
-  } catch (error) {}
-  console.log("false");
-  return false;
+    .done("token");
 };
 
 //comprueba si el usuario tiene una sesión activa
-const CheckLogged = async () => {
+const checkToken = async () => {
+  let res = false;
+  console.log("comprobamos token");
   try {
     const isLoggedIn = await AsyncStorage.getItem("apiKey");
     if (value !== null) {
       // value previously stored
       console.log("tenemos token");
-      return true;
+      res = true;
     } else {
-      return false;
+      console.log("no tenemos token");
     }
   } catch (e) {
+    console.log("error al comprobamos token");
     // error reading value
   }
+  return res;
 };
 
 //sale de la sesión
-const Logout = () => {
-  removeValue = async () => {
-    try {
-      await AsyncStorage.removeItem("apiKey");
-    } catch (e) {
-      // remove error
-    }
+const deleteToken = async () => {
+  console.log("Deleting token.");
+  try {
+    await AsyncStorage.removeItem("apiKey");
+  } catch (e) {
+    // remove error
+  }
 
-    console.log("Done.");
-  };
+  console.log("Done.");
 };
-export { Login, Register, CheckLogged, Logout };
+
+export { createToken, getToken, checkToken, deleteToken };

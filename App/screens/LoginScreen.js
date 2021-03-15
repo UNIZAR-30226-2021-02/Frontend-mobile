@@ -13,7 +13,7 @@ import {
   ScrollView,
 } from "react-native";
 
-import { Login, CheckLogged } from "../util/Login";
+import { getToken, checkToken } from "../util/Login";
 import Colors from "../constants/colors";
 const screen = Dimensions.get("window");
 
@@ -46,23 +46,8 @@ export default ({ navigation }) => {
           onPress={async () => {
             console.log(username);
             console.log(password);
-            /*
-              const res = Login(username, password);
-              
-              console.log(res);
-              if (res) {
-                navigation.navigate("HomeScreen");
-              }
-              */
-            //Login(username, password);
 
-            /* if (CheckLogged()) {
-              navigation.navigate("HomeScreen");
-            }*/
-            const succes = await Login(username, password);
-            if (succes) {
-              navigation.navigate("HomeScreen");
-            }
+            Login(username, password);
           }}
         >
           <Text style={styles.textButton}>Sign in</Text>
@@ -80,6 +65,19 @@ export default ({ navigation }) => {
       </View>
     </SafeAreaView>
   );
+};
+
+//Función que permite iniciar sesión
+const Login = async (usr, pwd) => {
+  try {
+    const tok = getToken(usr, pwd);
+    const isLogged = tok.then(() => checkToken());
+    isLogged.then((v) => {
+      if (v) navigation.navigate("HomeScreen");
+
+      console.log("fin " + v);
+    });
+  } catch (error) {}
 };
 
 const styles = StyleSheet.create({

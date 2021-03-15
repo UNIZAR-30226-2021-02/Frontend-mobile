@@ -1,6 +1,6 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, Button } from "react-native";
-import { Logout, getProtectedQuote } from "../util/Login";
+import { deleteToken, getProtectedQuote } from "../util/Login";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,7 +18,7 @@ export default ({ navigation }) => {
       <Button
         title="Sign out"
         onPress={() => {
-          Logout();
+          deleteToken();
           navigation.navigate("LoginScreen");
         }}
       />
