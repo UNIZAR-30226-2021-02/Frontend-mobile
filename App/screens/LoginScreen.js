@@ -22,7 +22,6 @@ export default ({ navigation }) => {
   const [password, setTextP] = useState("");
   return (
     <SafeAreaView style={styles.backgrdContainer}>
-      <StatusBar backgroundColor={Colors.background} barstyle="dark-content" />
       <View style={styles.container}>
         <Text style={styles.textH1}>Username</Text>
         <TextInput
