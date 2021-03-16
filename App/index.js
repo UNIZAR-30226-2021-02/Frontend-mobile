@@ -9,17 +9,19 @@ import RegisterScreen from "./screens/RegisterScreen";
 import GameScreen from "./screens/GameScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ShopScreen from "./screens/ShopScreen";
+import { Menu } from "./components/Menu";
 
 export default () => <AppNavigator />;
 
 const appSwitchNavigator = createSwitchNavigator({
+  HomeScreen: HomeScreen,
   LoginScreen: LoginScreen,
   LoadingScreen: LoadingScreen,
-  HomeScreen: HomeScreen,
   RegisterScreen: RegisterScreen,
   GameScreen: GameScreen,
   ProfileScreen: ProfileScreen,
   ShopScreen: ShopScreen,
+  Menu: Menu,
 });
 
 const AppNavigator = createAppContainer(appSwitchNavigator);
