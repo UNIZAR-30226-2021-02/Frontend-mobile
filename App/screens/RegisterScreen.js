@@ -13,7 +13,6 @@ import {
   View,
 } from "react-native";
 
-import { Register } from "../util/Login";
 const screen = Dimensions.get("window");
 const state = { text: "Ususario" };
 

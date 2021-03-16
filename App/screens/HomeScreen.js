@@ -1,6 +1,5 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, Button } from "react-native";
-import { deleteToken, getProtectedQuote } from "../util/Login";
 
 const styles = StyleSheet.create({
   container: {

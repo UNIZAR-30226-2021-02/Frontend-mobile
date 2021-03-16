@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import HomeScreen from "./HomeScreen";
 import LoginScreen from "./LoginScreen";
-import { CheckLogged } from "../util/Login";
+
 import Colors from "../constants/colors";
 
 class LoadingScreen extends Component {
