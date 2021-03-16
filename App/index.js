@@ -7,11 +7,10 @@ import LoadingScreen from "./screens/LoadingScreen";
 import HomeScreen from "./screens/HomeScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 
-export default () => <LoginScreen />;
+export default () => <AppNavigator />;
 
 const appSwitchNavigator = createSwitchNavigator({
   LoginScreen: LoginScreen,
-  LoadingScreen: LoadingScreen,
   HomeScreen: HomeScreen,
   RegisterScreen: RegisterScreen,
 });

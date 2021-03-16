@@ -1,7 +1,19 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  Button,
+  Dimensions,
+  TouchableOpacity,
+  StatusBar,
+  TextInput,
+  ScrollView,
+} from "react-native";
 
-import Spinner from "react-native-loading-spinner-overlay";
+import Colors from "../constants/colors";
+const screen = Dimensions.get("window");
 
 import APIKit, { setClientToken } from "../util/APIKit";
 
@@ -35,6 +47,7 @@ class Login extends Component {
       // Set JSON Web Token on success
       setClientToken(data.token);
       this.setState({ isLoading: false, isAuthorized: true });
+      this.props.navigation.navigate("HomeScreen");
     };
 
     const onFailure = (error) => {
@@ -48,151 +61,111 @@ class Login extends Component {
     APIKit.post("/login", payload).then(onSuccess).catch(onFailure);
   }
 
-  onPressGetData() {
-    const onSuccess = ({ data }) => {
-      // Set JSON Web Token on success
-      console.log(data);
-    };
-
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
-    };
-
-    // Show spinner when call is made
-    this.setState({ isLoading: true });
-
-    APIKit.get("/all").then(onSuccess).catch(onFailure);
-  }
-
   render() {
     const { isLoading } = this.state;
 
     return (
-      <View style={styles.containerStyle}>
-        <Spinner visible={isLoading} />
-
-        {!this.state.isAuthorized ? (
-          <View>
-            <View style={styles.logotypeContainer}></View>
-
-            <TextInput
-              style={styles.input}
-              value={this.state.username}
-              maxLength={256}
-              placeholder="Enter username..."
-              autoCapitalize="none"
-              autoCorrect={false}
-              returnKeyType="next"
-              onChangeText={this.onUsernameChange}
-              underlineColorAndroid="transparent"
-              placeholderTextColor="#999"
-            />
-
-            <TextInput
-              ref={(node) => {
-                this.passwordInput = node;
-              }}
-              style={styles.input}
-              value={this.state.password}
-              maxLength={40}
-              placeholder="Enter password..."
-              onChangeText={this.onPasswordChange}
-              autoCapitalize="none"
-              autoCorrect={false}
-              returnKeyType="done"
-              blurOnSubmit
-              secureTextEntry
-              underlineColorAndroid="transparent"
-              placeholderTextColor="#999"
-            />
-
-            <TouchableOpacity
-              style={styles.loginButton}
-              onPress={this.onPressLogin.bind(this)}
-            >
-              <Text style={styles.loginButtonText}>LOGIN</Text>
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <View>
-            <Text>Successfully authorized!</Text>
-            <TouchableOpacity
-              style={styles.loginButton}
-              onPress={this.onPressGetData.bind(this)}
-            ></TouchableOpacity>
-          </View>
-        )}
-      </View>
+      <SafeAreaView style={styles.backgrdContainer}>
+        <View style={styles.container}>
+          <Text style={styles.textH1}>Username</Text>
+          <TextInput
+            style={styles.input}
+            value={this.state.username}
+            maxLength={256}
+            placeholder="Enter username..."
+            autoCapitalize="none"
+            autoCorrect={false}
+            returnKeyType="next"
+            onChangeText={this.onUsernameChange}
+            underlineColorAndroid="transparent"
+            placeholderTextColor="#999"
+          />
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.textH1}>Password</Text>
+          <TextInput
+            ref={(node) => {
+              this.passwordInput = node;
+            }}
+            style={styles.input}
+            value={this.state.password}
+            maxLength={40}
+            placeholder="Enter password..."
+            onChangeText={this.onPasswordChange}
+            autoCapitalize="none"
+            autoCorrect={false}
+            returnKeyType="done"
+            blurOnSubmit
+            secureTextEntry
+            underlineColorAndroid="transparent"
+            placeholderTextColor="#999"
+          />
+        </View>
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.onPressLogin.bind(this)}
+          >
+            <Text style={styles.textButton}>Sign in</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate("RegisterScreen");
+            }}
+          >
+            <Text style={styles.textButton}>Register</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
     );
   }
 }
 
-// Define some colors and default sane values
-const utils = {
-  colors: { primaryColor: "#af0e66" },
-  dimensions: { defaultPadding: 12 },
-  fonts: { largeFontSize: 18, mediumFontSize: 16, smallFontSize: 12 },
-};
-
-// Define styles here
-const styles = {
-  innerContainer: {
-    marginBottom: 32,
-  },
-  logotypeContainer: {
+// Estilos
+const styles = StyleSheet.create({
+  backgrdContainer: {
     alignItems: "center",
-  },
-  logotype: {
-    maxWidth: 280,
-    maxHeight: 100,
-    resizeMode: "contain",
-    alignItems: "center",
-  },
-  containerStyle: {
+    justifyContent: "space-evenly",
+    backgroundColor: Colors.background,
     flex: 1,
+  },
+  container: {
+    width: screen.width * 0.75,
+    height: screen.height * 0.15,
+  },
+  button: {
+    position: "absolute",
+    borderRadius: 15,
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#f6f6f6",
+    justifyContent: "space-evenly",
+    top: 10,
+    backgroundColor: Colors.white,
+    height: 40,
+    width: 200,
+  },
+  textH1: {
+    top: 10,
+    color: Colors.white,
+    fontSize: 20,
+    paddingVertical: 16,
+  },
+  textH2: {
+    top: -130,
+    color: Colors.tranparentwhite,
+    fontSize: 14,
+    paddingVertical: 16,
   },
   input: {
-    height: 50,
-    padding: 12,
-    backgroundColor: "white",
-    borderRadius: 6,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    marginBottom: utils.dimensions.defaultPadding,
+    color: Colors.grey,
+    backgroundColor: Colors.white,
   },
-  loginButton: {
-    borderColor: utils.colors.primaryColor,
-    borderWidth: 2,
-    padding: utils.dimensions.defaultPadding,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 6,
-  },
-  loginButtonText: {
-    color: utils.colors.primaryColor,
-    fontSize: utils.fonts.mediumFontSize,
+  textButton: {
+    fontSize: 20,
     fontWeight: "bold",
   },
-  errorMessageContainerStyle: {
-    marginBottom: 8,
-    backgroundColor: "#fee8e6",
-    padding: 8,
-    borderRadius: 4,
-  },
-  errorMessageTextStyle: {
-    color: "#db2828",
-    textAlign: "center",
-    fontSize: 12,
-  },
-};
+});
 
 export default Login;
