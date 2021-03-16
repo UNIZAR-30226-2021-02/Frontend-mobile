@@ -1,5 +1,5 @@
-const ip = "80.39.50.206";
-const uri = `http://${ip}:8082/api/`;
+const ip = "10.0.2.2";
+const uri = `http://${ip}:8080/api/`;
 
 export default {
   login: uri + "login",
