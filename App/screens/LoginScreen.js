@@ -69,8 +69,8 @@ export default ({ navigation }) => {
 //Función que permite iniciar sesión
 const Login = async (usr, pwd, nav) => {
   try {
-    const tok = await getToken(usr, pwd);
-    const isLogged = await tok.then(() => checkToken());
+    const tok = getToken(usr, pwd);
+    const isLogged = tok.then(() => checkToken());
     isLogged.then((v) => {
       if (v) nav.navigate("HomeScreen");
 
