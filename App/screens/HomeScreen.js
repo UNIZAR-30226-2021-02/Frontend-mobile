@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 export default ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Menu />
+      <Menu navigation={navigation} />
       <Button title="get" onPress={() => getProtectedQuote()} />
       <Button
         title="Sign out"

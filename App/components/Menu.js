@@ -9,6 +9,8 @@ import {
   View,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import colors from "../constants/colors";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const styles = StyleSheet.create({
   container: {
@@ -37,7 +39,8 @@ export const Menu = ({ navigation }) => {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("ProfileScreen");
+          //navigation.navigate("ProfileScreen");
+          navigation.navigate("HomeScreen");
         }}
       >
         <Image
@@ -46,28 +49,44 @@ export const Menu = ({ navigation }) => {
           resizeMode="contain"
         />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("FriendsScreen");
+        }}
+      >
         <Image
           source={require("../assets/images/friends.png")}
           style={styles.logo}
           resizeMode="contain"
         />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("ShopScreen");
+        }}
+      >
         <Image
           source={require("../assets/images/tienda.png")}
           style={styles.logo}
           resizeMode="contain"
         />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("GameScreen");
+        }}
+      >
         <Image
           source={require("../assets/images/game.png")}
           style={styles.logo}
           resizeMode="contain"
         />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          console.log("TODO!");
+        }}
+      >
         <Image
           source={require("../assets/images/salir.png")}
           style={styles.logo}
