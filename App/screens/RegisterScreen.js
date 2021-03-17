@@ -44,6 +44,7 @@ class Register extends Component {
 
   onMailChange = (mail) => {
     this.setState({ mail });
+    console.log("Son: " + state.mail);
   };
 
   onUsernameChange = (username) => {
@@ -52,14 +53,27 @@ class Register extends Component {
 
   onPasswordAChange = (passwordA) => {
     this.setState({ passwordA });
+    console.log("Son: " + state.passwordA + "  " + state.passwordB);
+    if (state.passwordA === state.passwordB) {
+      this.setShow(false);
+    } else {
+      this.setShow(true);
+    }
   };
 
   onPasswordBChange = (passwordB) => {
     this.setState({ passwordB });
+    console.log("Son: " + state.passwordA + "  " + state.passwordB);
+    if (state.passwordB === state.passwordA) {
+      this.setShow(false);
+    } else {
+      this.setShow(true);
+    }
   };
 
   setShow = (value) => {
     state.isnotHidden = value;
+    console.log("Se cambia a " + value);
   };
 
   onPressRegister() {
@@ -101,26 +115,12 @@ class Register extends Component {
           <TextInput
             secureTextEntry={true}
             placeholder="Password"
-            onChangeText={(passwordA) => {
-              this.onPasswordAChange(passwordA);
-              if (passwordA === state.passwordB) {
-                this.setShow(false);
-              } else {
-                this.setShow(true);
-              }
-            }}
+            onChangeText={this.onPasswordAChange}
           />
           <TextInput
             secureTextEntry={true}
             placeholder="Repeat Password"
-            onChangeText={(passwordB) => {
-              this.onPasswordBChange(passwordB);
-              if (passwordB === state.passwordA) {
-                this.setShow(false);
-              } else {
-                this.setShow(true);
-              }
-            }}
+            onChangeText={this.onPasswordBChange}
           />
           <DiffPWD
             hide={state.isnotHidden}
