@@ -26,12 +26,15 @@ const initialState = {
   errors: {},
   isAuthorized: false,
   isLoading: false,
-  isnotHidden: false,
+  isnotHidden: true,
 };
 
 const DiffPWD = (props) => {
   const { children, hide, style } = props;
   if (hide) {
+    return null;
+  }
+  if (hide == null) {
     return null;
   }
   return <View style={style}>{children}</View>;
@@ -44,7 +47,7 @@ class Register extends Component {
 
   onMailChange = (mail) => {
     this.setState({ mail });
-    console.log("Son: " + state.mail);
+    console.log("Son: " + this.state.mail);
   };
 
   onUsernameChange = (username) => {
@@ -53,8 +56,8 @@ class Register extends Component {
 
   onPasswordAChange = (passwordA) => {
     this.setState({ passwordA });
-    console.log("Son: " + state.passwordA + "  " + state.passwordB);
-    if (state.passwordA === state.passwordB) {
+    console.log("Son: " + this.state.passwordA + "  " + this.state.passwordB);
+    if (this.state.passwordA === this.state.passwordB) {
       this.setShow(false);
     } else {
       this.setShow(true);
@@ -63,8 +66,8 @@ class Register extends Component {
 
   onPasswordBChange = (passwordB) => {
     this.setState({ passwordB });
-    console.log("Son: " + state.passwordA + "  " + state.passwordB);
-    if (state.passwordB === state.passwordA) {
+    console.log("Son: " + this.state.passwordA + "  " + this.state.passwordB);
+    if (this.state.passwordB === this.state.passwordA) {
       this.setShow(false);
     } else {
       this.setShow(true);
@@ -72,7 +75,7 @@ class Register extends Component {
   };
 
   setShow = (value) => {
-    state.isnotHidden = value;
+    this.state.isnotHidden = value;
     console.log("Se cambia a " + value);
   };
 
@@ -123,7 +126,7 @@ class Register extends Component {
             onChangeText={this.onPasswordBChange}
           />
           <DiffPWD
-            hide={state.isnotHidden}
+            hide={this.state.isnotHidden}
             onValueChange={(value) => this.setShow(value)}
           >
             <Text>Nooo son diferentessss</Text>
