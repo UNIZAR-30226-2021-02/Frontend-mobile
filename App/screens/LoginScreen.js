@@ -11,6 +11,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
+import Spinner from "react-native-loading-spinner-overlay";
 
 import Colors from "../constants/colors";
 const screen = Dimensions.get("window");
@@ -66,6 +67,7 @@ class Login extends Component {
 
     return (
       <SafeAreaView style={styles.backgrdContainer}>
+        <Spinner visible={isLoading} />
         <View style={styles.container}>
           <Text style={styles.textH1}>Username</Text>
           <TextInput
@@ -113,7 +115,7 @@ class Login extends Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              navigation.navigate("RegisterScreen");
+              this.props.navigation.navigate("RegisterScreen");
             }}
           >
             <Text style={styles.textButton}>Register</Text>

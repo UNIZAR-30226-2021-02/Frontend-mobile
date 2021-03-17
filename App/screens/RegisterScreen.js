@@ -16,91 +16,137 @@ import {
 const screen = Dimensions.get("window");
 const state = { text: "Ususario" };
 
+import APIKit, { setClientToken } from "../util/APIKit";
+
+const initialState = {
+  mail: "",
+  username: "",
+  passwordA: "",
+  passwordB: "",
+  errors: {},
+  isAuthorized: false,
+  isLoading: false,
+  isnotHidden: false,
+};
+
 const DiffPWD = (props) => {
   const { children, hide, style } = props;
   if (hide) {
     return null;
   }
-  return (
-    <View {...this.props} style={style}>
-      {children}
-    </View>
-  );
+  return <View style={style}>{children}</View>;
 };
 
-export default ({ navigation }) => {
-  const [mail, setTextM] = useState("");
-  const [username, setTextU] = useState("");
-  const [passwordA, setTextPA] = useState("");
-  const [passwordB, setTextPB] = useState("");
-  const [isnotHidden, setShow] = useState(true);
-  return (
-    <SafeAreaView style={styles.backgrdContainer}>
-      <ScrollView style={{ flex: 1, alignContent: "center" }}>
-        <TextInput placeholder="Mail" onChangeText={(mail) => setTextM(mail)} />
-        <TextInput
-          placeholder="Username"
-          onChangeText={(username) => setTextU(username)}
-        />
-        <TextInput
-          secureTextEntry={true}
-          placeholder="Password"
-          onChangeText={(passwordA) => {
-            setTextPA(passwordA);
-            if (passwordA === passwordB) {
-              setShow(true);
-            } else {
-              setShow(false);
-            }
-          }}
-        />
-        <TextInput
-          secureTextEntry={true}
-          placeholder="Repeat Password"
-          onChangeText={(passwordB) => {
-            setTextPB(passwordB);
-            if (passwordB === passwordA) {
-              setShow(true);
-            } else {
-              setShow(false);
-            }
-          }}
-        />
-        <DiffPWD
-          hide={isnotHidden}
-          onValueChange={(value) => this.setState({ isnotHidden: value })}
-        >
-          <Text>Nooo son diferentessss</Text>
-        </DiffPWD>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            console.log(mail);
-            console.log(username);
-            console.log(passwordA);
-            console.log(passwordB);
-            Register(username, passwordA, mail).then((v) => {
-              console.log(v);
-              if (v) {
-                navigation.navigate("HomeScreen");
+class Register extends Component {
+  state = initialState;
+
+  componentWillUnmount() {}
+
+  onMailChange = (mail) => {
+    this.setState({ mail });
+  };
+
+  onUsernameChange = (username) => {
+    this.setState({ username });
+  };
+
+  onPasswordAChange = (passwordA) => {
+    this.setState({ passwordA });
+  };
+
+  onPasswordBChange = (passwordB) => {
+    this.setState({ passwordB });
+  };
+
+  setShow = (value) => {
+    state.isnotHidden = value;
+  };
+
+  onPressRegister() {
+    const { username, passwordA, mail } = this.state;
+    const payload = JSON.stringify({
+      nombre: username,
+      password: passwordA,
+      mail: mail,
+    });
+    console.log(payload);
+
+    const onSuccess = ({ data }) => {
+      // Set JSON Web Token on success
+      setClientToken(data.token);
+      this.setState({ isLoading: false, isAuthorized: true });
+      this.props.navigation.navigate("HomeScreen");
+    };
+
+    const onFailure = (error) => {
+      console.log(error && error.response);
+      this.setState({ errors: error.response.data, isLoading: false });
+    };
+
+    // Show spinner when call is made
+    this.setState({ isLoading: true });
+
+    APIKit.post("/register", payload).then(onSuccess).catch(onFailure);
+  }
+
+  render() {
+    return (
+      <SafeAreaView style={styles.backgrdContainer}>
+        <ScrollView style={{ flex: 1, alignContent: "center" }}>
+          <TextInput placeholder="Mail" onChangeText={this.onMailChange} />
+          <TextInput
+            placeholder="Username"
+            onChangeText={this.onUsernameChange}
+          />
+          <TextInput
+            secureTextEntry={true}
+            placeholder="Password"
+            onChangeText={(passwordA) => {
+              this.onPasswordAChange(passwordA);
+              if (passwordA === state.passwordB) {
+                this.setShow(false);
+              } else {
+                this.setShow(true);
               }
-            });
-          }}
-        >
-          <Text style={styles.text}>Register</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate("LoginScreen");
-          }}
-        >
-          <Text style={styles.text}>Go to login</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+            }}
+          />
+          <TextInput
+            secureTextEntry={true}
+            placeholder="Repeat Password"
+            onChangeText={(passwordB) => {
+              this.onPasswordBChange(passwordB);
+              if (passwordB === state.passwordA) {
+                this.setShow(false);
+              } else {
+                this.setShow(true);
+              }
+            }}
+          />
+          <DiffPWD
+            hide={state.isnotHidden}
+            onValueChange={(value) => this.setShow(value)}
+          >
+            <Text>Nooo son diferentessss</Text>
+          </DiffPWD>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.onPressRegister.bind(this)}
+          >
+            <Text style={styles.text}>Register</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              this.props.navigation.navigate("LoginScreen");
+            }}
+          >
+            <Text style={styles.text}>Go to login</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   backgrdContainer: {
@@ -113,3 +159,5 @@ const styles = StyleSheet.create({
   button: {},
   text: {},
 });
+
+export default Register;
