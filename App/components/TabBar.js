@@ -37,15 +37,11 @@ class TabBar extends React.PureComponent {
   }
   onTabPressed = (routeName) => {
     this.props.navigation.navigate({ routeName });
+    this.setState({
+      selectedTab: routeName,
+    });
   };
-  handleNavChange = ({ action }) => {
-    // Handles when navigation is triggered from within a tabs content:
-    if (action.type === NavigationActions.NAVIGATE) {
-      this.setState({
-        selectedTab: action.routeName,
-      });
-    }
-  };
+
   render() {
     const { navigation } = this.props;
     const tabs = [

@@ -33,7 +33,11 @@ class LeftTabs extends React.PureComponent {
         {tabs.map(({ tabName, tabIcon }) => {
           return (
             <Tab
-              onPress={() => onTabPressed(tabName)}
+              onPress={() => {
+                onTabPressed(tabName);
+                selectedTab;
+                console.log(tabName + " " + selectedTab);
+              }}
               key={tabName}
               tabName={tabName}
               tabIcon={tabIcon}
