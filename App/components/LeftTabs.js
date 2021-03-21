@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 class Tab extends React.PureComponent {

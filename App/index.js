@@ -30,7 +30,7 @@ const AppContent = createSwitchNavigator(
   }
 );
 
-class Home extends React.PureComponent {
+class TabBar extends React.PureComponent {
   static router = AppContent.router;
   constructor() {
     super();
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 });
 
 const appSwitchNavigator = createSwitchNavigator({
-  Home: createAppContainer(Home),
+  Home: createAppContainer(TabBar),
   LoginScreen: LoginScreen,
   LoadingScreen: LoadingScreen,
   RegisterScreen: RegisterScreen,
