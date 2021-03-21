@@ -25,12 +25,7 @@ class Tab extends React.PureComponent {
     };
     return (
       <TouchableOpacity style={containerStyles} onPress={onPress}>
-        <AntDesign
-          name={tabIcon}
-          size={25}
-          color={color}
-          //style={{ width: 66, textAlign: "center" }}
-        />
+        <AntDesign name={tabIcon} size={25} color={color} />
       </TouchableOpacity>
     );
   }
