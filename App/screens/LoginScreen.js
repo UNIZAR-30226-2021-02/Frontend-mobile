@@ -42,12 +42,7 @@ export default ({ navigation }) => {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.button}
-          onPress={async () => {
-            console.log(username);
-            console.log(password);
-
-            Login(username, password, navigation);
-          }}
+          onPress={async () => navigation.navigate("HomeScreen")}
         >
           <Text style={styles.textButton}>Sign in</Text>
         </TouchableOpacity>
@@ -64,19 +59,6 @@ export default ({ navigation }) => {
       </View>
     </SafeAreaView>
   );
-};
-
-//Función que permite iniciar sesión
-const Login = async (usr, pwd, nav) => {
-  try {
-    const tok = getToken(usr, pwd);
-    const isLogged = tok.then(() => checkToken());
-    isLogged.then((v) => {
-      if (v) nav.navigate("HomeScreen");
-
-      console.log("fin " + v);
-    });
-  } catch (error) {}
 };
 
 const styles = StyleSheet.create({
