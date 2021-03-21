@@ -42,7 +42,7 @@ export default ({ navigation }) => {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.button}
-          onPress={async () => navigation.navigate("HomeScreen")}
+          onPress={() => navigation.navigate("Home")}
         >
           <Text style={styles.textButton}>Sign in</Text>
         </TouchableOpacity>
