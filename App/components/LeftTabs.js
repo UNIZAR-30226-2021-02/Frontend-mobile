@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 class Tab extends React.PureComponent {
   render() {
@@ -25,13 +25,12 @@ class Tab extends React.PureComponent {
     };
     return (
       <TouchableOpacity style={containerStyles} onPress={onPress}>
-        <Ionicons
+        <AntDesign
           name={tabIcon}
-          size={50}
+          size={25}
           color={color}
-          style={{ width: 66, textAlign: "center" }}
+          //style={{ width: 66, textAlign: "center" }}
         />
-        <Text style={textStyles}>{tabName}</Text>
       </TouchableOpacity>
     );
   }
@@ -60,9 +59,11 @@ class LeftTabs extends React.PureComponent {
 const styles = StyleSheet.create({
   box: {
     flex: -1,
-    minWidth: 140,
+    minWidth: 70,
     backgroundColor: "#eee",
     height: "100%",
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
 });
 export default LeftTabs;

@@ -54,21 +54,21 @@ class Home extends React.PureComponent {
     const tabs = [
       {
         tabName: "Home",
-        //tabIcon: "ios-planet",
+        tabIcon: "home",
       },
       {
         tabName: "Profile",
-        //tabIcon: "ios-pin",
+        tabIcon: "user",
       },
       {
         tabName: "Shop",
-        //tabIcon: "ios-contacts",
+        tabIcon: "shoppingcart",
       },
     ];
     return (
       <View style={styles.box}>
         <LeftTabs
-          width={"25%"}
+          width={"10%"}
           tabs={tabs}
           onTabPressed={this.onTabPressed}
           selectedTab={this.state.selectedTab}
