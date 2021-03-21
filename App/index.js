@@ -1,29 +1,40 @@
 import React from "react";
 
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
-import { ScrollView as GHScrollView } from "react-native-gesture-handler";
+import createMaterialTopTabNavigator from "react-navigation-tabs";
+
 import LoginScreen from "./screens/LoginScreen";
 import LoadingScreen from "./screens/LoadingScreen";
 import HomeScreen from "./screens/HomeScreen";
 import RegisterScreen from "./screens/RegisterScreen";
-import GameScreen from "./screens/GameScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ShopScreen from "./screens/ShopScreen";
-import FriendsScreen from "./screens/FriendsScreen";
-import { Menu } from "./components/Menu";
 
+import TabBar from "./config/TabBar";
 export default () => <AppNavigator />;
+/*
+const Home = createMaterialTopTabNavigator(
+  {
+    Home: {
+      screen: () => HomeScreen,
+    },
+    profile: {
+      screen: () => ProfileScreen,
+    },
+    Shop: {
+      screen: () => ShopScreen,
+    },
+  },
+  {
+    tabBarComponent: TabBar,
+  }
+);*/
 
 const appSwitchNavigator = createSwitchNavigator({
-  HomeScreen: HomeScreen,
+  Home: HomeScreen,
   LoginScreen: LoginScreen,
   LoadingScreen: LoadingScreen,
   RegisterScreen: RegisterScreen,
-  GameScreen: GameScreen,
-  ProfileScreen: ProfileScreen,
-  ShopScreen: ShopScreen,
-  FriendsScreen: FriendsScreen,
-  Menu: Menu,
 });
 
 const AppNavigator = createAppContainer(appSwitchNavigator);
