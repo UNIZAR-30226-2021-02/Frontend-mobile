@@ -29,6 +29,7 @@ const AppContent = createSwitchNavigator(
     resetOnBlur: false,
   }
 );
+
 class Home extends React.PureComponent {
   static router = AppContent.router;
   constructor() {
@@ -53,19 +54,15 @@ class Home extends React.PureComponent {
     const tabs = [
       {
         tabName: "Home",
-        tabIcon: "ios-planet",
+        //tabIcon: "ios-planet",
       },
       {
-        tabName: "Places",
-        tabIcon: "ios-pin",
+        tabName: "Profile",
+        //tabIcon: "ios-pin",
       },
       {
-        tabName: "People",
-        tabIcon: "ios-contacts",
-      },
-      {
-        tabName: "Me",
-        tabIcon: "ios-contact",
+        tabName: "Shop",
+        //tabIcon: "ios-contacts",
       },
     ];
     return (
