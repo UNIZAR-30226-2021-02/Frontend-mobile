@@ -1,7 +1,6 @@
 import React from "react";
-
+import { StyleSheet, View } from "react-native";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
-import createMaterialTopTabNavigator from "react-navigation-tabs";
 
 import LoginScreen from "./screens/LoginScreen";
 import LoadingScreen from "./screens/LoadingScreen";
@@ -10,28 +9,98 @@ import RegisterScreen from "./screens/RegisterScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ShopScreen from "./screens/ShopScreen";
 
-import TabBar from "./config/TabBar";
+import LeftTabs from "./components/LeftTabs";
 export default () => <AppNavigator />;
-/*
-const Home = createMaterialTopTabNavigator(
+
+const AppContent = createSwitchNavigator(
   {
     Home: {
-      screen: () => HomeScreen,
+      screen: HomeScreen,
     },
-    profile: {
-      screen: () => ProfileScreen,
+    Profile: {
+      screen: ProfileScreen,
     },
     Shop: {
-      screen: () => ShopScreen,
+      screen: ShopScreen,
     },
   },
   {
-    tabBarComponent: TabBar,
+    //Set to true if you want to destroy state on tab changes.
+    resetOnBlur: false,
   }
-);*/
+);
+class Home extends React.PureComponent {
+  static router = AppContent.router;
+  constructor() {
+    super();
+    this.state = {
+      selectedTab: "Home",
+    };
+  }
+  onTabPressed = (routeName) => {
+    this.props.navigation.navigate({ routeName });
+  };
+  handleNavChange = ({ action }) => {
+    // Handles when navigation is triggered from within a tabs content:
+    if (action.type === NavigationActions.NAVIGATE) {
+      this.setState({
+        selectedTab: action.routeName,
+      });
+    }
+  };
+  render() {
+    const { navigation } = this.props;
+    const tabs = [
+      {
+        tabName: "Home",
+        tabIcon: "ios-planet",
+      },
+      {
+        tabName: "Places",
+        tabIcon: "ios-pin",
+      },
+      {
+        tabName: "People",
+        tabIcon: "ios-contacts",
+      },
+      {
+        tabName: "Me",
+        tabIcon: "ios-contact",
+      },
+    ];
+    return (
+      <View style={styles.box}>
+        <LeftTabs
+          width={"25%"}
+          tabs={tabs}
+          onTabPressed={this.onTabPressed}
+          selectedTab={this.state.selectedTab}
+        />
+        <View style={styles.content}>
+          <AppContent
+            navigation={navigation}
+            screenProps={{ onDidFocus: this.handleNavChange }}
+          />
+        </View>
+      </View>
+    );
+  }
+}
+const styles = StyleSheet.create({
+  box: {
+    flexDirection: "row",
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  content: {
+    flex: 1,
+  },
+});
 
 const appSwitchNavigator = createSwitchNavigator({
-  Home: HomeScreen,
+  Home: createAppContainer(Home),
   LoginScreen: LoginScreen,
   LoadingScreen: LoadingScreen,
   RegisterScreen: RegisterScreen,

@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, StyleSheet, Text, Button } from "react-native";
 import { deleteToken, getProtectedQuote } from "../util/Login";
 
-import { Menu } from "../components/Menu";
+//import { Menu } from "../components/NavBar";
 
 const styles = StyleSheet.create({
   container: {
@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
 export default ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Menu navigation={navigation} />
       <Button title="get" onPress={() => getProtectedQuote()} />
       <Button
         title="Sign out"
