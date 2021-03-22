@@ -17,7 +17,7 @@ export default () => <AppNavigator />;
 const appSwitchNavigator = createSwitchNavigator({
   Home: TabBar,
   LoginScreen: LoginScreen,
-  HomeScreen: HomeScreen,
+  //aki debe ir loading
   RegisterScreen: RegisterScreen,
   FriendsScreen: FriendsScreen,
   GameScreen: GameScreen,
