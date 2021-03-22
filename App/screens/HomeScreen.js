@@ -1,17 +1,18 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, Button } from "react-native";
-import { deleteToken, getProtectedQuote } from "../util/Login";
+import APIKit, { setClientToken } from "../util/APIKit";
 
-//import { Menu } from "../components/NavBar";
+const getProtectedQuote = () => {
+  const onSuccess = ({ data }) => {
+    console.log(data);
+  };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "blue",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
-});
+  const onFailure = (error) => {
+    console.log(error && error.response);
+  };
+
+  APIKit.get("/all").then(onSuccess).catch(onFailure);
+};
 
 export default ({ navigation }) => {
   return (
@@ -20,10 +21,19 @@ export default ({ navigation }) => {
       <Button
         title="Sign out"
         onPress={() => {
-          deleteToken();
+          setClientToken("");
           navigation.navigate("LoginScreen");
         }}
       />
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "blue",
+    flex: 1,
+  },
+});
