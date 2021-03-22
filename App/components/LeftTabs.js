@@ -1,6 +1,10 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import {
+  AntDesign,
+  FontAwesome5,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
 class Tab extends React.PureComponent {
   render() {
@@ -17,11 +21,19 @@ class Tab extends React.PureComponent {
       backgroundColor: isSelected ? "blue" : "#EEE",
       padding: 12,
     };
-    return (
-      <TouchableOpacity style={containerStyles} onPress={onPress}>
-        <AntDesign name={tabIcon} size={25} color={color} />
-      </TouchableOpacity>
-    );
+    if (tabName == "Friends" || tabName == "Game") {
+      return (
+        <TouchableOpacity style={containerStyles} onPress={onPress}>
+          <FontAwesome5 name={tabIcon} size={25} color={color} />
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <TouchableOpacity style={containerStyles} onPress={onPress}>
+          <AntDesign name={tabIcon} size={25} color={color} />
+        </TouchableOpacity>
+      );
+    }
   }
 }
 

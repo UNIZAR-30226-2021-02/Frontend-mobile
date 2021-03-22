@@ -5,6 +5,8 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import FriendsScreen from "./screens/FriendsScreen";
+import GameScreen from "./screens/GameScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ShopScreen from "./screens/ShopScreen";
 
@@ -17,6 +19,8 @@ const appSwitchNavigator = createSwitchNavigator({
   LoginScreen: LoginScreen,
   HomeScreen: HomeScreen,
   RegisterScreen: RegisterScreen,
+  FriendsScreen: FriendsScreen,
+  GameScreen: GameScreen,
 });
 
 const AppNavigator = createAppContainer(appSwitchNavigator);

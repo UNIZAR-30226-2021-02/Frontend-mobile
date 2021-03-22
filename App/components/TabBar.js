@@ -6,6 +6,8 @@ import HomeScreen from "../screens/HomeScreen";
 
 import ProfileScreen from "../screens/ProfileScreen";
 import ShopScreen from "../screens/ShopScreen";
+import FriendsScreen from "../screens/FriendsScreen";
+import GameScreen from "../screens/GameScreen";
 
 import LeftTabs from "./LeftTabs";
 
@@ -19,6 +21,12 @@ const AppContent = createSwitchNavigator(
     },
     Shop: {
       screen: ShopScreen,
+    },
+    Friends: {
+      screen: FriendsScreen,
+    },
+    Game: {
+      screen: GameScreen,
     },
   },
   {
@@ -56,6 +64,14 @@ class TabBar extends React.PureComponent {
       {
         tabName: "Shop",
         tabIcon: "shoppingcart",
+      },
+      {
+        tabName: "Friends",
+        tabIcon: "user-friends",
+      },
+      {
+        tabName: "Game",
+        tabIcon: "gamepad",
       },
     ];
     return (
