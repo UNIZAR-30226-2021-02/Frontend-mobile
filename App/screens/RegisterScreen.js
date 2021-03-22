@@ -80,30 +80,39 @@ class Register extends Component {
   };
 
   onPressRegister() {
-    const { username, passwordA, mail } = this.state;
-    const payload = JSON.stringify({
-      nombre: username,
-      password: passwordA,
-      mail: mail,
-    });
-    console.log(payload);
+    if (
+      this.state.mail != "" &&
+      this.state.passwordA != "" &&
+      this.state.username != "" &&
+      this.state.passwordA == this.state.passwordB
+    ) {
+      const { username, passwordA, mail } = this.state;
+      const payload = JSON.stringify({
+        nombre: username,
+        password: passwordA,
+        mail: mail,
+      });
+      console.log(payload);
 
-    const onSuccess = ({ data }) => {
-      // Set JSON Web Token on success
-      setClientToken(data.token);
-      this.setState({ isLoading: false, isAuthorized: true });
-      this.props.navigation.navigate("HomeScreen");
-    };
+      const onSuccess = ({ data }) => {
+        // Set JSON Web Token on success
+        setClientToken(data.token);
+        this.setState({ isLoading: false, isAuthorized: true });
+        this.props.navigation.navigate("HomeScreen");
+      };
 
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
-    };
+      const onFailure = (error) => {
+        console.log(error && error.response);
+        this.setState({ errors: error.response.data, isLoading: false });
+      };
 
-    // Show spinner when call is made
-    this.setState({ isLoading: true });
+      // Show spinner when call is made
+      this.setState({ isLoading: true });
 
-    APIKit.post("/register", payload).then(onSuccess).catch(onFailure);
+      APIKit.post("/register", payload).then(onSuccess).catch(onFailure);
+    } else {
+      console.log("Faltan campos");
+    }
   }
 
   render() {
@@ -144,18 +153,10 @@ class Register extends Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              this.onPressRegister.bind(this);
-              //this.props.navigation.navigate("LoginScreen");
+              this.props.navigation.navigate("LoginScreen");
             }}
           >
-            <Text
-              style={styles.text}
-              onPress={() => {
-                this.props.navigation.navigate("LoginScreen");
-              }}
-            >
-              Go to login
-            </Text>
+            <Text style={styles.text}>Go to login</Text>
           </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
