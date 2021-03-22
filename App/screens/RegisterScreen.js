@@ -110,7 +110,11 @@ class Register extends Component {
     return (
       <SafeAreaView style={styles.backgrdContainer}>
         <ScrollView style={{ flex: 1, alignContent: "center" }}>
-          <TextInput placeholder="Mail" onChangeText={this.onMailChange} />
+          <TextInput
+            style={styles.input}
+            placeholder="Mail"
+            onChangeText={this.onMailChange}
+          />
           <TextInput
             placeholder="Username"
             onChangeText={this.onUsernameChange}
@@ -140,10 +144,18 @@ class Register extends Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              this.props.navigation.navigate("LoginScreen");
+              this.onPressRegister.bind(this);
+              //this.props.navigation.navigate("LoginScreen");
             }}
           >
-            <Text style={styles.text}>Go to login</Text>
+            <Text
+              style={styles.text}
+              onPress={() => {
+                this.props.navigation.navigate("LoginScreen");
+              }}
+            >
+              Go to login
+            </Text>
           </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
@@ -158,7 +170,9 @@ const styles = StyleSheet.create({
     backgroundColor: "yellow",
     flex: 1,
   },
-  input: {},
+  input: {
+    paddingVertical: 16,
+  },
   button: {},
   text: {},
 });
