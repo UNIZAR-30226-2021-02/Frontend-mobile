@@ -84,7 +84,9 @@ class Register extends Component {
       this.state.mail != "" &&
       this.state.passwordA != "" &&
       this.state.username != "" &&
-      this.state.passwordA == this.state.passwordB
+      this.state.passwordA == this.state.passwordB &&
+      this.state.mail.includes("@") &&
+      this.state.mail.includes(".")
     ) {
       const { username, passwordA, mail } = this.state;
       const payload = JSON.stringify({
