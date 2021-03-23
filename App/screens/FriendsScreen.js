@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
 
 const initialState = {
   searchUser: "",
+  myName: "",
   errors: {},
 };
 
