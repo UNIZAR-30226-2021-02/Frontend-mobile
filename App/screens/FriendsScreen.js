@@ -8,22 +8,26 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-//import { Menu } from "../components/NavBar";
-import Colors from "../constants/colors";
 import { Entypo } from "@expo/vector-icons";
+import ListaAmigos from "../components/ListaAmigos";
+import Colors from "../constants/colors";
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "yellow",
-    flexDirection: "row",
     flex: 1,
+    alignItems: "center",
+
+    justifyContent: "space-between",
   },
-  leftContainer: { flexDirection: "column" },
+
   addContainer: {
     top: "3%",
     start: "4%",
     padding: "5%",
-    flexDirection: "row",
+    alignItems: "center",
+
+    //backgroundColor: "blue",
     width: "85%",
   },
   textinput: {
@@ -44,10 +48,38 @@ const styles = StyleSheet.create({
   addFriend: {
     paddingLeft: 10,
   },
+  searchBar: {
+    flexDirection: "row",
+    marginBottom: 10,
+  },
+  header: {
+    marginTop: 30,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button: {
+    width: 220,
+    height: 40,
+    backgroundColor: "red",
+    marginLeft: 40,
+    marginRight: 40,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  selectedButton: {
+    width: 220,
+    height: 40,
+    backgroundColor: "green",
+    marginLeft: 40,
+    marginRight: 40,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   petitionsContainer: {
     padding: 40,
-    start: "9%",
-    width: "60%",
+
+    width: "100%",
     height: "70%",
     backgroundColor: Colors.white,
     borderRadius: 5,
@@ -63,12 +95,10 @@ const styles = StyleSheet.create({
   },
 
   friendsContainer: {
-    top: "5%",
-    right: "5%",
     width: "35%",
     height: "80%",
-    backgroundColor: Colors.white,
-    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -76,19 +106,25 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
-
     elevation: 8,
+    width: "85%",
   },
 });
-
+const rnk = "Rankig";
+const add = "Add friends";
 const initialState = {
   searchUser: "",
   myName: "",
   errors: {},
+  selectedButton: rnk,
 };
 
 class Friends extends Component {
-  state = initialState;
+  constructor() {
+    super();
+    this.state = initialState;
+  }
+
   onUserSearchChange = (searchUser) => {
     this.setState({ searchUser });
     console.log(searchUser);
@@ -119,26 +155,65 @@ class Friends extends Component {
     */
   }
 
+  button(name) {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          this.setState({ selectedButton: name });
+          console.log("voy " + this.state.selectedButton);
+        }}
+        style={
+          this.state.selectedButton == name
+            ? styles.selectedButton
+            : styles.button
+        }
+      >
+        <Text>{name}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  RankigList() {
+    return (
+      //general
+      <View style={styles.friendsContainer}>
+        <ListaAmigos />
+      </View>
+    );
+  }
+
+  AddFriendList() {
+    return (
+      //general
+      <View style={styles.addContainer}>
+        <View style={styles.searchBar}>
+          <TextInput
+            style={styles.textinput}
+            placeholder=" Friend to search"
+            onChangeText={this.onUserSearchChange}
+          />
+          <TouchableOpacity
+            style={styles.addFriend}
+            onPress={this.onPressAdd.bind(this)}
+          >
+            <Entypo name="add-user" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.petitionsContainer}></View>
+      </View>
+    );
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.leftContainer}>
-          <View style={styles.addContainer}>
-            <TextInput
-              style={styles.textinput}
-              placeholder=" Friend to search"
-              onChangeText={this.onUserSearchChange}
-            />
-            <TouchableOpacity
-              style={styles.addFriend}
-              onPress={this.onPressAdd.bind(this)}
-            >
-              <Entypo name="add-user" size={24} color="black" />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.petitionsContainer}></View>
+        <View style={styles.header}>
+          {this.button(rnk)}
+          {this.button(add)}
         </View>
-        <View style={styles.friendsContainer}></View>
+        {this.state.selectedButton == rnk
+          ? this.RankigList()
+          : this.AddFriendList()}
       </SafeAreaView>
     );
   }

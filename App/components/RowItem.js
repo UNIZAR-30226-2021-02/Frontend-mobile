@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { StyleSheet, TouchableOpacity, Text, View, Image } from "react-native";
 
 import colors from "../constants/colors";
 
@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     backgroundColor: colors.white,
+    width: 470,
   },
   title: {
     color: colors.text,
@@ -21,12 +22,16 @@ const styles = StyleSheet.create({
     height: StyleSheet.hairlineWidth,
     marginLeft: 20,
   },
+  picture: { resizeMode: "stretch" },
 });
 
-export const RowItem = ({ title, onPress, rightIcon }) => (
+export const RowItem = ({ title, onPress, picture }) => (
   <TouchableOpacity onPress={onPress} style={styles.row}>
+    <Image
+      source={require("../assets/images/monstruo.png")}
+      style={styles.picture}
+    />
     <Text style={styles.title}>{title}</Text>
-    {rightIcon}
   </TouchableOpacity>
 );
 
