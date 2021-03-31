@@ -136,7 +136,6 @@ class Friends extends Component {
     console.log("Se envía " + payload);
 
     const onSuccess = ({ data }) => {
-      // Set JSON Web Token on success
       console.log("Nos devuelve" + data);
       this.setState({ isLoading: false });
     };
@@ -146,10 +145,25 @@ class Friends extends Component {
       this.setState({ errors: error.response.data, isLoading: false });
     };
 
-    // Show spinner when call is made
     this.setState({ isLoading: true });
 
     APIKit.post("/sendRequest", payload).then(onSuccess).catch(onFailure);
+  }
+
+  listFriends() {
+    const onSuccess = ({ data }) => {
+      console.log("Nos devuelve" + data);
+      this.setState({ isLoading: false });
+    };
+
+    const onFailure = (error) => {
+      console.log(error && error.response);
+      this.setState({ errors: error.response.data, isLoading: false });
+    };
+
+    this.setState({ isLoading: true });
+
+    APIKit.get("/listFriends").then(onSuccess).catch(onFailure);
   }
 
   button(name) {
@@ -191,7 +205,7 @@ class Friends extends Component {
           />
           <TouchableOpacity
             style={styles.addFriend}
-            onPress={this.onPressAdd.bind(this)}
+            onPress={this.listFriends.bind(this)}
           >
             <Entypo name="add-user" size={24} color="black" />
           </TouchableOpacity>
