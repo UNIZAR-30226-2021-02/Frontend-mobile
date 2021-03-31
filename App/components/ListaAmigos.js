@@ -10,8 +10,9 @@ const Item = ({ title }) => (
   </View>
 );
 
-const renderItem = ({ item }) => (
+const renderItem = ({ item, index }) => (
   <View>
+    <Text>{index + 1}</Text>
     <RowItem
       title={item.name}
       onPress={() => console.log("hli")}
@@ -41,7 +42,7 @@ class ListaAmigos extends Component {
   };
   state = {};
   render() {
-    this.loadData();
+    //this.loadData();
     return (
       <View>
         <FlatList
