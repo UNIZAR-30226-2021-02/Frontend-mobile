@@ -15,4 +15,8 @@ export const setClientToken = (token) => {
   });
 };
 
+export const setClientName = (name) => {
+  APIKit.defaults.headers.common["identificador"] = name;
+};
+
 export default APIKit;
