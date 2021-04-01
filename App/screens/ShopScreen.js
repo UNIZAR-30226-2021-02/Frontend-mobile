@@ -1,6 +1,8 @@
-import React from "react";
-import { SafeAreaView, StyleSheet, Text, Button } from "react-native";
+import React, { Component } from "react";
+import { SafeAreaView, StyleSheet, Text, Button, Image } from "react-native";
 //import { Menu } from "../components/NavBar";
+import axios from "axios";
+//import { Buffer } from "buffer";
 
 const styles = StyleSheet.create({
   container: {
@@ -11,10 +13,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ navigation }) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text>Shop</Text>
-    </SafeAreaView>
-  );
-};
+const initialState = { hasPict: false };
+class Shop extends Component {
+  constructor() {
+    super();
+    this.state = initialState;
+  }
+
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text>Shop</Text>
+      </SafeAreaView>
+    );
+  }
+}
+export default Shop;

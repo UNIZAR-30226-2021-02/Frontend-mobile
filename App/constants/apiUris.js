@@ -10,5 +10,5 @@ export default {
   listFriends: "listFriends",
   deleteFriend: "deleteFriend",
   all: "all",
-  img: "/api/returnImageProfile/",
+  img: "http://10.0.2.2:8080/api/returnImageProfile/",
 };

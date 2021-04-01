@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     height: StyleSheet.hairlineWidth,
     marginLeft: 20,
   },
-  picture: { resizeMode: "stretch" },
+  picture: { width: 50, height: 50 },
 });
 
 export const RankingItem = ({ name, onPress, ind, picture }) => {
