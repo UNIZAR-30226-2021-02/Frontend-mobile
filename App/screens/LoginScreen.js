@@ -16,7 +16,7 @@ import Spinner from "react-native-loading-spinner-overlay";
 import Colors from "../constants/colors";
 const screen = Dimensions.get("window");
 
-import APIKit, { setClientToken } from "../util/APIKit";
+import APIKit, { setClientToken, setClientName } from "../util/APIKit";
 
 const initialState = {
   username: "",
@@ -47,6 +47,7 @@ class Login extends Component {
     const onSuccess = ({ data }) => {
       // Set JSON Web Token on success
       setClientToken(data.token);
+      setClientName(this.state.username);
       this.setState({ isLoading: false, isAuthorized: true });
       this.props.navigation.navigate("Home");
     };
