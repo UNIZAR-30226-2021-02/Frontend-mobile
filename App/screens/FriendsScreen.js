@@ -206,19 +206,6 @@ class Friends extends Component {
     APIKit.post("/denyRequest", payload).then(onSuccess).catch(onFailure);
   }
 
-  listFriends() {
-    const onSuccess = ({ data }) => {
-      console.log("Nos devuelve los amigos: " + JSON.stringify(data));
-      this.setState({ isLoading: false });
-    };
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
-    };
-    this.setState({ isLoading: true });
-    APIKit.get("/listFriends").then(onSuccess).catch(onFailure);
-  }
-
   listRequests() {
     const onSuccess = ({ data }) => {
       console.log("Nos devuelve las peticiones: " + JSON.stringify(data));
