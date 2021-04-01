@@ -37,16 +37,20 @@ export const RankingItem = ({ name, onPress, picture }) => (
   </TouchableOpacity>
 );
 
-export const RequestItem = ({ name, onPress, picture }) => (
-  <TouchableOpacity onPress={onPress} style={styles.row}>
+export const RequestItem = ({ name, onPressAdd, onPressReject, picture }) => (
+  <View style={styles.row}>
     <Image
       source={require("../assets/images/monstruo.png")}
       style={styles.picture}
     />
     <Text style={styles.title}>{name}</Text>
-    <AntDesign name="checkcircle" size={24} color="black" />
-    <MaterialCommunityIcons name="close-circle" size={24} color="black" />
-  </TouchableOpacity>
+    <TouchableOpacity onPress={onPressAdd}>
+      <AntDesign name="checkcircle" size={24} color="black" />
+    </TouchableOpacity>
+    <TouchableOpacity onPress={onPressReject}>
+      <MaterialCommunityIcons name="close-circle" size={24} color="black" />
+    </TouchableOpacity>
+  </View>
 );
 
 export const RowSeparator = () => <View style={styles.separator} />;

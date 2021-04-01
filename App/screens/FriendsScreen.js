@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import ListaAmigos from "../components/ListaAmigos";
+import ListaPetis from "../components/ListaPetis";
 import Colors from "../constants/colors";
 import APIKit from "../util/APIKit";
 
@@ -78,9 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   petitionsContainer: {
-    padding: 40,
-
-    width: "100%",
+    width: "110%",
     height: "70%",
     backgroundColor: Colors.white,
     borderRadius: 5,
@@ -306,7 +305,9 @@ class Friends extends Component {
             <Entypo name="add-user" size={24} color="red" />
           </TouchableOpacity>
         </View>
-        <View style={styles.petitionsContainer}></View>
+        <View style={styles.petitionsContainer}>
+          <ListaPetis />
+        </View>
       </View>
     );
   }
