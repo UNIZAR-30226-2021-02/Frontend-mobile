@@ -15,6 +15,7 @@ import {
 import Spinner from "react-native-loading-spinner-overlay";
 
 import Colors from "../constants/colors";
+import URI from "../constants/apiUris";
 const screen = Dimensions.get("window");
 
 import APIKit, { setClientToken, setClientName } from "../util/APIKit";
@@ -63,7 +64,7 @@ class Login extends Component {
     // Show spinner when call is made
     this.setState({ isLoading: true });
 
-    APIKit.post("/login", payload).then(onSuccess).catch(onFailure);
+    APIKit.post(URI.login, payload).then(onSuccess).catch(onFailure);
   }
 
   render() {

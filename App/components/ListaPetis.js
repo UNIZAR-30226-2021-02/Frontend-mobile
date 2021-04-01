@@ -2,14 +2,8 @@ import React, { Component } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { RowSeparator, RequestItem } from "./RowItem";
 import APIKit from "../util/APIKit";
-
+import URI from "../constants/apiUris";
 const initState = { loading: false, data: [] };
-
-const Item = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
 
 class ListaPetis extends Component {
   constructor() {
@@ -42,10 +36,9 @@ class ListaPetis extends Component {
           };
           const onFailure = (error) => {
             console.log(error && error.response);
-            this.removeRequest(item.nombre);
           };
 
-          APIKit.post("/acceptRequest", payload)
+          APIKit.post(URI.acceptRequest, payload)
             .then(onSuccess)
             .catch(onFailure);
         }}
@@ -59,12 +52,13 @@ class ListaPetis extends Component {
           };
           const onFailure = (error) => {
             console.log(error && error.response);
-            this.removeRequest(item.nombre);
           };
 
-          APIKit.post("/denyRequest", payload).then(onSuccess).catch(onFailure);
+          APIKit.post(URI.denyRequest, payload)
+            .then(onSuccess)
+            .catch(onFailure);
         }}
-        picture={"../assets/images/monstruo.png"}
+        picture={URI.img + item.fotPerf}
       ></RequestItem>
     </View>
   );
@@ -85,7 +79,7 @@ class ListaPetis extends Component {
       this.setState({ errors: error.response.data, loading: false });
     };
     this.setState({ loading: true });
-    APIKit.get("/listRequest").then(onSuccess).catch(onFailure);
+    APIKit.get(URI.listRequest).then(onSuccess).catch(onFailure);
   };
   state = {};
   render() {

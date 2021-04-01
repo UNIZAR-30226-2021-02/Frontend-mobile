@@ -18,6 +18,15 @@ class ListaAmigos extends Component {
     this.setState({ loading: false });
   };
 
+  removeFriend = (name) => {
+    console.log("antes " + this.state.data);
+    const newLs = this.state.data.filter((rqt) => {
+      return rqt.nombre != name;
+    });
+    this.setState({ data: newLs });
+    console.log("despues " + this.state.data);
+  };
+
   renderItem = ({ item, index }) => (
     <View>
       <Text></Text>
@@ -30,19 +39,18 @@ class ListaAmigos extends Component {
 
           const onSuccess = ({ data }) => {
             console.log("Eliminado manin " + data);
-            this.setState({ loading: false });
+            this.removeFriend(item.nombre);
+            this.removeRequest(item.nombre);
           };
           const onFailure = (error) => {
             console.log(error && error.response);
-            this.setState({ errors: error.response.data, loading: false });
           };
 
-          this.setState({ loading: true });
-          APIKit.post("/deleteFriend", payload)
+          APIKit.post(URI.deleteFriend, payload)
             .then(onSuccess)
             .catch(onFailure);
         }}
-        //picture={"../assets/images/monstruo.png"}
+        pts={item.estrellas}
         picture={URI.img + item.fotPerf}
       ></RankingItem>
     </View>
@@ -63,7 +71,7 @@ class ListaAmigos extends Component {
       this.setState({ errors: error.response.data, loading: false });
     };
     this.setState({ loading: true });
-    APIKit.get("/listFriends").then(onSuccess).catch(onFailure);
+    APIKit.get(URI.listFriends).then(onSuccess).catch(onFailure);
   };
   state = {};
   render() {

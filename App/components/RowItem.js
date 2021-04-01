@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   picture: { width: 50, height: 50 },
 });
 
-export const RankingItem = ({ name, onPress, ind, picture }) => {
+export const RankingItem = ({ name, onPress, ind, picture, pts }) => {
   console.log(picture);
   return (
     <View style={styles.row}>
@@ -39,6 +39,7 @@ export const RankingItem = ({ name, onPress, ind, picture }) => {
         style={styles.picture}
       />
       <Text style={styles.title}>{name}</Text>
+      <Text style={styles.title}>{pts + " pts."}</Text>
       <TouchableOpacity onPress={onPress}>
         <MaterialCommunityIcons name="close-circle" size={24} color="black" />
       </TouchableOpacity>
@@ -49,7 +50,9 @@ export const RankingItem = ({ name, onPress, ind, picture }) => {
 export const RequestItem = ({ name, onPressAdd, onPressReject, picture }) => (
   <View style={styles.row}>
     <Image
-      source={require("../assets/images/monstruo.png")}
+      source={{
+        uri: picture,
+      }}
       style={styles.picture}
     />
     <Text style={styles.title}>{name}</Text>

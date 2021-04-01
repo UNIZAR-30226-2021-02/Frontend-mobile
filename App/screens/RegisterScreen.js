@@ -12,6 +12,7 @@ import {
   ViewPropTypes,
   View,
 } from "react-native";
+import URI from "../constants/apiUris";
 
 const screen = Dimensions.get("window");
 const state = { text: "Ususario" };
@@ -112,7 +113,7 @@ class Register extends Component {
       // Show spinner when call is made
       this.setState({ isLoading: true });
 
-      APIKit.post("/register", payload).then(onSuccess).catch(onFailure);
+      APIKit.post(URI.register, payload).then(onSuccess).catch(onFailure);
     } else {
       console.log("Faltan campos");
     }
