@@ -27,15 +27,22 @@ const styles = StyleSheet.create({
   picture: { resizeMode: "stretch" },
 });
 
-export const RankingItem = ({ name, onPress, picture }) => (
-  <TouchableOpacity onPress={onPress} style={styles.row}>
-    <Image
-      source={require("../assets/images/monstruo.png")}
-      style={styles.picture}
-    />
-    <Text style={styles.title}>{name}</Text>
-  </TouchableOpacity>
-);
+export const RankingItem = ({ name, onPress, ind, picture }) => {
+  console.log(picture);
+  return (
+    <TouchableOpacity onPress={onPress} style={styles.row}>
+      <Text style={styles.title}>{ind}</Text>
+      <Image
+        source={{
+          uri: picture,
+        }}
+        style={styles.picture}
+      />
+      <Text style={styles.title}>{name}</Text>
+      <MaterialCommunityIcons name="close-circle" size={24} color="black" />
+    </TouchableOpacity>
+  );
+};
 
 export const RequestItem = ({ name, onPress, picture }) => (
   <TouchableOpacity onPress={onPress} style={styles.row}>

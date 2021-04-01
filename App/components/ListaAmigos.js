@@ -3,45 +3,49 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import { RowSeparator, RankingItem } from "./RowItem";
 import APIKit from "../util/APIKit";
 
-const initState = { loading: false };
+import URI from "../constants/apiUris";
 
-const renderItem = ({ item, index }) => (
-  <View>
-    <Text>{index + 1}</Text>
-    <RankingItem
-      name={item.nombre}
-      onPress={() => console.log("hli")}
-      picture={"../assets/images/monstruo.png"}
-    ></RankingItem>
-  </View>
-);
+const initState = { loading: true };
 
 class ListaAmigos extends Component {
   constructor() {
     super();
     this.state = initState;
-    this.loadData();
   }
 
   componentDidMount = () => {
     this.loadData();
+    this.setState({ loading: false });
   };
+
+  renderItem = ({ item, index }) => (
+    <View>
+      <Text></Text>
+      <RankingItem
+        ind={index + 1}
+        name={item.nombre}
+        onPress={() => console.log("hli")}
+        //picture={"../assets/images/monstruo.png"}
+        picture={URI.img + item.fotPerf}
+      ></RankingItem>
+    </View>
+  );
   //función que pide la lista de amigos a la API
 
   loadData = () => {
-    this.setState({ isLoading: true });
+    this.setState({ loading: true });
     const onSuccess = ({ data }) => {
       console.log("Nos devuelve los amigos: " + JSON.stringify(data));
       this.setState({
         data: data,
       });
-      this.setState({ isLoading: false });
+      this.setState({ loading: false });
     };
     const onFailure = (error) => {
       console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
+      this.setState({ errors: error.response.data, loading: false });
     };
-    this.setState({ isLoading: true });
+    this.setState({ loading: true });
     APIKit.get("/listFriends").then(onSuccess).catch(onFailure);
   };
   state = {};
@@ -51,7 +55,7 @@ class ListaAmigos extends Component {
       <View>
         <FlatList
           data={this.state.data}
-          renderItem={renderItem}
+          renderItem={this.renderItem}
           keyExtractor={(item) => item.nombre} //TODO
           ItemSeparatorComponent={RowSeparator}
           ListEmptyComponent={<Text>No tienes amigos owo</Text>}
