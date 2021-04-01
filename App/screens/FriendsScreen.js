@@ -318,11 +318,9 @@ class Friends extends Component {
           {this.button(rnk)}
           {this.button(add)}
         </View>
-        {this.state.selectedButton == rnk ? (
-          <Text>RankingList</Text> //this.RankigList()
-        ) : (
-          this.AddFriendList()
-        )}
+        {this.state.selectedButton == rnk
+          ? this.RankigList()
+          : this.AddFriendList()}
       </SafeAreaView>
     );
   }
