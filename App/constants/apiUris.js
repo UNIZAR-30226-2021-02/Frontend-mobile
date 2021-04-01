@@ -1,8 +1,14 @@
 const ip = "10.0.2.2";
-const uri = `http://${ip}:8080/api/`;
 
 export default {
-  login: uri + "login",
-  register: uri + "register",
-  all: uri + "all",
+  login: "login",
+  register: "register",
+  acceptRequest: "acceptRequest",
+  sendRequest: "sendRequest",
+  denyRequest: "denyRequest",
+  listRequest: "listRequest",
+  listFriends: "listFriends",
+  deleteFriend: "deleteFriend",
+  all: "all",
+  img: "http://10.0.2.2:8080/api/returnImageProfile/",
 };

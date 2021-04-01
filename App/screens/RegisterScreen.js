@@ -12,11 +12,12 @@ import {
   ViewPropTypes,
   View,
 } from "react-native";
+import URI from "../constants/apiUris";
 
 const screen = Dimensions.get("window");
 const state = { text: "Ususario" };
 
-import APIKit, { setClientToken } from "../util/APIKit";
+import APIKit, { setClientToken, setClientName } from "../util/APIKit";
 
 const initialState = {
   mail: "",
@@ -99,8 +100,9 @@ class Register extends Component {
       const onSuccess = ({ data }) => {
         // Set JSON Web Token on success
         setClientToken(data.token);
+        setClientName(this.state.username);
         this.setState({ isLoading: false, isAuthorized: true });
-        this.props.navigation.navigate("HomeScreen");
+        this.props.navigation.navigate("Home");
       };
 
       const onFailure = (error) => {
@@ -111,7 +113,7 @@ class Register extends Component {
       // Show spinner when call is made
       this.setState({ isLoading: true });
 
-      APIKit.post("/register", payload).then(onSuccess).catch(onFailure);
+      APIKit.post(URI.register, payload).then(onSuccess).catch(onFailure);
     } else {
       console.log("Faltan campos");
     }

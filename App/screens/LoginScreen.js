@@ -10,13 +10,15 @@ import {
   StatusBar,
   TextInput,
   ScrollView,
+  Alert,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 
 import Colors from "../constants/colors";
+import URI from "../constants/apiUris";
 const screen = Dimensions.get("window");
 
-import APIKit, { setClientToken } from "../util/APIKit";
+import APIKit, { setClientToken, setClientName } from "../util/APIKit";
 
 const initialState = {
   username: "",
@@ -47,19 +49,22 @@ class Login extends Component {
     const onSuccess = ({ data }) => {
       // Set JSON Web Token on success
       setClientToken(data.token);
+      setClientName(this.state.username);
       this.setState({ isLoading: false, isAuthorized: true });
-      this.props.navigation.navigate("HomeScreen");
+      this.props.navigation.navigate("Home");
     };
 
     const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
+      console.log("Petición fallida ");
+
+      this.setState({ isLoading: false });
+      Alert.alert("No se puede conectar al servidor, pruebe más tarde");
     };
 
     // Show spinner when call is made
     this.setState({ isLoading: true });
 
-    APIKit.post("/login", payload).then(onSuccess).catch(onFailure);
+    APIKit.post(URI.login, payload).then(onSuccess).catch(onFailure);
   }
 
   render() {
