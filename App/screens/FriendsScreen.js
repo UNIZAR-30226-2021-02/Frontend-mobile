@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import ListaAmigos from "../components/ListaAmigos";
+import ListaPetis from "../components/ListaPetis";
 import Colors from "../constants/colors";
 import APIKit from "../util/APIKit";
 
@@ -78,9 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   petitionsContainer: {
-    padding: 40,
-
-    width: "100%",
+    width: "110%",
     height: "70%",
     backgroundColor: Colors.white,
     borderRadius: 5,
@@ -170,45 +169,9 @@ class Friends extends Component {
     APIKit.post("/deleteFriend", payload).then(onSuccess).catch(onFailure);
   }
 
-  onAcceptRequest() {
-    const { searchUser } = this.state;
-    const payload = JSON.stringify({ nombre: searchUser });
-    console.log("Se envía " + payload);
-
+  listFriends() {
     const onSuccess = ({ data }) => {
-      console.log("Aceptado manin " + data);
-      this.setState({ isLoading: false });
-    };
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
-    };
-
-    this.setState({ isLoading: true });
-    APIKit.post("/acceptRequest", payload).then(onSuccess).catch(onFailure);
-  }
-
-  onDenyRequest() {
-    const { searchUser } = this.state;
-    const payload = JSON.stringify({ nombre: searchUser });
-    console.log("Se envía " + payload);
-
-    const onSuccess = ({ data }) => {
-      console.log("Rechazado manin " + data);
-      this.setState({ isLoading: false });
-    };
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
-    };
-
-    this.setState({ isLoading: true });
-    APIKit.post("/denyRequest", payload).then(onSuccess).catch(onFailure);
-  }
-
-  listRequests() {
-    const onSuccess = ({ data }) => {
-      console.log("Nos devuelve las peticiones: " + JSON.stringify(data));
+      console.log("Nos devuelve los amigos: " + JSON.stringify(data));
       this.setState({ isLoading: false });
     };
     const onFailure = (error) => {
@@ -216,7 +179,7 @@ class Friends extends Component {
       this.setState({ errors: error.response.data, isLoading: false });
     };
     this.setState({ isLoading: true });
-    APIKit.get("/listRequest").then(onSuccess).catch(onFailure);
+    APIKit.get("/listFriends").then(onSuccess).catch(onFailure);
   }
 
   button(name) {
@@ -264,28 +227,11 @@ class Friends extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.addFriend}
-            onPress={this.listRequests.bind(this)}
-          >
-            <Entypo name="add-user" size={24} color="green" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.addFriend}
             onPress={this.listFriends.bind(this)}
           >
             <Entypo name="add-user" size={24} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.addFriend}
-            onPress={this.onAcceptRequest.bind(this)}
-          >
-            <Entypo name="add-user" size={24} color="blue" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.addFriend}
-            onPress={this.onDenyRequest.bind(this)}
-          >
-            <Entypo name="add-user" size={24} color="brown" />
-          </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.addFriend}
             onPress={this.onPressDelete.bind(this)}
@@ -293,7 +239,9 @@ class Friends extends Component {
             <Entypo name="add-user" size={24} color="red" />
           </TouchableOpacity>
         </View>
-        <View style={styles.petitionsContainer}></View>
+        <View style={styles.petitionsContainer}>
+          <ListaPetis />
+        </View>
       </View>
     );
   }
