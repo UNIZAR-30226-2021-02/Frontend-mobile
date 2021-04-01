@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { RowSeparator, RowItem } from "./RowItem";
+import { RowSeparator, RankingItem } from "./RowItem";
 
 const initState = { loading: false };
 
@@ -13,11 +13,11 @@ const Item = ({ title }) => (
 const renderItem = ({ item, index }) => (
   <View>
     <Text>{index + 1}</Text>
-    <RowItem
-      title={item.name}
+    <RankingItem
+      name={item.name}
       onPress={() => console.log("hli")}
       picture={"../assets/images/monstruo.png"}
-    ></RowItem>
+    ></RankingItem>
   </View>
 );
 
