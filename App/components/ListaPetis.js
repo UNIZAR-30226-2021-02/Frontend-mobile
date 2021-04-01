@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import { RowSeparator, RequestItem } from "./RowItem";
 import APIKit from "../util/APIKit";
 
-const initState = { loading: false, data: "" };
+const initState = { loading: false, data: [] };
 
 const Item = ({ title }) => (
   <View style={styles.item}>
@@ -19,6 +19,15 @@ class ListaPetis extends Component {
     //this.loadData();
   }
 
+  removeRequest = (name) => {
+    console.log("antes " + this.state.data);
+    const newLs = this.state.data.filter((rqt) => {
+      return rqt.nombre != name;
+    });
+    this.setState({ data: newLs });
+    console.log("despues " + this.state.data);
+  };
+
   renderItem = ({ item, index }) => (
     <View>
       <RequestItem
@@ -29,14 +38,13 @@ class ListaPetis extends Component {
 
           const onSuccess = ({ data }) => {
             console.log("Aceptado manin " + data);
-            this.setState({ isLoading: false });
+            this.removeRequest(item.nombre);
           };
           const onFailure = (error) => {
             console.log(error && error.response);
-            this.setState({ errors: error.response.data, isLoading: false });
+            this.removeRequest(item.nombre);
           };
 
-          this.setState({ isLoading: true });
           APIKit.post("/acceptRequest", payload)
             .then(onSuccess)
             .catch(onFailure);
@@ -47,14 +55,13 @@ class ListaPetis extends Component {
 
           const onSuccess = ({ data }) => {
             console.log("Rechazado manin " + data);
-            this.setState({ loading: false });
+            this.removeRequest(item.nombre);
           };
           const onFailure = (error) => {
             console.log(error && error.response);
-            this.setState({ errors: error.response.data, loading: false });
+            this.removeRequest(item.nombre);
           };
 
-          this.setState({ loading: true });
           APIKit.post("/denyRequest", payload).then(onSuccess).catch(onFailure);
         }}
         picture={"../assets/images/monstruo.png"}
