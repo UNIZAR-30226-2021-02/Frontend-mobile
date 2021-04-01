@@ -10,6 +10,7 @@ import {
   StatusBar,
   TextInput,
   ScrollView,
+  Alert,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 
@@ -53,8 +54,10 @@ class Login extends Component {
     };
 
     const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
+      console.log("Petición fallida ");
+
+      this.setState({ isLoading: false });
+      Alert.alert("No se puede conectar al servidor, pruebe más tarde");
     };
 
     // Show spinner when call is made
