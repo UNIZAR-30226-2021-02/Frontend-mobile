@@ -169,42 +169,6 @@ class Friends extends Component {
     APIKit.post("/deleteFriend", payload).then(onSuccess).catch(onFailure);
   }
 
-  onAcceptRequest() {
-    const { searchUser } = this.state;
-    const payload = JSON.stringify({ nombre: searchUser });
-    console.log("Se envía " + payload);
-
-    const onSuccess = ({ data }) => {
-      console.log("Aceptado manin " + data);
-      this.setState({ isLoading: false });
-    };
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
-    };
-
-    this.setState({ isLoading: true });
-    APIKit.post("/acceptRequest", payload).then(onSuccess).catch(onFailure);
-  }
-
-  onDenyRequest() {
-    const { searchUser } = this.state;
-    const payload = JSON.stringify({ nombre: searchUser });
-    console.log("Se envía " + payload);
-
-    const onSuccess = ({ data }) => {
-      console.log("Rechazado manin " + data);
-      this.setState({ isLoading: false });
-    };
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
-    };
-
-    this.setState({ isLoading: true });
-    APIKit.post("/denyRequest", payload).then(onSuccess).catch(onFailure);
-  }
-
   listFriends() {
     const onSuccess = ({ data }) => {
       console.log("Nos devuelve los amigos: " + JSON.stringify(data));
@@ -216,19 +180,6 @@ class Friends extends Component {
     };
     this.setState({ isLoading: true });
     APIKit.get("/listFriends").then(onSuccess).catch(onFailure);
-  }
-
-  listRequests() {
-    const onSuccess = ({ data }) => {
-      console.log("Nos devuelve las peticiones: " + JSON.stringify(data));
-      this.setState({ isLoading: false });
-    };
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
-    };
-    this.setState({ isLoading: true });
-    APIKit.get("/listRequest").then(onSuccess).catch(onFailure);
   }
 
   button(name) {
@@ -276,28 +227,11 @@ class Friends extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.addFriend}
-            onPress={this.listRequests.bind(this)}
-          >
-            <Entypo name="add-user" size={24} color="green" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.addFriend}
             onPress={this.listFriends.bind(this)}
           >
             <Entypo name="add-user" size={24} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.addFriend}
-            onPress={this.onAcceptRequest.bind(this)}
-          >
-            <Entypo name="add-user" size={24} color="blue" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.addFriend}
-            onPress={this.onDenyRequest.bind(this)}
-          >
-            <Entypo name="add-user" size={24} color="brown" />
-          </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.addFriend}
             onPress={this.onPressDelete.bind(this)}
