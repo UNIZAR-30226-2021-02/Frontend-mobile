@@ -149,39 +149,6 @@ class Friends extends Component {
     APIKit.post("/sendRequest", payload).then(onSuccess).catch(onFailure);
   }
 
-  onPressDelete() {
-    const { searchUser } = this.state;
-    const payload = JSON.stringify({ nombre: searchUser });
-    console.log("Se envía " + payload);
-
-    const onSuccess = ({ data }) => {
-      console.log("Eliminado manin " + data);
-      this.setState({ isLoading: false });
-    };
-
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
-    };
-
-    this.setState({ isLoading: true });
-
-    APIKit.post("/deleteFriend", payload).then(onSuccess).catch(onFailure);
-  }
-
-  listFriends() {
-    const onSuccess = ({ data }) => {
-      console.log("Nos devuelve los amigos: " + JSON.stringify(data));
-      this.setState({ isLoading: false });
-    };
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
-    };
-    this.setState({ isLoading: true });
-    APIKit.get("/listFriends").then(onSuccess).catch(onFailure);
-  }
-
   button(name) {
     return (
       <TouchableOpacity
@@ -224,19 +191,6 @@ class Friends extends Component {
             onPress={this.onPressAdd.bind(this)}
           >
             <Entypo name="add-user" size={24} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.addFriend}
-            onPress={this.listFriends.bind(this)}
-          >
-            <Entypo name="add-user" size={24} color="white" />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.addFriend}
-            onPress={this.onPressDelete.bind(this)}
-          >
-            <Entypo name="add-user" size={24} color="red" />
           </TouchableOpacity>
         </View>
         <View style={styles.petitionsContainer}>

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 export const RankingItem = ({ name, onPress, ind, picture }) => {
   console.log(picture);
   return (
-    <TouchableOpacity onPress={onPress} style={styles.row}>
+    <View style={styles.row}>
       <Text style={styles.title}>{ind}</Text>
       <Image
         source={{
@@ -39,8 +39,10 @@ export const RankingItem = ({ name, onPress, ind, picture }) => {
         style={styles.picture}
       />
       <Text style={styles.title}>{name}</Text>
-      <MaterialCommunityIcons name="close-circle" size={24} color="black" />
-    </TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
+        <MaterialCommunityIcons name="close-circle" size={24} color="black" />
+      </TouchableOpacity>
+    </View>
   );
 };
 

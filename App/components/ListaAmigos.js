@@ -24,7 +24,24 @@ class ListaAmigos extends Component {
       <RankingItem
         ind={index + 1}
         name={item.nombre}
-        onPress={() => console.log("hli")}
+        onPress={() => {
+          const payload = JSON.stringify({ nombre: item.nombre });
+          console.log("Se envía " + payload);
+
+          const onSuccess = ({ data }) => {
+            console.log("Eliminado manin " + data);
+            this.setState({ loading: false });
+          };
+          const onFailure = (error) => {
+            console.log(error && error.response);
+            this.setState({ errors: error.response.data, loading: false });
+          };
+
+          this.setState({ loading: true });
+          APIKit.post("/deleteFriend", payload)
+            .then(onSuccess)
+            .catch(onFailure);
+        }}
         //picture={"../assets/images/monstruo.png"}
         picture={URI.img + item.fotPerf}
       ></RankingItem>
