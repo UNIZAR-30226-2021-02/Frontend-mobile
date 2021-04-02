@@ -25,13 +25,36 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
   },
-  containerPtsLGD: {
+  containerPts: {
+    backgroundColor: "pink",
     flexDirection: "row",
+    borderColor: "black",
+    borderRadius: 9,
+    borderWidth: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 10,
+      height: 8,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.27,
+    elevation: 7,
   },
-  containerEMA: {
-    flexDirection: "row",
+  interiorIcon: {
+    paddingTop: 2,
+    paddingLeft: 6,
+    paddingBottom: 2,
   },
-  picture: { width: 50, height: 50 },
+  interiorVal: {
+    paddingTop: 2,
+    paddingLeft: 5,
+    paddingRight: 6,
+    paddingBottom: 2,
+  },
+  separador: {
+    borderRightWidth: 1,
+  },
+  picture: { width: 70, height: 70 },
 });
 
 const initialState = {
@@ -63,7 +86,7 @@ class Profile extends Component {
       });
       this.setState({
         nombre: data.nombre,
-        fotPerf: data.fotPerf,
+        fotPerf: URI.img + data.fotPerf,
         estrellas: data.estrellas,
         monedas: data.monedas,
         pDibujo: data.pDibujo,
@@ -92,25 +115,57 @@ class Profile extends Component {
           style={styles.picture}
         />
         <TextInput>{this.state.nombre}</TextInput>
-        <View style={styles.containerPtsLGD}>
-          <FontAwesome name="pencil" size={18} color="black" />
-          <Text>{this.state.pDibujo}</Text>
-          <MaterialCommunityIcons name="brain" size={18} color="black" />
-          <Text>{this.state.pListo}</Text>
-          <Ionicons name="md-happy-outline" size={18} color="black" />
-          <Text>{this.state.pGracioso}</Text>
+        <View style={styles.containerPts}>
+          <FontAwesome
+            style={styles.interiorIcon}
+            name="pencil"
+            size={18}
+            color="black"
+          />
+          <Text style={styles.interiorVal}>{this.state.pDibujo}</Text>
+          <View style={styles.separador} />
+          <MaterialCommunityIcons
+            style={styles.interiorIcon}
+            name="brain"
+            size={18}
+            color="black"
+          />
+          <Text style={styles.interiorVal}>{this.state.pListo}</Text>
+          <View style={styles.separador} />
+          <Ionicons
+            style={styles.interiorIcon}
+            name="md-happy-outline"
+            size={18}
+            color="black"
+          />
+          <Text style={styles.interiorVal}>{this.state.pGracioso}</Text>
         </View>
-        <View style={styles.containerEMA}>
-          <AntDesign name="staro" size={18} color="black" />
-          <Text>{this.state.estrellas}</Text>
+        <View style={styles.containerPts}>
+          <AntDesign
+            style={styles.interiorIcon}
+            name="staro"
+            size={18}
+            color="black"
+          />
+          <Text style={styles.interiorVal}>{this.state.estrellas}</Text>
         </View>
-        <View style={styles.containerEMA}>
-          <FontAwesome5 name="coins" size={18} color="black" />
-          <Text>{this.state.monedas}</Text>
+        <View style={styles.containerPts}>
+          <FontAwesome5
+            style={styles.interiorIcon}
+            name="coins"
+            size={18}
+            color="black"
+          />
+          <Text style={styles.interiorVal}>{this.state.monedas}</Text>
         </View>
-        <View style={styles.containerEMA}>
-          <FontAwesome name="user" size={18} color="black" />
-          <Text>{this.state.nAmigos}</Text>
+        <View style={styles.containerPts}>
+          <FontAwesome
+            style={styles.interiorIcon}
+            name="user"
+            size={18}
+            color="black"
+          />
+          <Text style={styles.interiorVal}>{this.state.nAmigos}</Text>
         </View>
       </SafeAreaView>
     );
