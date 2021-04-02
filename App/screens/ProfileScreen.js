@@ -40,6 +40,10 @@ const styles = StyleSheet.create({
     shadowRadius: 4.27,
     elevation: 7,
   },
+  nombre: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
   interiorIcon: {
     paddingTop: 2,
     paddingLeft: 6,
@@ -114,7 +118,7 @@ class Profile extends Component {
           }}
           style={styles.picture}
         />
-        <TextInput>{this.state.nombre}</TextInput>
+        <TextInput style={styles.nombre}>{this.state.nombre}</TextInput>
         <View style={styles.containerPts}>
           <FontAwesome
             style={styles.interiorIcon}
