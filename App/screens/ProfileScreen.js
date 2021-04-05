@@ -6,6 +6,7 @@ import {
   Button,
   Image,
   View,
+  Touchable,
 } from "react-native";
 import {
   FontAwesome5,
@@ -14,9 +15,9 @@ import {
   MaterialCommunityIcons,
   Ionicons,
 } from "@expo/vector-icons";
-import { TextInput } from "react-native-gesture-handler";
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import URI from "../constants/apiUris";
-import APIKit from "../util/APIKit";
+import APIKit, { setClientName } from "../util/APIKit";
 
 const styles = StyleSheet.create({
   container: {
@@ -59,6 +60,28 @@ const styles = StyleSheet.create({
     borderRightWidth: 1,
   },
   picture: { width: 70, height: 70 },
+  cambiarView: {
+    paddingLeft: "78%",
+  },
+  cambiarButton: {
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "blue",
+    borderColor: "black",
+    borderRadius: 9,
+    borderWidth: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 10,
+      height: 8,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.27,
+    elevation: 7,
+  },
+  cambiarFont: {
+    fontSize: 13,
+  },
 });
 
 const initialState = {
@@ -71,6 +94,7 @@ const initialState = {
   pGracioso: 0,
   nAmigos: 0,
   errors: {},
+  hide: true,
 };
 
 class Profile extends Component {
@@ -107,6 +131,30 @@ class Profile extends Component {
     this.setState({ loading: true });
     APIKit.get(URI.viewProfile).then(onSuccess).catch(onFailure);
   };
+
+  onPressChange() {
+    const { nombre } = this.state;
+    const payload = JSON.stringify({ nombre: nombre });
+    console.log(payload);
+
+    const onSuccess = ({ data }) => {
+      setClientName(this.state.nombre);
+      console.log("Cambiado " + this.state.nombre);
+      this.setState({ isLoading: false });
+    };
+
+    const onFailure = (error) => {
+      console.log("Petición fallida ");
+
+      this.setState({ isLoading: false });
+      Alert.alert("No se puede conectar al servidor, pruebe más tarde");
+    };
+
+    this.setState({ isLoading: true });
+
+    APIKit.post(URI.changeName, payload).then(onSuccess).catch(onFailure);
+  }
+
   state = {};
 
   render() {
@@ -118,7 +166,17 @@ class Profile extends Component {
           }}
           style={styles.picture}
         />
-        <TextInput style={styles.nombre}>{this.state.nombre}</TextInput>
+        <View style={{ flexDirection: "row" }}>
+          <TextInput
+            style={styles.nombre}
+            onChangeText={(text) => {
+              this.state.nombre = text;
+              this.state.hide = false;
+            }}
+          >
+            {this.state.nombre}
+          </TextInput>
+        </View>
         <View style={styles.containerPts}>
           <FontAwesome
             style={styles.interiorIcon}
@@ -170,6 +228,15 @@ class Profile extends Component {
             color="black"
           />
           <Text style={styles.interiorVal}>{this.state.nAmigos}</Text>
+        </View>
+        <View style={styles.cambiarView}>
+          <TouchableOpacity
+            style={styles.cambiarButton}
+            onPress={this.onPressChange.bind(this)}
+          >
+            <Text style={styles.cambiarFont}>Change</Text>
+            <Text style={styles.cambiarFont}> Username </Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     );

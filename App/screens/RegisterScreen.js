@@ -56,7 +56,7 @@ class Register extends Component {
   };
 
   onPasswordAChange = (passwordA) => {
-    this.setState({ passwordA });
+    this.state.passwordA = passwordA;
     console.log("Son: " + this.state.passwordA + "  " + this.state.passwordB);
     if (this.state.passwordA === this.state.passwordB) {
       this.setShow(false);
@@ -66,7 +66,7 @@ class Register extends Component {
   };
 
   onPasswordBChange = (passwordB) => {
-    this.setState({ passwordB });
+    this.state.passwordB = passwordB;
     console.log("Son: " + this.state.passwordA + "  " + this.state.passwordB);
     if (this.state.passwordB === this.state.passwordA) {
       this.setShow(false);
