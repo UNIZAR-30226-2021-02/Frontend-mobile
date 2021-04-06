@@ -1,6 +1,6 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, Button } from "react-native";
-//import { Menu } from "../components/NavBar";
+import { GameItem } from "../components/RowItem";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,6 +15,7 @@ export default ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Text>Game</Text>
+      <GameItem />
     </SafeAreaView>
   );
 };

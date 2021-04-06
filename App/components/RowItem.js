@@ -14,6 +14,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: colors.white,
     width: 470,
+    borderRadius: 9,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+
+    elevation: 8,
   },
   title: {
     color: colors.text,
@@ -61,6 +71,27 @@ export const RequestItem = ({ name, onPressAdd, onPressReject, picture }) => (
     </TouchableOpacity>
     <TouchableOpacity onPress={onPressReject}>
       <MaterialCommunityIcons name="close-circle" size={24} color="black" />
+    </TouchableOpacity>
+  </View>
+);
+
+export const InviteItem = ({ name, onPressAccept, onPressReject }) => (
+  <View style={styles.row}>
+    <Text style={styles.title}>{name}</Text>
+    <TouchableOpacity onPress={onPressAccept}>
+      <AntDesign name="checkcircle" size={24} color="black" />
+    </TouchableOpacity>
+    <TouchableOpacity onPress={onPressReject}>
+      <MaterialCommunityIcons name="close-circle" size={24} color="black" />
+    </TouchableOpacity>
+  </View>
+);
+
+export const GameItem = ({ name, onPressPlay }) => (
+  <View style={styles.row}>
+    <Text style={styles.title}>{name}</Text>
+    <TouchableOpacity onPress={onPressPlay}>
+      <AntDesign name="play" size={24} color="black" />
     </TouchableOpacity>
   </View>
 );
