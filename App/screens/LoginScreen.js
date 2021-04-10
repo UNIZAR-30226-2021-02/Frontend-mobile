@@ -11,6 +11,7 @@ import {
   TextInput,
   ScrollView,
   Alert,
+  Image,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 
@@ -72,60 +73,65 @@ class Login extends Component {
 
     return (
       <SafeAreaView style={styles.backgrdContainer}>
+        <View style={styles.logoContainer}>
+          <Image
+            source={require("../assets/images/background.png")}
+            style={styles.logoBackground}
+          />
+          <Image
+            source={require("../assets/images/logo.png")}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+        </View>
+        <View style={styles.separator} />
         <Spinner visible={isLoading} />
-        <View style={styles.container}>
-          <Text style={styles.textH1}>Username</Text>
-          <TextInput
-            style={styles.input}
-            value={this.state.username}
-            maxLength={256}
-            placeholder="Enter username..."
-            autoCapitalize="none"
-            autoCorrect={false}
-            returnKeyType="next"
-            onChangeText={this.onUsernameChange}
-            underlineColorAndroid="transparent"
-            placeholderTextColor="#999"
-          />
-        </View>
-        <View style={styles.container}>
-          <Text style={styles.textH1}>Password</Text>
-          <TextInput
-            ref={(node) => {
-              this.passwordInput = node;
-            }}
-            style={styles.input}
-            value={this.state.password}
-            maxLength={40}
-            placeholder="Enter password..."
-            onChangeText={this.onPasswordChange}
-            autoCapitalize="none"
-            autoCorrect={false}
-            returnKeyType="done"
-            blurOnSubmit
-            secureTextEntry
-            underlineColorAndroid="transparent"
-            placeholderTextColor="#999"
-          />
-        </View>
-        <View style={styles.container}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={this.onPressLogin.bind(this)}
-          >
-            <Text style={styles.textButton}>Sign in</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.container}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              this.props.navigation.navigate("RegisterScreen");
-            }}
-          >
-            <Text style={styles.textButton}>Register</Text>
-          </TouchableOpacity>
-        </View>
+        <TextInput
+          style={styles.input}
+          value={this.state.username}
+          maxLength={256}
+          placeholder="Username"
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="next"
+          onChangeText={this.onUsernameChange}
+          underlineColorAndroid="transparent"
+          placeholderTextColor="#999"
+        />
+        <View style={styles.separator} />
+        <TextInput
+          ref={(node) => {
+            this.passwordInput = node;
+          }}
+          style={styles.input}
+          value={this.state.password}
+          maxLength={40}
+          placeholder="Password"
+          onChangeText={this.onPasswordChange}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="done"
+          blurOnSubmit
+          secureTextEntry
+          underlineColorAndroid="transparent"
+          placeholderTextColor="#999"
+        />
+        <View style={styles.separatorBig} />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.onPressLogin.bind(this)}
+        >
+          <Text style={styles.textButton}>Sign in</Text>
+        </TouchableOpacity>
+        <View style={styles.separatorBig} />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.props.navigation.navigate("RegisterScreen");
+          }}
+        >
+          <Text style={styles.textButton}>Register</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     );
   }
@@ -135,42 +141,56 @@ class Login extends Component {
 const styles = StyleSheet.create({
   backgrdContainer: {
     alignItems: "center",
-    justifyContent: "space-evenly",
     backgroundColor: Colors.background,
     flex: 1,
   },
   container: {
     width: screen.width * 0.75,
-    height: screen.height * 0.15,
+    height: screen.height * 0.2,
+  },
+  logoContainer: {
+    paddingTop: screen.height * 0.45,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  logoBackground: {
+    position: "absolute",
+    width: screen.width * 0.2,
+    height: screen.width * 0.21,
+  },
+  logo: {
+    position: "absolute",
+    width: screen.width * 0.15,
+    height: screen.width * 0.16,
   },
   button: {
-    position: "absolute",
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "space-evenly",
-    top: 10,
-    backgroundColor: Colors.white,
-    height: 40,
-    width: 200,
-  },
-  textH1: {
-    top: 10,
-    color: Colors.white,
-    fontSize: 20,
-    paddingVertical: 16,
-  },
-  textH2: {
-    top: -130,
-    color: Colors.tranparentwhite,
-    fontSize: 14,
-    paddingVertical: 16,
+    backgroundColor: Colors.cyan,
+    height: "10%",
+    width: "25%",
   },
   input: {
     color: Colors.grey,
     backgroundColor: Colors.white,
+    width: "50%",
+    paddingLeft: 8,
+    borderRadius: 9,
+  },
+  separator: {
+    height: "1.5%",
+  },
+  separatorBig: {
+    height: "4%",
   },
   textButton: {
     fontSize: 20,
+    fontWeight: "bold",
+  },
+  textButton: {
+    fontSize: 18,
+    color: Colors.white,
     fontWeight: "bold",
   },
 });
