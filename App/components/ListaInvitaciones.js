@@ -27,7 +27,7 @@ class ListaInvitaciones extends Component {
         nameGame={item.partida.nombre}
         namePlayer={item.invitador.nombre}
         onPressAccept={() => {
-          setGameId(item.id);
+          setGameId(item.partida.id);
           const onSuccess = ({ data }) => {
             console.log("Aceptado manin " + data);
             this.removeRequest(item.nombre);
@@ -39,7 +39,8 @@ class ListaInvitaciones extends Component {
           APIKit.get(URI.acceptInvite).then(onSuccess).catch(onFailure);
         }}
         onPressReject={() => {
-          setGameId(item.id);
+          setGameId(item.partida.id);
+          console.log("AAAAAAAAAAAAA: " + item.id);
           const onSuccess = ({ data }) => {
             console.log("Rechazado manin " + data);
             this.removeRequest(item.nombre);
