@@ -15,9 +15,9 @@ import TabBar from "./components/TabBar";
 export default () => <AppNavigator />;
 
 const appSwitchNavigator = createSwitchNavigator({
-  RegisterScreen: RegisterScreen,
   Home: TabBar,
   LoginScreen: LoginScreen,
+  RegisterScreen: RegisterScreen,
   //aki debe ir loading
   FriendsScreen: FriendsScreen,
   GameScreen: GameScreen,

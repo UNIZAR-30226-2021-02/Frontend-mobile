@@ -77,7 +77,7 @@ class ListaInvitaciones extends Component {
       this.setState({ errors: error.response.data, loading: false });
     };
     this.setState({ loading: true });
-    APIKit.get(URI.listRequest).then(onSuccess).catch(onFailure);
+    APIKit.get(URI.listInvites).then(onSuccess).catch(onFailure);
   };
   state = {};
   render() {

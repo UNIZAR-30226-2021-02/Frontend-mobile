@@ -174,7 +174,8 @@ const styles = StyleSheet.create({
   input: {
     color: Colors.grey,
     backgroundColor: Colors.white,
-    width: "50%",
+    width: "55%",
+    height: "8%",
     paddingLeft: 8,
     borderRadius: 9,
   },

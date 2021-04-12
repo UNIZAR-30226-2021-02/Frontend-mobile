@@ -51,8 +51,9 @@ class ListaPartidas extends Component {
       this.setState({ errors: error.response.data, loading: false });
     };
     this.setState({ loading: true });
-    APIKit.get(URI.listRequest).then(onSuccess).catch(onFailure);
+    APIKit.get(URI.listGames).then(onSuccess).catch(onFailure);
   };
+
   state = {};
   render() {
     //this.loadData();
@@ -63,10 +64,10 @@ class ListaPartidas extends Component {
           renderItem={this.renderItem}
           keyExtractor={(item) => item.nombre} //TODO
           ItemSeparatorComponent={RowSeparator}
-          ListEmptyComponent={<Text>No tienes peticiones owo</Text>}
+          ListEmptyComponent={<Text>No tienes partidas owo</Text>}
           onRefresh={this.loadData}
           refreshing={this.state.loading}
-          ListHeaderComponent={<Text>Peticiones papu</Text>}
+          ListHeaderComponent={<Text>Partidas papu</Text>}
         />
       </View>
     );

@@ -11,6 +11,12 @@ export default {
   deleteFriend: "deleteFriend",
   viewProfile: "viewProfile",
   changeName: "changeNameProfile",
+  newGame: "newGame",
+  listGames: "listGames",
+  listInvites: "listInvite",
+  inviteGame: "inviteGame",
+  acceptInvite: "acceptInvite",
+  denyInvite: "denyInvite",
   all: "all",
   img: "http://10.0.2.2:8080/api/returnImageProfile/",
 };
