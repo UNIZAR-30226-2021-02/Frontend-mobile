@@ -75,9 +75,16 @@ export const RequestItem = ({ name, onPressAdd, onPressReject, picture }) => (
   </View>
 );
 
-export const InviteItem = ({ name, onPressAccept, onPressReject }) => (
+export const InviteItem = ({
+  nameGame,
+  namePlayer,
+  onPressAccept,
+  onPressReject,
+}) => (
   <View style={styles.row}>
-    <Text style={styles.title}>{name}</Text>
+    <Text style={styles.title}>
+      Game {nameGame} from player {namePlayer}
+    </Text>
     <TouchableOpacity onPress={onPressAccept}>
       <AntDesign name="checkcircle" size={24} color="black" />
     </TouchableOpacity>

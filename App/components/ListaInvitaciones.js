@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { RowSeparator, InviteItem } from "./RowItem";
-import APIKit from "../util/APIKit";
+import APIKit, { setGameId } from "../util/APIKit";
 import URI from "../constants/apiUris";
 const initState = { loading: false, data: [] };
 
@@ -24,11 +24,10 @@ class ListaInvitaciones extends Component {
   renderItem = ({ item, index }) => (
     <View>
       <InviteItem
-        name={item.nombre}
+        nameGame={item.partida.nombre}
+        namePlayer={item.invitador.nombre}
         onPressAccept={() => {
-          const payload = JSON.stringify({ nombre: item.nombre });
-          console.log("Se envía " + payload);
-
+          setGameId(item.id);
           const onSuccess = ({ data }) => {
             console.log("Aceptado manin " + data);
             this.removeRequest(item.nombre);
@@ -37,14 +36,10 @@ class ListaInvitaciones extends Component {
             console.log(error && error.response);
           };
 
-          APIKit.post(URI.acceptRequest, payload)
-            .then(onSuccess)
-            .catch(onFailure);
+          APIKit.get(URI.acceptInvite).then(onSuccess).catch(onFailure);
         }}
         onPressReject={() => {
-          const payload = JSON.stringify({ nombre: item.nombre });
-          console.log("Se envía " + payload);
-
+          setGameId(item.id);
           const onSuccess = ({ data }) => {
             console.log("Rechazado manin " + data);
             this.removeRequest(item.nombre);
@@ -53,9 +48,7 @@ class ListaInvitaciones extends Component {
             console.log(error && error.response);
           };
 
-          APIKit.post(URI.denyRequest, payload)
-            .then(onSuccess)
-            .catch(onFailure);
+          APIKit.get(URI.denyInvite).then(onSuccess).catch(onFailure);
         }}
       ></InviteItem>
     </View>
@@ -66,7 +59,7 @@ class ListaInvitaciones extends Component {
     this.setState({ loading: true });
 
     const onSuccess = ({ data }) => {
-      console.log("Nos devuelve las peticiones: " + JSON.stringify(data));
+      console.log("Nos devuelve las invitaciones: " + JSON.stringify(data));
       this.setState({
         data: data,
       });
