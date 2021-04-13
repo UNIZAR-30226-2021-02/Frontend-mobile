@@ -9,6 +9,7 @@ import FriendsScreen from "./screens/FriendsScreen";
 import GameScreen from "./screens/GameScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ShopScreen from "./screens/ShopScreen";
+import LobbyScreen from "./screens/LobbyScreen";
 
 import LeftTabs from "./components/LeftTabs";
 import TabBar from "./components/TabBar";
@@ -19,7 +20,7 @@ const appSwitchNavigator = createSwitchNavigator({
   LoginScreen: LoginScreen,
   RegisterScreen: RegisterScreen,
   //aki debe ir loading
-  FriendsScreen: FriendsScreen,
+  Lobby: LobbyScreen,
   GameScreen: GameScreen,
 });
 

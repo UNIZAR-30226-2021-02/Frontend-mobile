@@ -142,7 +142,9 @@ class Games extends Component {
           </TouchableOpacity>
         </View>
         <View style={styles.listaPartidas}>
-          <ListaPartidas />
+          <ListaPartidas
+            action={() => this.props.navigation.navigate("Lobby")}
+          />
         </View>
       </View>
     );

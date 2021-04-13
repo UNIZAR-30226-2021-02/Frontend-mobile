@@ -17,19 +17,7 @@ class ListaPartidas extends Component {
       <GameItem
         name={item.nombre}
         onPressPlay={() => {
-          const payload = JSON.stringify({ nombre: item.nombre });
-          console.log("Se envía " + payload);
-
-          const onSuccess = ({ data }) => {
-            console.log("Entramos a la partida :3 " + data);
-          };
-          const onFailure = (error) => {
-            console.log(error && error.response);
-          };
-
-          APIKit.post(URI.acceptRequest, payload)
-            .then(onSuccess)
-            .catch(onFailure);
+          this.props.action();
         }}
       ></GameItem>
     </View>
