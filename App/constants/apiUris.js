@@ -17,6 +17,7 @@ export default {
   inviteGame: "inviteGame",
   acceptInvite: "acceptInvite",
   denyInvite: "denyInvite",
+  listPlayers: "listPlayers",
   all: "all",
   img: "http://10.0.2.2:8080/api/returnImageProfile/",
 };

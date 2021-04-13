@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Octicons } from "@expo/vector-icons";
 
 import colors from "../constants/colors";
 
@@ -14,6 +14,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: colors.white,
     width: 470,
+    borderRadius: 9,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+
+    elevation: 8,
+  },
+  semirow: {
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+    backgroundColor: colors.white,
+    width: "80%",
     borderRadius: 9,
     shadowColor: "#000",
     shadowOffset: {
@@ -102,5 +121,41 @@ export const GameItem = ({ name, onPressPlay }) => (
     </TouchableOpacity>
   </View>
 );
+
+export const InLobbyItem = ({ name, onPress, picture }) => {
+  console.log(picture);
+  return (
+    <View style={styles.semirow}>
+      <Image
+        source={{
+          uri: picture,
+        }}
+        style={styles.picture}
+      />
+      <Text style={styles.title}>{name}</Text>
+      <TouchableOpacity onPress={onPress}>
+        <MaterialCommunityIcons name="close-circle" size={24} color="black" />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export const InviteFriendItem = ({ name, onPress, picture }) => {
+  console.log(picture);
+  return (
+    <View style={styles.semirow}>
+      <Image
+        source={{
+          uri: picture,
+        }}
+        style={styles.picture}
+      />
+      <Text style={styles.title}>{name}</Text>
+      <TouchableOpacity onPress={onPress}>
+        <Octicons name="diff-added" size={24} color="black" />
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 export const RowSeparator = () => <View style={styles.separator} />;

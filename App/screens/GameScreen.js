@@ -15,7 +15,6 @@ import ListaPartidas from "../components/ListaPartidas";
 import APIKit, { setGameId, setInviteName } from "../util/APIKit";
 import URI from "../constants/apiUris";
 import { ScrollView } from "react-native-gesture-handler";
-import ListaPetis from "../components/ListaPetis";
 import ListaInvitaciones from "../components/ListaInvitaciones";
 
 const styles = StyleSheet.create({
@@ -107,27 +106,6 @@ class Games extends Component {
     APIKit.post(URI.newGame, payload).then(onSuccess).catch(onFailure);
   }
 
-  onPressInvite() {
-    console.log(this.state);
-    const { game, friendInvite } = this.state;
-    setInviteName(friendInvite);
-    setGameId(game);
-
-    const onSuccess = ({ data }) => {
-      console.log("Enviado manin " + data);
-      this.setState({ isLoading: false });
-    };
-
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
-    };
-
-    this.setState({ isLoading: true });
-
-    APIKit.get(URI.inviteGame).then(onSuccess).catch(onFailure);
-  }
-
   GameList() {
     return (
       <View>
@@ -152,25 +130,8 @@ class Games extends Component {
 
   PetisList() {
     return (
-      <View>
-        <View style={styles.createContainer}>
-          <TextInput
-            style={styles.textinput}
-            placeholder="Game to invite"
-            onChangeText={this.onGameInviteChange}
-          />
-          <TextInput
-            style={styles.textinput}
-            placeholder="Friend to invite"
-            onChangeText={this.onFriendInviteChange}
-          />
-          <TouchableOpacity onPress={this.onPressInvite.bind(this)}>
-            <Entypo name="add-user" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.listaPartidas}>
-          <ListaInvitaciones />
-        </View>
+      <View style={styles.listaPartidas}>
+        <ListaInvitaciones />
       </View>
     );
   }

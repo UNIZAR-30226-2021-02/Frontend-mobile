@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RowSeparator, GameItem } from "./RowItem";
-import APIKit from "../util/APIKit";
+import APIKit, { setGameId } from "../util/APIKit";
 import URI from "../constants/apiUris";
 const initState = { loading: false, data: [] };
 
@@ -17,6 +18,8 @@ class ListaPartidas extends Component {
       <GameItem
         name={item.nombre}
         onPressPlay={() => {
+          AsyncStorage.setItem("@partidaName", item.nombre);
+          setGameId(item.id);
           this.props.action();
         }}
       ></GameItem>
