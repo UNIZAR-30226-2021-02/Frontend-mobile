@@ -7,7 +7,7 @@ class Lobby extends Component {
         <Text>Lobby</Text>
         <Button
           title="si"
-          onPress={() => this.props.navigation.navigate("Home")}
+          onPress={() => this.props.navigation.navigate("Game")}
         />
       </View>
     );
