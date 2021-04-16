@@ -12,6 +12,7 @@ import {
   ViewPropTypes,
   View,
   Image,
+  Alert,
 } from "react-native";
 import URI from "../constants/apiUris";
 
@@ -61,9 +62,9 @@ class Register extends Component {
     this.state.passwordA = passwordA;
     console.log("Son: " + this.state.passwordA + "  " + this.state.passwordB);
     if (this.state.passwordA === this.state.passwordB) {
-      this.setShow(false);
+      this.setState({ hide: true });
     } else {
-      this.setShow(true);
+      this.setState({ hide: false });
     }
   };
 
@@ -71,9 +72,9 @@ class Register extends Component {
     this.state.passwordB = passwordB;
     console.log("Son: " + this.state.passwordA + "  " + this.state.passwordB);
     if (this.state.passwordB === this.state.passwordA) {
-      this.setShow(false);
+      this.setState({ hide: true });
     } else {
-      this.setShow(true);
+      this.setState({ hide: false });
     }
   };
 
@@ -109,6 +110,9 @@ class Register extends Component {
 
       const onFailure = (error) => {
         console.log(error && error.response);
+        if (error.message == "Request failed with status code 417") {
+          Alert.alert("El usuario o el mail introducidos ya están en uso.");
+        }
         this.setState({ errors: error.response.data, isLoading: false });
       };
 
@@ -116,8 +120,10 @@ class Register extends Component {
       this.setState({ isLoading: true });
 
       APIKit.post(URI.register, payload).then(onSuccess).catch(onFailure);
+    } else if (this.state.passwordA != this.state.passwordB) {
+      Alert.alert("Las contraseñas no coinciden, inténtelo de nuevo.");
     } else {
-      console.log("Faltan campos");
+      Alert.alert("Rellene todos los campos, por favor.");
     }
   }
 

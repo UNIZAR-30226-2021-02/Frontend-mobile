@@ -56,10 +56,16 @@ class Login extends Component {
     };
 
     const onFailure = (error) => {
-      console.log("Petición fallida ");
-
+      console.log(error.message);
+      if (error.message == "Request failed with status code 400") {
+        Alert.alert("El usuario no existe, inténtelo de nuevo.");
+      } else if (error.message == "Request failed with status code 417") {
+        Alert.alert("La contraseña no es correcta, inténtelo de nuevo.");
+      } else {
+        Alert.alert("Error del servidor, inténtelo de nuevo.");
+      }
       this.setState({ isLoading: false });
-      Alert.alert("No se puede conectar al servidor, pruebe más tarde");
+      //Alert.alert("No se puede conectar al servidor, pruebe más tarde ");
     };
 
     // Show spinner when call is made
