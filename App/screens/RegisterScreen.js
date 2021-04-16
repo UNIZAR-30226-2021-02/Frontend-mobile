@@ -120,6 +120,10 @@ class Register extends Component {
       this.setState({ isLoading: true });
 
       APIKit.post(URI.register, payload).then(onSuccess).catch(onFailure);
+    } else if (
+      !(this.state.mail.includes("@") && this.state.mail.includes("."))
+    ) {
+      Alert.alert("El correo introducido no es válido, inténtelo de nuevo.");
     } else if (this.state.passwordA != this.state.passwordB) {
       Alert.alert("Las contraseñas no coinciden, inténtelo de nuevo.");
     } else {
