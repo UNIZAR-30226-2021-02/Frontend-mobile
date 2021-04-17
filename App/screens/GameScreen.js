@@ -122,6 +122,7 @@ class Games extends Component {
         <View style={styles.listaPartidas}>
           <ListaPartidas
             action={() => this.props.navigation.navigate("Lobby")}
+            action2={() => this.props.navigation.navigate("Turn")}
           />
         </View>
       </View>

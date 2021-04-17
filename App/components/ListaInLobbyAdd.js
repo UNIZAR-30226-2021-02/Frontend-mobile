@@ -28,30 +28,26 @@ class ListaInLobbyAdd extends Component {
   };
 
   renderItem = ({ item, index }) => (
-    <View>
-      <InviteFriendItem
-        name={item.nombre}
-        onPress={() => {
-          setInviteName(item.nombre);
+    <InviteFriendItem
+      name={item.nombre}
+      onPress={() => {
+        setInviteName(item.nombre);
 
-          const onSuccess = ({ data }) => {
-            console.log("Eliminado manin " + data);
-            this.removeFriend(item.nombre);
-          };
-          const onFailure = (error) => {
-            console.log(error && error.response);
-            if (error.message == "Request failed with status code 417") {
-              Alert.alert(
-                "Error: El usuario ya está invitado o en la partida."
-              );
-            }
-          };
+        const onSuccess = ({ data }) => {
+          console.log("Eliminado manin " + data);
+          this.removeFriend(item.nombre);
+        };
+        const onFailure = (error) => {
+          console.log(error && error.response);
+          if (error.message == "Request failed with status code 417") {
+            Alert.alert("Error: El usuario ya está invitado.");
+          }
+        };
 
-          APIKit.get(URI.inviteGame).then(onSuccess).catch(onFailure);
-        }}
-        picture={URI.img + item.fotPerf}
-      ></InviteFriendItem>
-    </View>
+        APIKit.get(URI.inviteGame).then(onSuccess).catch(onFailure);
+      }}
+      picture={URI.img + item.fotPerf}
+    ></InviteFriendItem>
   );
   //función que pide la lista de amigos a la API
 
@@ -69,7 +65,7 @@ class ListaInLobbyAdd extends Component {
       this.setState({ errors: error.response.data, loading: false });
     };
     this.setState({ loading: true });
-    APIKit.get(URI.listFriends).then(onSuccess).catch(onFailure);
+    APIKit.get(URI.listFriendsGame).then(onSuccess).catch(onFailure);
   };
   state = {};
   render() {

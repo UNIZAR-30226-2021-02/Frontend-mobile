@@ -6,17 +6,14 @@ import {
   StyleSheet,
   TouchableOpacity,
   Touchable,
-  Alert,
 } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
-import APIKit from "../util/APIKit";
-import URI from "../constants/apiUris";
 import ListaInLobby from "../components/ListaInLobby";
 import ListaInLobbyAdd from "../components/ListaInLobbyAdd";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Colors from "../constants/colors";
 
-const initState = { partida: "", isLoading: false };
+const initState = { partida: "" };
 
 const styles = StyleSheet.create({
   container: {
@@ -82,7 +79,7 @@ const styles = StyleSheet.create({
     height: "1.5%",
   },
 });
-class Lobby extends Component {
+class TurnScreen extends Component {
   constructor() {
     super();
     this.state = initState;
@@ -90,25 +87,6 @@ class Lobby extends Component {
       this.setState({ partida: item });
       console.log("Soy " + this.state.partida);
     });
-  }
-
-  onPressStart() {
-    const onSuccess = ({ data }) => {
-      console.log("Enviado manin " + data);
-      this.setState({ isLoading: false });
-      this.props.navigation.navigate("Turn");
-    };
-
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      if (error.message == "Request failed with status code 417") {
-        Alert.alert("Sólo el host puede iniciar la partida.");
-      } else if (error.message == "Request failed with status code 503") {
-        Alert.alert("La partida ya está empezada.");
-      }
-    };
-
-    APIKit.get(URI.startGame).then(onSuccess).catch(onFailure);
   }
 
   render() {
@@ -123,26 +101,14 @@ class Lobby extends Component {
               <Fontisto name="arrow-return-left" size={26} color="black" />
             </TouchableOpacity>
             <Text style={styles.lobbyText}>
-              Lobby from: {this.state.partida}
+              Turn from: {this.state.partida}
             </Text>
           </View>
-          <ListaInLobby />
         </View>
-        <View style={styles.rightContainer}>
-          <View style={styles.friendsContainer}>
-            <ListaInLobbyAdd />
-          </View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={this.onPressStart.bind(this)}
-          >
-            <Text style={styles.textButton}>Start</Text>
-            <Text style={styles.textButton}>Game</Text>
-          </TouchableOpacity>
-        </View>
+        <View style={styles.rightContainer}></View>
       </View>
     );
   }
 }
 
-export default Lobby;
+export default TurnScreen;

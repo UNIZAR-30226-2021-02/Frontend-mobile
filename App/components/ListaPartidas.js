@@ -20,7 +20,11 @@ class ListaPartidas extends Component {
         onPressPlay={() => {
           AsyncStorage.setItem("@partidaName", item.nombre);
           setGameId(item.id);
-          this.props.action();
+          if (item.estado_ == "esperando") {
+            this.props.action();
+          } else {
+            this.props.action2();
+          }
         }}
       ></GameItem>
     </View>
