@@ -7,6 +7,7 @@ import {
   Image,
   View,
   Touchable,
+  Alert,
 } from "react-native";
 import {
   FontAwesome5,
@@ -79,10 +80,51 @@ const styles = StyleSheet.create({
     shadowRadius: 4.27,
     elevation: 7,
   },
+  cambiarButtonTransp: {
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 205, 0.6)",
+    borderColor: "black",
+    borderRadius: 9,
+    borderWidth: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 10,
+      height: 8,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.27,
+    elevation: 7,
+  },
   cambiarFont: {
     fontSize: 13,
   },
 });
+
+const DiffName = (props) => {
+  const { transparent, onPress } = props;
+  if (transparent) {
+    return (
+      <View style={styles.cambiarView}>
+        <View style={styles.cambiarButtonTransp}>
+          <Text style={styles.cambiarFont}>Change</Text>
+          <Text style={styles.cambiarFont}> Username </Text>
+        </View>
+      </View>
+    );
+  }
+  if (transparent == null) {
+    return null;
+  }
+  return (
+    <View style={styles.cambiarView}>
+      <TouchableOpacity style={styles.cambiarButton} onPress={onPress}>
+        <Text style={styles.cambiarFont}>Change</Text>
+        <Text style={styles.cambiarFont}> Username </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const initialState = {
   nombre: "",
@@ -95,6 +137,8 @@ const initialState = {
   nAmigos: 0,
   errors: {},
   hide: true,
+  nombreViejo: "",
+  transparent: true,
 };
 
 class Profile extends Component {
@@ -114,6 +158,7 @@ class Profile extends Component {
       });
       this.setState({
         nombre: data.nombre,
+        nombreViejo: data.nombre,
         fotPerf: URI.img + data.fotPerf,
         estrellas: data.estrellas,
         monedas: data.monedas,
@@ -147,7 +192,13 @@ class Profile extends Component {
       console.log("Petición fallida ");
 
       this.setState({ isLoading: false });
-      Alert.alert("No se puede conectar al servidor, pruebe más tarde");
+      if (error.message == "Request failed with status code 417") {
+        Alert.alert("Ya existe un usuario con ese nombre, inténtelo con otro.");
+      } else {
+        Alert.alert(
+          "No se puede conectar con el servidor, inténtelo más tarde."
+        );
+      }
     };
 
     this.setState({ isLoading: true });
@@ -171,7 +222,11 @@ class Profile extends Component {
             style={styles.nombre}
             onChangeText={(text) => {
               this.state.nombre = text;
-              this.state.hide = false;
+              if (this.state.nombre != this.state.nombreViejo) {
+                this.setState({ transparent: false });
+              } else {
+                this.setState({ transparent: true });
+              }
             }}
           >
             {this.state.nombre}
@@ -229,6 +284,11 @@ class Profile extends Component {
           />
           <Text style={styles.interiorVal}>{this.state.nAmigos}</Text>
         </View>
+        <DiffName
+          onPress={this.onPressChange.bind(this)}
+          transparent={this.state.transparent}
+        />
+        {/*
         <View style={styles.cambiarView}>
           <TouchableOpacity
             style={styles.cambiarButton}
@@ -237,7 +297,7 @@ class Profile extends Component {
             <Text style={styles.cambiarFont}>Change</Text>
             <Text style={styles.cambiarFont}> Username </Text>
           </TouchableOpacity>
-        </View>
+        </View>*/}
       </SafeAreaView>
     );
   }

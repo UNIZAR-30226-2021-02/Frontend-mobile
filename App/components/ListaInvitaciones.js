@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View, Alert } from "react-native";
 import { RowSeparator, InviteItem } from "./RowItem";
 import APIKit, { setGameId } from "../util/APIKit";
 import URI from "../constants/apiUris";
@@ -34,6 +34,11 @@ class ListaInvitaciones extends Component {
           };
           const onFailure = (error) => {
             console.log(error && error.response);
+            if (error.message == "Request failed with status code 417") {
+              Alert.alert(
+                "Error: La partida no está disponibleo ya está dentro de ella"
+              );
+            }
           };
 
           APIKit.get(URI.acceptInvite).then(onSuccess).catch(onFailure);

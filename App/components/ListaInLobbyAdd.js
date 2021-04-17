@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View, Alert } from "react-native";
 import { RowSeparator, InviteFriendItem } from "./RowItem";
 import APIKit, { setInviteName } from "../util/APIKit";
 
@@ -40,6 +40,11 @@ class ListaInLobbyAdd extends Component {
           };
           const onFailure = (error) => {
             console.log(error && error.response);
+            if (error.message == "Request failed with status code 417") {
+              Alert.alert(
+                "Error: El usuario ya está invitado o en la partida."
+              );
+            }
           };
 
           APIKit.get(URI.inviteGame).then(onSuccess).catch(onFailure);

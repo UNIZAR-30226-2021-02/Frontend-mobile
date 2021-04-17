@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Alert,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import ListaAmigos from "../components/ListaAmigos";
@@ -140,8 +141,13 @@ class Friends extends Component {
     };
 
     const onFailure = (error) => {
-      console.log(error && error.response);
+      console.log(error);
       this.setState({ errors: error.response.data, isLoading: false });
+      if (error.message == "Request failed with status code 417") {
+        Alert.alert(
+          "Este usuario ya tiene una petición de amistad suya o ya es su amigo."
+        );
+      }
     };
 
     this.setState({ isLoading: true });
