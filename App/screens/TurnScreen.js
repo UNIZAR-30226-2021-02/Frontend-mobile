@@ -12,6 +12,7 @@ import ListaInLobby from "../components/ListaInLobby";
 import ListaInLobbyAdd from "../components/ListaInLobbyAdd";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Colors from "../constants/colors";
+import Draw from "../components/game/draw";
 
 const initState = { partida: "" };
 
@@ -22,61 +23,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   leftContainer: {
+    alignSelf: "baseline",
     paddingLeft: "5%",
     paddingTop: "3%",
     flexDirection: "column",
     width: "50%",
-    backgroundColor: "cyan",
   },
   upLeftContainer: {
     flexDirection: "row",
     paddingBottom: "5%",
-  },
-  rightContainer: {
-    paddingLeft: "5%",
-    paddingTop: "3%",
-    flexDirection: "column",
-    width: "50%",
   },
   lobbyText: {
     fontSize: 20,
     fontWeight: "bold",
     left: "30%",
   },
-  return: {
-    right: "30%",
-  },
-  createContainer: {
-    top: "10%",
-    flexDirection: "row",
-  },
-  listaPartidas: {
-    top: "20%",
-  },
-  toggle: {
-    top: "5%",
-    flexDirection: "row",
-  },
-  friendsContainer: {
-    left: "6.5%",
-    height: "80%",
-  },
-  button: {
-    left: "36%",
-    borderRadius: 12,
+  gamezone: {
+    justifyContent: "center",
     alignItems: "center",
-    justifyContent: "space-evenly",
-    backgroundColor: Colors.cyan,
-    height: "13%",
-    width: "22%",
-  },
-  textButton: {
-    fontSize: 18,
-    color: Colors.white,
-    fontWeight: "bold",
-  },
-  separator: {
-    height: "1.5%",
   },
 });
 class TurnScreen extends Component {
@@ -105,7 +69,9 @@ class TurnScreen extends Component {
             </Text>
           </View>
         </View>
-        <View style={styles.rightContainer}></View>
+        <View style={styles.gamezone}>
+          <Draw />
+        </View>
       </View>
     );
   }
