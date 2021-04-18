@@ -13,6 +13,9 @@ import LeftTabs from "./LeftTabs";
 
 const AppContent = createSwitchNavigator(
   {
+    Game: {
+      screen: GameScreen,
+    },
     Home: {
       screen: HomeScreen,
     },
@@ -24,9 +27,6 @@ const AppContent = createSwitchNavigator(
     },
     Friends: {
       screen: FriendsScreen,
-    },
-    Game: {
-      screen: GameScreen,
     },
   },
   {
@@ -40,7 +40,7 @@ class TabBar extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      selectedTab: "Home",
+      selectedTab: "Game",
     };
   }
   onTabPressed = (routeName) => {
@@ -53,6 +53,10 @@ class TabBar extends React.PureComponent {
   render() {
     const { navigation } = this.props;
     const tabs = [
+      {
+        tabName: "Game",
+        tabIcon: "gamepad",
+      },
       {
         tabName: "Home",
         tabIcon: "home",
@@ -68,10 +72,6 @@ class TabBar extends React.PureComponent {
       {
         tabName: "Friends",
         tabIcon: "user-friends",
-      },
-      {
-        tabName: "Game",
-        tabIcon: "gamepad",
       },
     ];
     return (

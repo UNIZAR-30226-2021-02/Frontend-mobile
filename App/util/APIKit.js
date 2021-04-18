@@ -16,4 +16,12 @@ export const setClientName = (name) => {
   APIKit.defaults.headers.common["identificador"] = name;
 };
 
+export const setInviteName = (name) => {
+  APIKit.defaults.headers.common["idInvitado"] = name;
+};
+
+export const setGameId = (name) => {
+  APIKit.defaults.headers.common["idPartida"] = name;
+};
+
 export default APIKit;
