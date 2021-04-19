@@ -35,12 +35,15 @@ const styles = StyleSheet.create({
   },
   lobbyText: {
     fontSize: 20,
+
     fontWeight: "bold",
     left: "30%",
   },
   gamezone: {
+    height: "80%",
     justifyContent: "center",
     alignItems: "center",
+    alignSelf: "baseline",
   },
 });
 class TurnScreen extends Component {

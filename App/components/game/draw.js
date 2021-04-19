@@ -6,6 +6,7 @@ import {
   Button,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import ExpoDraw from "expo-draw";
 import { captureRef as takeSnapshotAsync } from "react-native-view-shot";
@@ -15,7 +16,7 @@ import ApiKit from "../../util/APIKit";
 
 class Draw extends Component {
   mySaveFx = async () => {
-    const signatureResult = await takeSnapshotAsync(this.refOfExpoDrawElement, {
+    const signatureResult = await takeSnapshotAsync(this.screenshot, {
       result: "tmpfile",
       quality: 0.5,
       format: "png",
@@ -28,29 +29,38 @@ class Draw extends Component {
     // Check if any file is selected or not
     console.log("hola");
     // If file selected then create FormData
-    //this.mySaveFx();
+    this.mySaveFx().catch((e) => {
+      console.log(e);
+    });
   };
   render() {
     return (
       <View style={styles.container}>
-        <ExpoDraw
-          strokes={[]}
-          containerStyle={styles.canvas}
-          rewind={(undo) => {
-            this._undo = undo;
+        <View
+          collapsable={false}
+          ref={(shot) => {
+            this.screenshot = shot;
           }}
-          clear={(clear) => {
-            this._clear = clear;
-          }}
-          color={"#000000"}
-          strokeWidth={4}
-          enabled={true}
-          onChangeStrokes={(strokes) => console.log(strokes)}
-        />
+        >
+          <ExpoDraw
+            strokes={[]}
+            containerStyle={styles.canvas}
+            rewind={(undo) => {
+              this._undo = undo;
+            }}
+            clear={(clear) => {
+              this._clear = clear;
+            }}
+            color={"#000000"}
+            strokeWidth={4}
+            enabled={true}
+            onChangeStrokes={(strokes) => console.log(strokes)}
+          />
+        </View>
         <TouchableOpacity
           style={styles.button}
-          onPess={() => {
-            console.log("hola");
+          onPress={() => {
+            this.uploadImage();
           }}
         >
           <Text>Send</Text>
@@ -67,8 +77,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   canvas: {
-    height: 500,
-    width: 500,
+    height: 2,
+    width: 100,
     backgroundColor: "#FFFFFF",
   },
   button: {
