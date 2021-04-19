@@ -23,15 +23,42 @@ class Draw extends Component {
     });
 
     //The output will be a local tmpfile (uri)[String], with the current lines that were drawn. Therefore, you can save it or so! ;)
-    console.log(signatureResult);
+    //console.log(signatureResult);
+    return signatureResult;
   };
   uploadImage = () => {
     // Check if any file is selected or not
-    console.log("hola");
+
     // If file selected then create FormData
-    this.mySaveFx().catch((e) => {
-      console.log(e);
-    });
+    this.mySaveFx()
+      .then((img) => {
+        let body = new FormData();
+        body.append("contenido", {
+          uri: img,
+          name: "photo.png",
+          type: "image/png",
+        });
+        body.append("Content-Type", "image/png");
+
+        fetch("http://80.39.50.206:8082/api/addImage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+            idPartida: "27",
+            autor: "user",
+          },
+          body: body,
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log("response" + JSON.stringify(res));
+          })
+          .catch((e) => console.log(e))
+          .done();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
   render() {
     return (
