@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   canvas: {
     height: 2,
-    width: 100,
+    width: 300,
     backgroundColor: "#FFFFFF",
   },
   button: {

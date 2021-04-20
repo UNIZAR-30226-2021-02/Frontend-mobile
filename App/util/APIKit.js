@@ -2,7 +2,8 @@ import axios from "axios";
 
 // Create axios client, pre-configured with baseURL
 let APIKit = axios.create({
-  baseURL: "http://80.39.50.206:8082/api/",
+  //baseURL: "http://80.39.50.206:8082/api/",
+  baseURL: "http://10.0.2.2:8080/api/",
   timeout: 10000,
   headers: { "Content-Type": "application/json" },
 });
@@ -14,6 +15,7 @@ export const setClientToken = (token) => {
 
 export const setClientName = (name) => {
   APIKit.defaults.headers.common["identificador"] = name;
+  APIKit.defaults.headers.common["autor"] = name;
 };
 
 export const setInviteName = (name) => {

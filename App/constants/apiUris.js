@@ -20,6 +20,7 @@ export default {
   listPlayers: "listPlayers",
   listFriendsGame: "listFriendsGame",
   startGame: "startGame",
+  addRespuesta: "addRespuesta",
   all: "all",
   img: "http://10.0.2.2:8080/api/returnImageProfile/",
   sendImg: "",

@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 });
 
 const initState = { respuestaAct: "" };
-class Write extends Component {
+class IniWrite extends Component {
   constructor() {
     super();
     this.state = initState;
@@ -73,7 +73,7 @@ class Write extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>¿Qué ves en el dibujo?</Text>
+        <Text>Dinos qué quieres que dibujen tus amigos.</Text>
         <TextInput
           style={styles.input}
           value={this.state.respuestaAct}
@@ -90,4 +90,4 @@ class Write extends Component {
   }
 }
 
-export default Write;
+export default IniWrite;
