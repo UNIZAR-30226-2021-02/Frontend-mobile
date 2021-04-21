@@ -17,8 +17,8 @@ import TabBar from "./components/TabBar";
 export default () => <AppNavigator />;
 
 const appSwitchNavigator = createSwitchNavigator({
-  Home: TabBar,
   LoginScreen: LoginScreen,
+  Home: TabBar,
   RegisterScreen: RegisterScreen,
   //aki debe ir loading
   Lobby: LobbyScreen,
