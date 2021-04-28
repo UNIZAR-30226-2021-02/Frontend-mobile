@@ -14,13 +14,17 @@ import {
   Image,
   Alert,
 } from "react-native";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import URI from "../constants/apiUris";
+
+import APIKit, { setClientToken, setClientMail } from "../util/APIKit";
+import Colors from "../constants/colors"
+
 
 const screen = Dimensions.get("window");
 const state = { text: "Ususario" };
-
-import APIKit, { setClientToken, setClientName } from "../util/APIKit";
-import Colors from "../constants/colors";
+;
 
 const initialState = {
   mail: "",
@@ -101,14 +105,22 @@ class Register extends Component {
       console.log(payload);
 
       const onSuccess = ({ data }) => {
-        // Set JSON Web Token on success
-        setClientToken(data.token);
-        AsyncStorage.setItem("@token", data.token);
-        setClientMail(data.mail);
-        AsyncStorage.setItem("@mail", data.mail);
+          console.log(data);
         
+        // Set JSON Web Token on success
+        console.log(1);
+        setClientToken(data.token);
+        console.log(2);
+        AsyncStorage.setItem("@token", data.token);
+        console.log(3);
+        setClientMail(data.mail);
+        console.log(4);
+        AsyncStorage.setItem("@mail", data.mail);
+        console.log(5);
         this.setState({ isLoading: false, isAuthorized: true });
+        console.log("holi");
         this.props.navigation.navigate("Home");
+        console.log("holi");
       };
 
       const onFailure = (error) => {

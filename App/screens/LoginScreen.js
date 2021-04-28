@@ -14,15 +14,16 @@ import {
   Image,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Colors from "../constants/colors";
 import URI from "../constants/apiUris";
 const screen = Dimensions.get("window");
 
-import APIKit, { setClientToken, setClientName, setClientMail } from "../util/APIKit";
+import APIKit, { setClientToken, setClientMail } from "../util/APIKit";
 
 const initialState = {
-  username: "",
+  usermail: "",
   password: "",
   errors: {},
   isAuthorized: false,
@@ -34,8 +35,8 @@ class Login extends Component {
 
   componentWillUnmount() {}
 
-  onUsernameChange = (username) => {
-    this.setState({ username });
+  onUsermailChange = (usermail) => {
+    this.setState({ usermail});
   };
 
   onPasswordChange = (password) => {
@@ -43,8 +44,8 @@ class Login extends Component {
   };
 
   onPressLogin() {
-    const { username, password } = this.state;
-    const payload = JSON.stringify({ nombre: username, password: password });
+    const { usermail, password } = this.state;
+    const payload = JSON.stringify({ mail: usermail, password: password });
     console.log(payload);
 
     const onSuccess = ({ data }) => {
@@ -96,13 +97,13 @@ class Login extends Component {
         <Spinner visible={isLoading} />
         <TextInput
           style={styles.input}
-          value={this.state.username}
+          value={this.state.usermail}
           maxLength={256}
-          placeholder="Username"
+          placeholder="Email"
           autoCapitalize="none"
           autoCorrect={false}
           returnKeyType="next"
-          onChangeText={this.onUsernameChange}
+          onChangeText={this.onUsermailChange}
           underlineColorAndroid="transparent"
           placeholderTextColor="#999"
         />
