@@ -35,7 +35,7 @@ class ListaPartidas extends Component {
     this.setState({ loading: true });
 
     const onSuccess = ({ data }) => {
-      console.log("Nos devuelve las peticiones: " + JSON.stringify(data));
+    //  console.log("Nos devuelve las peticiones: " + JSON.stringify(data));
       this.setState({
         data: data,
       });
@@ -58,7 +58,7 @@ class ListaPartidas extends Component {
           style={{height:"60%"}}
           data={this.state.data}
           renderItem={this.renderItem}
-          keyExtractor={(item) => parseInt(item.id)} //TODO
+          keyExtractor={(item) => String(item.id)} //TODO
           ItemSeparatorComponent={RowSeparator}
           ListEmptyComponent={<Text>No tienes partidas owo</Text>}
           onRefresh={this.loadData}
