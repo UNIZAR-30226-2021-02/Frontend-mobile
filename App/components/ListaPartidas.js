@@ -10,7 +10,10 @@ class ListaPartidas extends Component {
   constructor() {
     super();
     this.state = initState;
-    this.state.data = this.loadData();
+   
+  }
+  componentDidMount(){
+    this.loadData();
   }
 
   renderItem = ({ item, index }) => (
