@@ -24,6 +24,7 @@ import APIKit, { setClientToken, setClientMail } from "../util/APIKit";
 
 const initialState = {
   usermail: "",
+   pp:"",
   password: "",
   errors: {},
   isAuthorized: false,
