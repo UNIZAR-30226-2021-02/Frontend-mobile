@@ -14,14 +14,16 @@ import TurnScreen from "./screens/TurnScreen";
 
 import LeftTabs from "./components/LeftTabs";
 import TabBar from "./components/TabBar";
+import LoadingScreen from "./screens/LoadingScreen";
 export default () => <AppNavigator />;
 
 const appSwitchNavigator = createSwitchNavigator({
  
+  LoadingScreen:LoadingScreen,
   LoginScreen: LoginScreen,
   Home: TabBar,
   RegisterScreen: RegisterScreen,
-  //aki debe ir loading
+  
   Lobby: LobbyScreen,
   Turn: TurnScreen,
   GameScreen: GameScreen,

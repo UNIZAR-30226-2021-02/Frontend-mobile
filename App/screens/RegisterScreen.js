@@ -103,7 +103,10 @@ class Register extends Component {
       const onSuccess = ({ data }) => {
         // Set JSON Web Token on success
         setClientToken(data.token);
-        setClientName(this.state.username);
+        AsyncStorage.setItem("@token", data.token);
+        setClientMail(data.mail);
+        AsyncStorage.setItem("@mail", data.mail);
+        
         this.setState({ isLoading: false, isAuthorized: true });
         this.props.navigation.navigate("Home");
       };

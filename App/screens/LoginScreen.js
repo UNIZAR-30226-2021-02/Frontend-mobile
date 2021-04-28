@@ -19,7 +19,7 @@ import Colors from "../constants/colors";
 import URI from "../constants/apiUris";
 const screen = Dimensions.get("window");
 
-import APIKit, { setClientToken, setClientName } from "../util/APIKit";
+import APIKit, { setClientToken, setClientName, setClientMail } from "../util/APIKit";
 
 const initialState = {
   username: "",
@@ -50,7 +50,9 @@ class Login extends Component {
     const onSuccess = ({ data }) => {
       // Set JSON Web Token on success
       setClientToken(data.token);
-      setClientName(this.state.username);
+      AsyncStorage.setItem("@token", data.token);
+      setClientMail(data.mail);
+      AsyncStorage.setItem("@mail", data.mail);
       this.setState({ isLoading: false, isAuthorized: true });
       this.props.navigation.navigate("Home");
     };
