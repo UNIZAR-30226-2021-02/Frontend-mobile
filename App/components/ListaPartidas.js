@@ -55,14 +55,16 @@ class ListaPartidas extends Component {
     return (
       <View>
         <FlatList
+          style={{height:"60%"}}
           data={this.state.data}
           renderItem={this.renderItem}
-          keyExtractor={(item) => item.nombre} //TODO
+          keyExtractor={(item) => parseInt(item.id)} //TODO
           ItemSeparatorComponent={RowSeparator}
           ListEmptyComponent={<Text>No tienes partidas owo</Text>}
           onRefresh={this.loadData}
           refreshing={this.state.loading}
-          ListHeaderComponent={<Text>Partidas papu</Text>}
+          ItemSeparatorComponent={RowSeparator}
+          
         />
       </View>
     );
