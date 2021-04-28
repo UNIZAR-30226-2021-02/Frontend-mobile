@@ -22,12 +22,12 @@ class ListaPetis extends Component {
     console.log("despues " + this.state.data);
   };
 
-  renderItem = ({ item, index }) => (
+  renderItem = ({ item }) => (
     <View>
       <RequestItem
-        name={item.nombre}
+        name={item.mail}
         onPressAdd={() => {
-          const payload = JSON.stringify({ nombre: item.nombre });
+          const payload = JSON.stringify({ mail: item.mail });
           console.log("Se envía " + payload);
 
           const onSuccess = ({ data }) => {
@@ -35,7 +35,8 @@ class ListaPetis extends Component {
             this.removeRequest(item.nombre);
           };
           const onFailure = (error) => {
-            console.log(error && error.response);
+            console.log("mal")
+            //console.log(error && error.response);
           };
 
           APIKit.post(URI.acceptRequest, payload)

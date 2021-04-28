@@ -21,7 +21,7 @@ class ListaInvitaciones extends Component {
     console.log("despues " + this.state.data);
   };
 
-  renderItem = ({ item, index }) => (
+  renderItem = ({ item}) => (
     <View>
       <InviteItem
         nameGame={item.partida.nombre}
