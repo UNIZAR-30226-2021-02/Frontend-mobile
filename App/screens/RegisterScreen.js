@@ -113,7 +113,7 @@ class Register extends Component {
         if (error.message == "Request failed with status code 417") {
           Alert.alert("El usuario o el mail introducidos ya están en uso.");
         }
-        this.setState({ errors: error.response.data, isLoading: false });
+        this.setState({ isLoading: false });
       };
 
       // Show spinner when call is made
