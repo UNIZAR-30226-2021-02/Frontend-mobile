@@ -12,7 +12,7 @@ import ListaInLobby from "../components/ListaInLobby";
 import ListaInLobbyAdd from "../components/ListaInLobbyAdd";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Colors from "../constants/colors";
-import Draw from "../components/game/draw";
+import Draw from "../components/game/draw" ;
 import Write from "../components/game/write";
 import IniWrite from "../components/game/initialWrite";
 

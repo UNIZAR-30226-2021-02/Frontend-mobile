@@ -17,6 +17,7 @@ import URI from "../constants/apiUris";
 import { ScrollView } from "react-native-gesture-handler";
 import ListaInvitaciones from "../components/ListaInvitaciones";
 
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "green",
@@ -92,13 +93,18 @@ class Games extends Component {
     console.log("Se envía " + payload);
 
     const onSuccess = ({ data }) => {
-      console.log("Enviado manin " + data);
+      console.log("Partida creada " +  JSON.stringify(data));
+     
       this.setState({ isLoading: false });
+      setGameId(data.id);
+      this.props.navigation.navigate("Lobby")
+
     };
 
     const onFailure = (error) => {
       console.log(error && error.response);
-      this.setState({ errors: error.response.data, isLoading: false });
+      this.setState({ isLoading: false });
+
     };
 
     this.setState({ isLoading: true });
