@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { RowSeparator, RankingItem } from "./RowItem";
 import APIKit from "../util/APIKit";
+import globalStyles from "../constants/styles";
 
 import URI from "../constants/apiUris";
 
@@ -86,7 +87,9 @@ class ListaAmigos extends Component {
           ListEmptyComponent={<Text>No tienes amigos owo</Text>}
           onRefresh={this.loadData}
           refreshing={this.state.loading}
-          ListHeaderComponent={<Text>Ranking papu</Text>}
+          ListHeaderComponent={
+            <Text style={globalStyles.papuFont}>Ranking</Text>
+          }
         />
       </View>
     );

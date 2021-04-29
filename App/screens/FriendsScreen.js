@@ -14,6 +14,7 @@ import ListaAmigos from "../components/ListaAmigos";
 import ListaPetis from "../components/ListaPetis";
 import Colors from "../constants/colors";
 import APIKit from "../util/APIKit";
+import globalStyles from "../constants/styles";
 
 const styles = StyleSheet.create({
   container: {
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     width: "85%",
   },
 });
-const rnk = "Rankig";
+const rnk = "Ranking";
 const add = "Add friends";
 const initialState = {
   searchUser: "",
@@ -164,11 +165,11 @@ class Friends extends Component {
         }}
         style={
           this.state.selectedButton == name
-            ? styles.selectedButton
-            : styles.button
+            ? globalStyles.toggleSelectedButton
+            : globalStyles.toggleButton
         }
       >
-        <Text>{name}</Text>
+        <Text style={globalStyles.toggleFont}>{name}</Text>
       </TouchableOpacity>
     );
   }
@@ -208,7 +209,7 @@ class Friends extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={globalStyles.background}>
         <View style={styles.header}>
           {this.button(rnk)}
           {this.button(add)}
