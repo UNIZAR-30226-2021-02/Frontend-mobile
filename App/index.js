@@ -18,12 +18,11 @@ import LoadingScreen from "./screens/LoadingScreen";
 export default () => <AppNavigator />;
 
 const appSwitchNavigator = createSwitchNavigator({
- 
-  LoadingScreen:LoadingScreen,
+  LoadingScreen: LoadingScreen,
   LoginScreen: LoginScreen,
   Home: TabBar,
   RegisterScreen: RegisterScreen,
-  
+  Profile: ProfileScreen,
   Lobby: LobbyScreen,
   Turn: TurnScreen,
   GameScreen: GameScreen,

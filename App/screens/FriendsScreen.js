@@ -133,7 +133,7 @@ class Friends extends Component {
 
   onPressAdd() {
     const { searchUser } = this.state;
-    const payload = JSON.stringify({ nombre: searchUser });
+    const payload = JSON.stringify({ mail: searchUser });
     console.log("Se envía " + payload);
 
     const onSuccess = ({ data }) => {

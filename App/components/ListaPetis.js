@@ -25,7 +25,7 @@ class ListaPetis extends Component {
   renderItem = ({ item }) => (
     <View>
       <RequestItem
-        name={item.mail}
+        name={item.nombre}
         onPressAdd={() => {
           const payload = JSON.stringify({ mail: item.mail });
           console.log("Se envía " + payload);
@@ -35,7 +35,7 @@ class ListaPetis extends Component {
             this.removeRequest(item.nombre);
           };
           const onFailure = (error) => {
-            console.log("mal")
+            console.log("mal");
             //console.log(error && error.response);
           };
 
@@ -44,7 +44,7 @@ class ListaPetis extends Component {
             .catch(onFailure);
         }}
         onPressReject={() => {
-          const payload = JSON.stringify({ nombre: item.nombre });
+          const payload = JSON.stringify({ mail: item.mail });
           console.log("Se envía " + payload);
 
           const onSuccess = ({ data }) => {

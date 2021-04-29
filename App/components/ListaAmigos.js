@@ -35,7 +35,7 @@ class ListaAmigos extends Component {
         ind={index + 1}
         name={item.nombre}
         onPress={() => {
-          const payload = JSON.stringify({ nombre: item.nombre });
+          const payload = JSON.stringify({ mail: item.mail });
           console.log("Se envía " + payload);
 
           const onSuccess = ({ data }) => {
