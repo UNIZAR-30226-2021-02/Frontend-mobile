@@ -197,7 +197,7 @@ class Friends extends Component {
             style={styles.addFriend}
             onPress={this.onPressAdd.bind(this)}
           >
-            <Entypo name="add-user" size={24} color="black" />
+            <Entypo name="add-user" size={24} color="white" />
           </TouchableOpacity>
         </View>
         <View style={styles.petitionsContainer}>
