@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   Alert,
+  ToastAndroid,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import ListaAmigos from "../components/ListaAmigos";
@@ -138,6 +139,10 @@ class Friends extends Component {
 
     const onSuccess = ({ data }) => {
       console.log("Enviado manin " + data);
+      ToastAndroid.show(
+        "Friend request sent to: " + searchUser,
+        ToastAndroid.SHORT
+      );
       this.setState({ isLoading: false });
     };
 

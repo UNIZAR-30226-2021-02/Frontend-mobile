@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  ToastAndroid,
 } from "react-native";
 import { GameItem } from "../components/RowItem";
 import Colors from "../constants/colors";
@@ -15,6 +16,7 @@ import ListaPartidas from "../components/ListaPartidas";
 import APIKit, { setGameId, setInviteName } from "../util/APIKit";
 import URI from "../constants/apiUris";
 import { ScrollView } from "react-native-gesture-handler";
+import globalStyles from "../constants/styles";
 import ListaInvitaciones from "../components/ListaInvitaciones";
 
 const styles = StyleSheet.create({
@@ -24,10 +26,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textinput: {
-    width: "40%",
+    width: "60%",
     color: Colors.grey,
     backgroundColor: Colors.white,
-    paddingLeft: "1%",
+    paddingLeft: "2%",
     borderRadius: 5,
     shadowColor: "#000",
     shadowOffset: {
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   listaPartidas: {
-    top: "20%",
+    top: "14%",
   },
   toggle: {
     top: "5%",
@@ -93,6 +95,7 @@ class Games extends Component {
 
     const onSuccess = ({ data }) => {
       console.log("Enviado manin " + data);
+      ToastAndroid.show("Game " + newGame + " created!", ToastAndroid.SHORT);
       this.setState({ isLoading: false });
     };
 
@@ -116,7 +119,7 @@ class Games extends Component {
             onChangeText={this.onNewGameChange}
           />
           <TouchableOpacity onPress={this.onPressCreate.bind(this)}>
-            <AntDesign name="play" size={24} color="black" />
+            <AntDesign name="play" size={24} color="white" />
           </TouchableOpacity>
         </View>
         <View style={styles.listaPartidas}>
@@ -139,7 +142,7 @@ class Games extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={globalStyles.background}>
         <View style={styles.toggle}>
           <TouchableOpacity
             onPress={() => {
@@ -148,11 +151,11 @@ class Games extends Component {
             }}
             style={
               this.state.selectedButton == partidas
-                ? styles.selectedButton
-                : styles.button
+                ? globalStyles.toggleSelectedButton
+                : globalStyles.toggleButton
             }
           >
-            <Text>Partidas </Text>
+            <Text style={globalStyles.toggleFont}>Partidas </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -161,11 +164,11 @@ class Games extends Component {
             }}
             style={
               this.state.selectedButton == invitaciones
-                ? styles.selectedButton
-                : styles.button
+                ? globalStyles.toggleSelectedButton
+                : globalStyles.toggleButton
             }
           >
-            <Text> Invitaciones</Text>
+            <Text style={globalStyles.toggleFont}> Invitaciones</Text>
           </TouchableOpacity>
         </View>
         {this.state.selectedButton == partidas

@@ -4,15 +4,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RowSeparator, GameItem } from "./RowItem";
 import APIKit, { setGameId } from "../util/APIKit";
 import URI from "../constants/apiUris";
+import globalStyles from "../constants/styles";
 const initState = { loading: false, data: [] };
 
 class ListaPartidas extends Component {
   constructor() {
     super();
     this.state = initState;
-   
   }
-  componentDidMount(){
+  componentDidMount() {
     this.loadData();
   }
 
@@ -65,7 +65,9 @@ class ListaPartidas extends Component {
           ListEmptyComponent={<Text>No tienes partidas owo</Text>}
           onRefresh={this.loadData}
           refreshing={this.state.loading}
-          ListHeaderComponent={<Text>Partidas papu</Text>}
+          ListHeaderComponent={
+            <Text style={globalStyles.papuFont}>Partidas</Text>
+          }
         />
       </View>
     );
