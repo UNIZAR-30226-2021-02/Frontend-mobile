@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border,
     height: StyleSheet.hairlineWidth,
     marginLeft: 20,
+    height: 5,
   },
   picture: { width: 50, height: 50 },
 });

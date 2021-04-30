@@ -27,11 +27,8 @@ const styles = StyleSheet.create({
   },
 
   addContainer: {
-    top: "3%",
-    start: "4%",
     padding: "5%",
     alignItems: "center",
-
     //backgroundColor: "blue",
     width: "85%",
   },
@@ -55,10 +52,10 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     flexDirection: "row",
-    marginBottom: 10,
   },
   header: {
     marginTop: 30,
+    marginBottom: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -84,17 +81,6 @@ const styles = StyleSheet.create({
   petitionsContainer: {
     width: "110%",
     height: "70%",
-    backgroundColor: Colors.white,
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-
-    elevation: 8,
   },
 
   friendsContainer: {

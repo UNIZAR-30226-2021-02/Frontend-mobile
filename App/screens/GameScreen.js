@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textinput: {
-    width: "60%",
+    width: "50%",
     color: Colors.grey,
     backgroundColor: Colors.white,
     paddingLeft: "2%",
@@ -44,10 +44,11 @@ const styles = StyleSheet.create({
   },
   createContainer: {
     top: "10%",
+    left: "28%",
     flexDirection: "row",
   },
   listaPartidas: {
-    top: "14%",
+    top: "12%",
   },
   toggle: {
     top: "5%",

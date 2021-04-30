@@ -9,8 +9,13 @@ const globalStyles = StyleSheet.create({
   },
   papuFont: {
     paddingTop: 10,
+    paddingBottom: 4,
     fontWeight: "bold",
     fontSize: 18,
+    color: "white",
+  },
+  owoFont: {
+    fontSize: 15,
     color: "white",
   },
   toggleButton: {

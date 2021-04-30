@@ -84,7 +84,9 @@ class ListaAmigos extends Component {
           renderItem={this.renderItem}
           keyExtractor={(item) => item.nombre} //TODO
           ItemSeparatorComponent={RowSeparator}
-          ListEmptyComponent={<Text>No tienes amigos owo</Text>}
+          ListEmptyComponent={
+            <Text style={globalStyles.owoFont}>No tienes amigos.</Text>
+          }
           onRefresh={this.loadData}
           refreshing={this.state.loading}
           ListHeaderComponent={

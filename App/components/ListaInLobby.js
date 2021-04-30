@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { RowSeparator, InLobbyItem } from "./RowItem";
 import APIKit from "../util/APIKit";
-
+import globalStyles from "../constants/styles";
 import URI from "../constants/apiUris";
 
 const initState = { loading: true };
@@ -83,10 +83,14 @@ class ListaInLobby extends Component {
           renderItem={this.renderItem}
           keyExtractor={(item) => item.nombre} //TODO
           ItemSeparatorComponent={RowSeparator}
-          ListEmptyComponent={<Text>No tienes amigos owo</Text>}
+          ListEmptyComponent={
+            <Text style={globalStyles.owoFont}>No nay nadie en el lobby.</Text>
+          }
           onRefresh={this.loadData}
           refreshing={this.state.loading}
-          ListHeaderComponent={<Text>Players papu</Text>}
+          ListHeaderComponent={
+            <Text style={globalStyles.papuFont}>Players</Text>
+          }
         />
       </View>
     );

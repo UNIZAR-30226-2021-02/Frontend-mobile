@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FlatList, StyleSheet, Text, View, Alert } from "react-native";
 import { RowSeparator, InviteFriendItem } from "./RowItem";
 import APIKit, { setInviteName } from "../util/APIKit";
-
+import globalStyles from "../constants/styles";
 import URI from "../constants/apiUris";
 
 const initState = { loading: true };
@@ -77,10 +77,14 @@ class ListaInLobbyAdd extends Component {
           renderItem={this.renderItem}
           keyExtractor={(item) => item.nombre} //TODO
           ItemSeparatorComponent={RowSeparator}
-          ListEmptyComponent={<Text>No tienes amigos owo</Text>}
+          ListEmptyComponent={
+            <Text style={globalStyles.owoFont}>No tienes amigos.</Text>
+          }
           onRefresh={this.loadData}
           refreshing={this.state.loading}
-          ListHeaderComponent={<Text>Amigos papu</Text>}
+          ListHeaderComponent={
+            <Text style={globalStyles.papuFont}>Amigos</Text>
+          }
         />
       </View>
     );

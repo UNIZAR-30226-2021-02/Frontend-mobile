@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, Text, View, Alert } from "react-native";
 import { RowSeparator, InviteItem } from "./RowItem";
 import APIKit, { setGameId } from "../util/APIKit";
 import URI from "../constants/apiUris";
+import globalStyles from "../constants/styles";
 const initState = { loading: false, data: [] };
 
 class ListaInvitaciones extends Component {
@@ -21,7 +22,7 @@ class ListaInvitaciones extends Component {
     console.log("despues " + this.state.data);
   };
 
-  renderItem = ({ item}) => (
+  renderItem = ({ item }) => (
     <View>
       <InviteItem
         nameGame={item.partida.nombre}
@@ -88,10 +89,14 @@ class ListaInvitaciones extends Component {
           renderItem={this.renderItem}
           keyExtractor={(item) => item.nombre}
           ItemSeparatorComponent={RowSeparator}
-          ListEmptyComponent={<Text>No tienes invitaciones</Text>}
+          ListEmptyComponent={
+            <Text style={globalStyles.owoFont}>No tienes invitaciones</Text>
+          }
           onRefresh={this.loadData}
           refreshing={this.state.loading}
-          ListHeaderComponent={<Text>Invitaciones</Text>}
+          ListHeaderComponent={
+            <Text style={globalStyles.papuFont}>Invitaciones</Text>
+          }
         />
       </View>
     );
