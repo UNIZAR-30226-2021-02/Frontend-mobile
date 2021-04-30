@@ -1,15 +1,16 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
+import { StyleSheet, TouchableOpacity, SafeAreaView, View } from "react-native";
 import {
   AntDesign,
   FontAwesome5,
   MaterialCommunityIcons,
+  MaterialIcons,
 } from "@expo/vector-icons";
 
 class Tab extends React.PureComponent {
   render() {
     const { isSelected, tabIcon, tabName, onPress } = this.props;
-    const color = isSelected ? "#EEE" : "blue";
+    const color = !isSelected ? "#EEE" : "blue";
     const textStyles = {
       color,
       fontSize: 32,
@@ -18,19 +19,41 @@ class Tab extends React.PureComponent {
     const containerStyles = {
       flexDirection: "row",
       alignItems: "center",
-      backgroundColor: isSelected ? "blue" : "#EEE",
+      backgroundColor: "#EEE",
       padding: 12,
     };
     if (tabName == "Friends" || tabName == "Game") {
       return (
         <TouchableOpacity style={containerStyles} onPress={onPress}>
-          <FontAwesome5 name={tabIcon} size={25} color={color} />
+          <FontAwesome5
+            style={styles.left}
+            name={tabIcon}
+            size={25}
+            color="blue"
+          />
+          <MaterialIcons
+            style={styles.lessleft}
+            name="arrow-left"
+            size={50}
+            color={color}
+          />
         </TouchableOpacity>
       );
     } else {
       return (
         <TouchableOpacity style={containerStyles} onPress={onPress}>
-          <AntDesign name={tabIcon} size={25} color={color} />
+          <AntDesign
+            style={styles.left}
+            name={tabIcon}
+            size={25}
+            color="blue"
+          />
+          <MaterialIcons
+            style={styles.moreleft}
+            name="arrow-left"
+            size={50}
+            color={color}
+          />
         </TouchableOpacity>
       );
     }
@@ -69,6 +92,15 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "space-evenly",
+  },
+  left: {
+    left: "49%",
+  },
+  lessleft: {
+    left: "27%",
+  },
+  moreleft: {
+    left: "33%",
   },
 });
 export default LeftTabs;
