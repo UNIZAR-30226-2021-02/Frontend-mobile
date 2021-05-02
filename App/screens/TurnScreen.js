@@ -60,14 +60,14 @@ class TurnScreen extends Component {
 
 checkTurn(){
     const onSuccess = ({ data }) => {
-     // console.log("Recibo " +  JSON.stringify(data));
+      console.log("Recibo turno" +  JSON.stringify(data));
      //seleccionar componente a mostrar
-     if(data.id==-1){
+     if(data.id_==-1){
        //Primer turno
        console.log("Primer turno")
        this.setState({mode:0})
      }
-     else if(data.id==-2){
+     else if(data.id_==-2){
        //Esperar siguiente turno
        console.log("esperar siguiente turno")
        this.setState({mode:1})
@@ -79,7 +79,7 @@ checkTurn(){
 
         console.log("turno escribir")
        }else{
-        this.setState({mode:4})
+        this.setState({mode:3})
         //turno dibujar
         console.log("turno dibujar")
        

@@ -11,8 +11,8 @@ import {
 import ExpoDraw from "expo-draw";
 import { captureRef as takeSnapshotAsync } from "react-native-view-shot";
 
-import Uri from "../../constants/apiUris";
-import ApiKit from "../../util/APIKit";
+import URI from "../../constants/apiUris";
+import APIKit from "../../util/APIKit";
 
 class Draw extends Component {
   mySaveFx = async () => {
@@ -32,6 +32,21 @@ class Draw extends Component {
     // If file selected then create FormData
     this.mySaveFx()
       .then((img) => {
+
+
+        const onSuccess = ({ data }) => {
+          console.log("OK :" + data);
+        }
+        const onFailure = (error) => {
+          console.log(error.message);
+          if (error.message == "Request failed with status code 417") {
+            Alert.alert(
+              "El jugador no pertenece a la partida o ya ha jugado ese turno."
+            );
+          }
+          this.setState({ isLoading: false });
+          //Alert.alert("No se puede conectar al servidor, pruebe más tarde ");
+        };
         let body = new FormData();
         body.append("contenido", {
           uri: img,
@@ -40,21 +55,8 @@ class Draw extends Component {
         });
         body.append("Content-Type", "image/png");
 
-        fetch("http://80.39.50.206:8082/api/addImage", {
-          method: "POST",
-          headers: {
-            "Content-Type": "multipart/form-data",
-            idPartida: "27",
-            autor: "user",
-          },
-          body: body,
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            console.log("response" + JSON.stringify(res));
-          })
-          .catch((e) => console.log(e))
-          .done();
+        APIKit.post(URI.sendImg, body).then(onSuccess).catch(onFailure);
+
       })
       .catch((e) => {
         console.log(e);

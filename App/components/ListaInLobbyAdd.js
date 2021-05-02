@@ -31,7 +31,7 @@ class ListaInLobbyAdd extends Component {
     <InviteFriendItem
       name={item.nombre}
       onPress={() => {
-        setInviteName(item.nombre);
+        setInviteName(item.mail);
 
         const onSuccess = ({ data }) => {
           console.log("Eliminado manin " + data);

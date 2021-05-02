@@ -51,6 +51,7 @@ class IniWrite extends Component {
     const onSuccess = ({ data }) => {
       console.log("OK :" + data);
       this.setState({ isLoading: false, isAuthorized: true });
+      
     };
 
     const onFailure = (error) => {
@@ -67,7 +68,7 @@ class IniWrite extends Component {
     // Show spinner when call is made
     this.setState({ isLoading: true });
 
-    APIKit.post(URI.addRespuesta, payload).then(onSuccess).catch(onFailure);
+    APIKit.post(URI.sendText, payload).then(onSuccess).catch(onFailure);
   }
 
   render() {
