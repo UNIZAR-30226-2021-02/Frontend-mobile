@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
-import HomeScreen from "../screens/HomeScreen";
+
 
 import ProfileScreen from "../screens/ProfileScreen";
 import ShopScreen from "../screens/ShopScreen";
@@ -15,9 +15,6 @@ const AppContent = createSwitchNavigator(
   {
     Game: {
       screen: GameScreen,
-    },
-    Home: {
-      screen: HomeScreen,
     },
     Profile: {
       screen: ProfileScreen,
@@ -56,10 +53,6 @@ class TabBar extends React.PureComponent {
       {
         tabName: "Game",
         tabIcon: "gamepad",
-      },
-      {
-        tabName: "Home",
-        tabIcon: "home",
       },
       {
         tabName: "Profile",

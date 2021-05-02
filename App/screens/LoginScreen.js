@@ -56,7 +56,7 @@ class Login extends Component {
       setClientMail(data.mail);
       AsyncStorage.setItem("@mail", data.mail);
       this.setState({ isLoading: false, isAuthorized: true });
-      this.props.navigation.navigate("Home");
+      this.props.navigation.navigate("Game");
     };
 
     const onFailure = (error) => {

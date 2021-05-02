@@ -67,16 +67,21 @@ const initialState = {
 };
 
 class Profile extends Component {
+ 
   constructor() {
     super();
+    console.log("PRRRRROPS: "+this.props)
     this.state = initialState;
     
   }
   componentDidMount(){
     this.state.data = this.loadData();
+    
   }
+ 
 
   loadData = () => {
+    
     this.setState({ loading: true });
 
     const onSuccess = ({ data }) => {
@@ -134,19 +139,20 @@ class Profile extends Component {
     APIKit.post(URI.changeName, payload).then(onSuccess).catch(onFailure);
   }
 
-  state = {};
+  
 
   signOut() {
     setClientToken("");
     AsyncStorage.setItem("@token", "");
     setClientMail("");
     AsyncStorage.setItem("@mail", "");
-    console.log(this.props)
-    //this.props.navigation.navigate("LoginScreen");
+    //console.log(this.props)
+    this.props.navigation.navigate("LoginScreen");
   }
 
   render() {
-    console.log(this.props)
+    
+    console.log("PRRRRROPS: "+this.props)
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.signOutImage}>
@@ -159,7 +165,7 @@ class Profile extends Component {
           <View style={{ left: "255%" }}>
             <TouchableOpacity>
               <FontAwesome
-                onPress={this.signOut}
+                onPress={()=>this.signOut()}
                 name="sign-out"
                 size={40}
                 color="black"

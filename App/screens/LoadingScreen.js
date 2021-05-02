@@ -38,7 +38,7 @@ class LoadingScreen extends Component {
   checkIfLoggedIn = () => {
     if (this.CheckLogged()) {
       
-      this.props.navigation.navigate("Home");
+      this.props.navigation.navigate("Game");
     } else {
       this.props.navigation.navigate("LoginScreen");
     }
