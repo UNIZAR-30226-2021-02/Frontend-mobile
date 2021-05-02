@@ -25,91 +25,6 @@ import APIKit, {
   setClientMail,
 } from "../util/APIKit";
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "pink",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
-  containerPts: {
-    backgroundColor: "pink",
-    flexDirection: "row",
-    borderColor: "black",
-    borderRadius: 9,
-    borderWidth: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 10,
-      height: 8,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.27,
-    elevation: 7,
-  },
-  nombre: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  interiorIcon: {
-    paddingTop: 2,
-    paddingLeft: 6,
-    paddingBottom: 2,
-  },
-  interiorVal: {
-    paddingTop: 2,
-    paddingLeft: 5,
-    paddingRight: 6,
-    paddingBottom: 2,
-  },
-  separador: {
-    borderRightWidth: 1,
-  },
-  picture: { width: 70, height: 70 },
-  cambiarView: {
-    paddingLeft: "78%",
-  },
-  cambiarButton: {
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "blue",
-    borderColor: "black",
-    borderRadius: 9,
-    borderWidth: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 10,
-      height: 8,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.27,
-    elevation: 7,
-  },
-  cambiarButtonTransp: {
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 205, 0.6)",
-    borderColor: "black",
-    borderRadius: 9,
-    borderWidth: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 10,
-      height: 8,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.27,
-    elevation: 7,
-  },
-  cambiarFont: {
-    fontSize: 13,
-  },
-  signOutImage: {
-    top: "1%",
-    flexDirection: "row",
-    left: "5%",
-  },
-});
 
 const DiffName = (props) => {
   const { transparent, onPress } = props;
@@ -155,6 +70,9 @@ class Profile extends Component {
   constructor() {
     super();
     this.state = initialState;
+    
+  }
+  componentDidMount(){
     this.state.data = this.loadData();
   }
 
@@ -223,10 +141,12 @@ class Profile extends Component {
     AsyncStorage.setItem("@token", "");
     setClientMail("");
     AsyncStorage.setItem("@mail", "");
-    this.props.navigation.navigate("LoginScreen");
+    console.log(this.props)
+    //this.props.navigation.navigate("LoginScreen");
   }
 
   render() {
+    console.log(this.props)
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.signOutImage}>
@@ -332,5 +252,92 @@ class Profile extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "pink",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+  containerPts: {
+    backgroundColor: "pink",
+    flexDirection: "row",
+    borderColor: "black",
+    borderRadius: 9,
+    borderWidth: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 10,
+      height: 8,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.27,
+    elevation: 7,
+  },
+  nombre: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  interiorIcon: {
+    paddingTop: 2,
+    paddingLeft: 6,
+    paddingBottom: 2,
+  },
+  interiorVal: {
+    paddingTop: 2,
+    paddingLeft: 5,
+    paddingRight: 6,
+    paddingBottom: 2,
+  },
+  separador: {
+    borderRightWidth: 1,
+  },
+  picture: { width: 70, height: 70 },
+  cambiarView: {
+    paddingLeft: "78%",
+  },
+  cambiarButton: {
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "blue",
+    borderColor: "black",
+    borderRadius: 9,
+    borderWidth: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 10,
+      height: 8,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.27,
+    elevation: 7,
+  },
+  cambiarButtonTransp: {
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 205, 0.6)",
+    borderColor: "black",
+    borderRadius: 9,
+    borderWidth: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 10,
+      height: 8,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.27,
+    elevation: 7,
+  },
+  cambiarFont: {
+    fontSize: 13,
+  },
+  signOutImage: {
+    top: "1%",
+    flexDirection: "row",
+    left: "5%",
+  },
+});
+
 
 export default Profile;

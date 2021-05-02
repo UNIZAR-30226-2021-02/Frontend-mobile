@@ -49,7 +49,7 @@ class Shop extends Component {
   constructor() {
     super();
     this.state = initialState;
-    this.loadData();
+  
   }
   componentDidMount(){
     this.loadData();
