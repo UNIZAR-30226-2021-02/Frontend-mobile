@@ -67,7 +67,7 @@ class Write extends Component {
     // Show spinner when call is made
     this.setState({ isLoading: true });
 
-    APIKit.post(URI.addText, payload).then(onSuccess).catch(onFailure);
+    APIKit.post(URI.sendText, payload).then(onSuccess).catch(onFailure);
   }
 
   render() {

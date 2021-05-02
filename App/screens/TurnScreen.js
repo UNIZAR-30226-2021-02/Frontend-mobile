@@ -21,32 +21,7 @@ import Wait from "../components/game/wait";
 
 const initState = { partida: "", mode: 1 ,isLoading: true};
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "green",
-    flex: 1,
-    flexDirection: "column",
-  },
-  upLeftContainer: {
-    paddingLeft: "5%",
-    paddingTop: "3%",
-    flexDirection: "row",
-    paddingBottom: "5%",
-  },
-  return: {},
-  lobbyText: {
-    fontSize: 20,
-    fontWeight: "bold",
-    left: "30%",
-  },
-  gamezone: {
-    height: "73%",
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "baseline",
-  },
-});
+
 
 class TurnScreen extends Component {
   constructor() {
@@ -73,7 +48,8 @@ checkTurn(){
        this.setState({mode:1})
      }
      else{
-       if(data.Dibujo){
+       console.log("es dibujo "+data.esDibujo)
+       if(data.esDibujo){
         this.setState({mode:2})
           //turno escribir
 
@@ -150,5 +126,32 @@ checkTurn(){
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "green",
+    flex: 1,
+    flexDirection: "column",
+  },
+  upLeftContainer: {
+    paddingLeft: "5%",
+    paddingTop: "3%",
+    flexDirection: "row",
+    paddingBottom: "5%",
+  },
+  return: {},
+  lobbyText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    left: "30%",
+  },
+  gamezone: {
+    height: "73%",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "baseline",
+  },
+});
 
 export default TurnScreen;
