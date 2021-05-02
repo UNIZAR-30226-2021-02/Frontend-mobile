@@ -4,13 +4,16 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RowSeparator, GameItem } from "./RowItem";
 import APIKit, { setGameId } from "../util/APIKit";
 import URI from "../constants/apiUris";
+import globalStyles from "../constants/styles";
 const initState = { loading: false, data: [] };
 
 class ListaPartidas extends Component {
   constructor() {
     super();
     this.state = initState;
-    this.state.data = this.loadData();
+  }
+  componentDidMount() {
+    this.loadData();
   }
 
   renderItem = ({ item, index }) => (
@@ -60,7 +63,9 @@ class ListaPartidas extends Component {
           renderItem={this.renderItem}
           keyExtractor={(item) => String(item.id)} //TODO
           ItemSeparatorComponent={RowSeparator}
-          ListEmptyComponent={<Text>No tienes partidas owo</Text>}
+          ListEmptyComponent={
+            <Text style={globalStyles.owoFont}>No tienes partidas.</Text>
+          }
           onRefresh={this.loadData}
           refreshing={this.state.loading}
           ItemSeparatorComponent={RowSeparator}

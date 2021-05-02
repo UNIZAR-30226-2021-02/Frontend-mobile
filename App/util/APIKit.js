@@ -13,9 +13,8 @@ export const setClientToken = (token) => {
   APIKit.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
 
-export const setClientName = (name) => {
-  APIKit.defaults.headers.common["identificador"] = name;
-  APIKit.defaults.headers.common["autor"] = name;
+export const setClientMail = (mail) => {
+  APIKit.defaults.headers.common["identificador"] = mail;
 };
 
 export const setInviteName = (name) => {

@@ -18,6 +18,70 @@ import Colors from "../constants/colors";
 
 const initState = { partida: "", isLoading: false };
 
+
+class Lobby extends Component {
+  constructor() {
+    super();
+    this.state = initState;
+    AsyncStorage.getItem("@partidaName", (err, item) => {
+      this.setState({ partida: item });
+      console.log("Soy " + this.state.partida);
+    });
+  }
+
+  onPressStart() {
+    const onSuccess = ({ data }) => {
+      console.log("Enviado manin " + data);
+      this.setState({ isLoading: false });
+      this.props.navigation.navigate("Turn");
+    };
+
+    const onFailure = (error) => {
+      console.log(error && error.response);
+      if (error.message == "Request failed with status code 417") {
+        Alert.alert("Sólo el host puede iniciar la partida.");
+      } else if (error.message == "Request failed with status code 503") {
+        Alert.alert("La partida ya está empezada.");
+      }
+    };
+
+    APIKit.get(URI.startGame).then(onSuccess).catch(onFailure);
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.leftContainer}>
+          <View style={styles.upLeftContainer}>
+            <TouchableOpacity
+              style={styles.return}
+              onPress={() => this.props.navigation.navigate("Game")}
+            >
+              <Fontisto name="arrow-return-left" size={26} color="black" />
+            </TouchableOpacity>
+            <Text style={styles.lobbyText}>
+              Lobby from: {this.state.partida}
+            </Text>
+          </View>
+          <ListaInLobby />
+        </View>
+        <View style={styles.rightContainer}>
+          <View style={styles.friendsContainer}>
+            <ListaInLobbyAdd />
+          </View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.onPressStart.bind(this)}
+          >
+            <Text style={styles.textButton}>Start</Text>
+            <Text style={styles.textButton}>Game</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "green",
@@ -82,67 +146,5 @@ const styles = StyleSheet.create({
     height: "1.5%",
   },
 });
-class Lobby extends Component {
-  constructor() {
-    super();
-    this.state = initState;
-    AsyncStorage.getItem("@partidaName", (err, item) => {
-      this.setState({ partida: item });
-      console.log("Soy " + this.state.partida);
-    });
-  }
-
-  onPressStart() {
-    const onSuccess = ({ data }) => {
-      console.log("Enviado manin " + data);
-      this.setState({ isLoading: false });
-      this.props.navigation.navigate("Turn");
-    };
-
-    const onFailure = (error) => {
-      console.log(error && error.response);
-      if (error.message == "Request failed with status code 417") {
-        Alert.alert("Sólo el host puede iniciar la partida.");
-      } else if (error.message == "Request failed with status code 503") {
-        Alert.alert("La partida ya está empezada.");
-      }
-    };
-
-    APIKit.get(URI.startGame).then(onSuccess).catch(onFailure);
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.leftContainer}>
-          <View style={styles.upLeftContainer}>
-            <TouchableOpacity
-              style={styles.return}
-              onPress={() => this.props.navigation.navigate("Game")}
-            >
-              <Fontisto name="arrow-return-left" size={26} color="black" />
-            </TouchableOpacity>
-            <Text style={styles.lobbyText}>
-              Lobby from: {this.state.partida}
-            </Text>
-          </View>
-          <ListaInLobby />
-        </View>
-        <View style={styles.rightContainer}>
-          <View style={styles.friendsContainer}>
-            <ListaInLobbyAdd />
-          </View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={this.onPressStart.bind(this)}
-          >
-            <Text style={styles.textButton}>Start</Text>
-            <Text style={styles.textButton}>Game</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-}
 
 export default Lobby;

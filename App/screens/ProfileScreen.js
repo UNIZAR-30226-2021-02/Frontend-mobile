@@ -16,9 +16,14 @@ import {
   MaterialCommunityIcons,
   Ionicons,
 } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import URI from "../constants/apiUris";
-import APIKit, { setClientName } from "../util/APIKit";
+import APIKit, {
+  setClientName,
+  setClientToken,
+  setClientMail,
+} from "../util/APIKit";
 
 const styles = StyleSheet.create({
   container: {
@@ -98,6 +103,11 @@ const styles = StyleSheet.create({
   },
   cambiarFont: {
     fontSize: 13,
+  },
+  signOutImage: {
+    top: "1%",
+    flexDirection: "row",
+    left: "5%",
   },
 });
 
@@ -208,15 +218,35 @@ class Profile extends Component {
 
   state = {};
 
+  signOut() {
+    setClientToken("");
+    AsyncStorage.setItem("@token", "");
+    setClientMail("");
+    AsyncStorage.setItem("@mail", "");
+    this.props.navigation.navigate("LoginScreen");
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Image
-          source={{
-            uri: this.state.fotPerf,
-          }}
-          style={styles.picture}
-        />
+        <View style={styles.signOutImage}>
+          <Image
+            source={{
+              uri: this.state.fotPerf,
+            }}
+            style={styles.picture}
+          />
+          <View style={{ left: "255%" }}>
+            <TouchableOpacity>
+              <FontAwesome
+                onPress={this.signOut}
+                name="sign-out"
+                size={40}
+                color="black"
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
         <View style={{ flexDirection: "row" }}>
           <TextInput
             style={styles.nombre}

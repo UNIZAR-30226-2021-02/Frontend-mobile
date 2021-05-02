@@ -49,7 +49,10 @@ class Shop extends Component {
   constructor() {
     super();
     this.state = initialState;
-    this.state.data = this.loadData();
+    this.loadData();
+  }
+  componentDidMount(){
+    this.loadData();
   }
   loadData = () => {
     this.setState({ loading: true });
