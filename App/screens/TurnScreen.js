@@ -47,6 +47,12 @@ checkTurn(){
        console.log("esperar siguiente turno")
        this.setState({mode:1})
      }
+    
+    else if(data.id_==-3){
+      //Esperar siguiente turno
+      console.log("partida acabada")
+      this.setState({mode:4})
+    }
      else{
        console.log("es dibujo "+data.esDibujo)
        if(data.esDibujo){
@@ -98,6 +104,9 @@ checkTurn(){
                 break;
                 case 3:
                 return <Draw/>
+                break;
+                case 4:
+                return <Text>Mostrar historias y votar</Text>
                 break;
               default:
                return <Text>k verga hago aki</Text>
