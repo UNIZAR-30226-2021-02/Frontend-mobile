@@ -37,12 +37,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   picContainer: {
+    top: "2%",
     paddingTop: "13%",
     alignItems: "center",
     justifyContent: "center",
   },
   containerPts: {
-    top: "1%",
+    top: "3%",
     backgroundColor: Colors.background,
     flexDirection: "row",
     borderColor: "white",
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     elevation: 7,
   },
   nombre: {
-    top: "1%",
+    top: "3%",
     fontSize: 20,
     fontWeight: "bold",
     color: "white",
