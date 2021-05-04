@@ -55,7 +55,7 @@ class TabBar extends React.PureComponent {
     const tabs = [
       {
         tabName: "Game",
-        tabIcon: "gamepad",
+        tabIcon: "gamepad-variant-outline",
       },
       {
         tabName: "Home",
@@ -71,7 +71,7 @@ class TabBar extends React.PureComponent {
       },
       {
         tabName: "Friends",
-        tabIcon: "user-friends",
+        tabIcon: "people-outline",
       },
     ];
     return (
