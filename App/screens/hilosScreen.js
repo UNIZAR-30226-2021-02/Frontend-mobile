@@ -36,7 +36,6 @@ class HilosScreen extends Component {
             
             this.hilos=data
             this.setState({hiloAhora:this.hilos[0]})
-            console.log(this.state.hiloAhora)
 
           
           }
