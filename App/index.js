@@ -15,9 +15,11 @@ import TurnScreen from "./screens/TurnScreen";
 import LeftTabs from "./components/LeftTabs";
 import TabBar from "./components/TabBar";
 import LoadingScreen from "./screens/LoadingScreen";
+import hilosScreen from "./screens/hilosScreen";
 export default () => <AppNavigator />;
 
 const appSwitchNavigator = createSwitchNavigator({
+  Si:hilosScreen,
   LoadingScreen: LoadingScreen,
   LoginScreen: LoginScreen,
   Home: TabBar,
