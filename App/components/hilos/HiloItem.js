@@ -25,6 +25,7 @@ export const TextHiloItem = ({ name,img,answer  }) => {
   };
 
   export const ImgHiloItem = ({ name,img,answer  }) => {
+    console.log("http://10.0.2.2:8080/api/returnImageResponse/"+answer)
    
     return (
       <View style={styles.row}>
@@ -40,8 +41,8 @@ export const TextHiloItem = ({ name,img,answer  }) => {
           
       <Image
               source={{
-              //uri:"http://10.0.2.2:8080/api/returnImageResponse"+answer,
-              uri:URI.img+ img,
+              uri:"http://10.0.2.2:8080/api/returnImageResponse/"+answer,
+              //uri:URI.img+ img,
              }}
             style={styles.imgResponse}
         />

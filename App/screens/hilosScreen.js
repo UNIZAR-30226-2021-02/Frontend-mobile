@@ -99,7 +99,7 @@ class HilosScreen extends Component {
               {
                 <View style={styles.hilos}>
                 <Button title={"Anterior hilo"} onPress={()=> this.anteriorHilo()}></Button>
-            <Hilo hilo={this.state.hiloAhora.respuestas_} jugadorInicial={this.state.hiloAhora.jugadorInicial} />
+            <Hilo hilo={this.state.hiloAhora.respuestas_} jugadorInicial={this.state.hiloAhora.jugadorInicial_} />
             <Button title={"Siguiente hilo"} onPress={()=> this.siguienteHilo()}></Button>
            </View>
                 

@@ -26,7 +26,7 @@ class Hilo extends Component {
         if(item.esDibujo){
           return ( 
           <View>
-            <ImgHiloItem name={item.autor_.nombre} img={item.autor_.fotPerf} answer={item.frase}/>
+            <ImgHiloItem name={item.autor_.nombre} img={item.autor_.fotPerf} answer={item.id_}/>
           </View>);
         }
         else 
