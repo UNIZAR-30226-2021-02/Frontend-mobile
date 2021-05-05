@@ -7,6 +7,7 @@ import {
   Image,
   View,
   Touchable,
+  Dimensions,
   Alert,
 } from "react-native";
 import {
@@ -19,12 +20,126 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import URI from "../constants/apiUris";
+import Colors from "../constants/colors";
 import APIKit, {
   setClientName,
   setClientToken,
   setClientMail,
 } from "../util/APIKit";
 
+const screen = Dimensions.get("window");
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.background,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+  picContainer: {
+    top: "2%",
+    paddingTop: "13%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  containerPts: {
+    top: "3%",
+    backgroundColor: Colors.background,
+    flexDirection: "row",
+    borderColor: "white",
+    borderRadius: 9,
+    borderWidth: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 10,
+      height: 8,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.27,
+    elevation: 7,
+  },
+  nombre: {
+    top: "3%",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+  },
+  interiorIcon: {
+    paddingTop: 2,
+    paddingLeft: 6,
+    paddingBottom: 2,
+  },
+  interiorVal: {
+    color: "white",
+    paddingTop: 2,
+    paddingLeft: 5,
+    paddingRight: 6,
+    paddingBottom: 2,
+  },
+  separador: {
+    borderRightWidth: 1,
+    borderColor: "white",
+  },
+  pictureBackground: {
+    position: "absolute",
+    width: screen.width * 0.15,
+    height: screen.width * 0.15,
+  },
+  picture: {
+    position: "absolute",
+    top: screen.width * 0.005,
+    width: screen.width * 0.13,
+    height: screen.width * 0.12,
+  },
+  cambiarView: {
+    paddingLeft: "78%",
+  },
+  cambiarButton: {
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "blue",
+    borderColor: "white",
+    borderRadius: 9,
+    borderWidth: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 10,
+      height: 8,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.27,
+    elevation: 7,
+  },
+  cambiarButtonTransp: {
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 205, 0.6)",
+    borderColor: "grey",
+    borderRadius: 9,
+    borderWidth: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 10,
+      height: 8,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.27,
+    elevation: 7,
+  },
+  cambiarFont: {
+    color: "white",
+    fontSize: 13,
+  },
+  cambiarFontTransp: {
+    color: "grey",
+    fontSize: 13,
+  },
+  signOutImage: {
+    top: "1%",
+    flexDirection: "row",
+    left: "5%",
+  },
+});
 
 const DiffName = (props) => {
   const { transparent, onPress } = props;
@@ -32,8 +147,8 @@ const DiffName = (props) => {
     return (
       <View style={styles.cambiarView}>
         <View style={styles.cambiarButtonTransp}>
-          <Text style={styles.cambiarFont}>Change</Text>
-          <Text style={styles.cambiarFont}> Username </Text>
+          <Text style={styles.cambiarFontTransp}>Change</Text>
+          <Text style={styles.cambiarFontTransp}> Username </Text>
         </View>
       </View>
     );
@@ -67,21 +182,13 @@ const initialState = {
 };
 
 class Profile extends Component {
- 
   constructor() {
     super();
-    console.log("PRRRRROPS: "+this.props)
     this.state = initialState;
-    
-  }
-  componentDidMount(){
     this.state.data = this.loadData();
-    
   }
- 
 
   loadData = () => {
-    
     this.setState({ loading: true });
 
     const onSuccess = ({ data }) => {
@@ -139,36 +246,39 @@ class Profile extends Component {
     APIKit.post(URI.changeName, payload).then(onSuccess).catch(onFailure);
   }
 
-  
+  state = {};
 
   signOut() {
     setClientToken("");
     AsyncStorage.setItem("@token", "");
     setClientMail("");
     AsyncStorage.setItem("@mail", "");
-    //console.log(this.props)
     this.props.navigation.navigate("LoginScreen");
   }
 
   render() {
-    
-    console.log("PRRRRROPS: "+this.props)
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.signOutImage}>
-          <Image
-            source={{
-              uri: this.state.fotPerf,
-            }}
-            style={styles.picture}
-          />
-          <View style={{ left: "255%" }}>
+          <View style={styles.picContainer}>
+            <Image
+              source={require("../assets/images/background.png")}
+              style={styles.pictureBackground}
+            />
+            <Image
+              source={{
+                uri: this.state.fotPerf,
+              }}
+              style={styles.picture}
+            />
+          </View>
+          <View style={{ left: "290%" }}>
             <TouchableOpacity>
               <FontAwesome
-                onPress={()=>this.signOut()}
+                onPress={() => this.signOut()}
                 name="sign-out"
                 size={40}
-                color="black"
+                color="white"
               />
             </TouchableOpacity>
           </View>
@@ -193,7 +303,7 @@ class Profile extends Component {
             style={styles.interiorIcon}
             name="pencil"
             size={18}
-            color="black"
+            color="white"
           />
           <Text style={styles.interiorVal}>{this.state.pDibujo}</Text>
           <View style={styles.separador} />
@@ -201,7 +311,7 @@ class Profile extends Component {
             style={styles.interiorIcon}
             name="brain"
             size={18}
-            color="black"
+            color="white"
           />
           <Text style={styles.interiorVal}>{this.state.pListo}</Text>
           <View style={styles.separador} />
@@ -209,7 +319,7 @@ class Profile extends Component {
             style={styles.interiorIcon}
             name="md-happy-outline"
             size={18}
-            color="black"
+            color="white"
           />
           <Text style={styles.interiorVal}>{this.state.pGracioso}</Text>
         </View>
@@ -218,7 +328,7 @@ class Profile extends Component {
             style={styles.interiorIcon}
             name="staro"
             size={18}
-            color="black"
+            color="white"
           />
           <Text style={styles.interiorVal}>{this.state.estrellas}</Text>
         </View>
@@ -227,7 +337,7 @@ class Profile extends Component {
             style={styles.interiorIcon}
             name="coins"
             size={18}
-            color="black"
+            color="white"
           />
           <Text style={styles.interiorVal}>{this.state.monedas}</Text>
         </View>
@@ -236,7 +346,7 @@ class Profile extends Component {
             style={styles.interiorIcon}
             name="user"
             size={18}
-            color="black"
+            color="white"
           />
           <Text style={styles.interiorVal}>{this.state.nAmigos}</Text>
         </View>
@@ -258,92 +368,5 @@ class Profile extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "pink",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
-  containerPts: {
-    backgroundColor: "pink",
-    flexDirection: "row",
-    borderColor: "black",
-    borderRadius: 9,
-    borderWidth: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 10,
-      height: 8,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.27,
-    elevation: 7,
-  },
-  nombre: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  interiorIcon: {
-    paddingTop: 2,
-    paddingLeft: 6,
-    paddingBottom: 2,
-  },
-  interiorVal: {
-    paddingTop: 2,
-    paddingLeft: 5,
-    paddingRight: 6,
-    paddingBottom: 2,
-  },
-  separador: {
-    borderRightWidth: 1,
-  },
-  picture: { width: 70, height: 70 },
-  cambiarView: {
-    paddingLeft: "78%",
-  },
-  cambiarButton: {
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "blue",
-    borderColor: "black",
-    borderRadius: 9,
-    borderWidth: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 10,
-      height: 8,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.27,
-    elevation: 7,
-  },
-  cambiarButtonTransp: {
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 205, 0.6)",
-    borderColor: "black",
-    borderRadius: 9,
-    borderWidth: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 10,
-      height: 8,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.27,
-    elevation: 7,
-  },
-  cambiarFont: {
-    fontSize: 13,
-  },
-  signOutImage: {
-    top: "1%",
-    flexDirection: "row",
-    left: "5%",
-  },
-});
-
 
 export default Profile;
