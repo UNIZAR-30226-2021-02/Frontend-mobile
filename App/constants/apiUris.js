@@ -25,5 +25,6 @@ export default {
   img: "http://10.0.2.2:8080/api/returnImageProfile/",
   sendImg: "addImage",
   sendText:"addText",
-  getTurn:"returnResponse"
+  getTurn:"returnResponse",
+  getHilos:"returnAllResponses"
 };

@@ -106,7 +106,7 @@ checkTurn(){
                 return <Draw/>
                 break;
                 case 4:
-                return <Text>Mostrar historias y votar</Text>
+                  this.props.navigation.navigate("Hilos")
                 break;
               default:
                return <Text>k verga hago aki</Text>
@@ -148,7 +148,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingBottom: "5%",
   },
-  return: {},
   lobbyText: {
     fontSize: 20,
     fontWeight: "bold",

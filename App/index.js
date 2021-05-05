@@ -19,7 +19,7 @@ import hilosScreen from "./screens/hilosScreen";
 export default () => <AppNavigator />;
 
 const appSwitchNavigator = createSwitchNavigator({
-  Si:hilosScreen,
+
   LoadingScreen: LoadingScreen,
   LoginScreen: LoginScreen,
   Home: TabBar,
@@ -28,6 +28,7 @@ const appSwitchNavigator = createSwitchNavigator({
   Lobby: LobbyScreen,
   Turn: TurnScreen,
   GameScreen: GameScreen,
+  Hilos:hilosScreen,
 });
 
 const AppNavigator = createAppContainer(appSwitchNavigator);
