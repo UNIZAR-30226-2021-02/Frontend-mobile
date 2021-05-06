@@ -17,15 +17,33 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-    backgroundColor: "red",
-    width: "75%",
-    height: "100%",
+    backgroundColor: Colors.background,
+    width: "43%",
+    height: "82%",
+    right: "9%",
   },
   button: {
-    backgroundColor: "blue",
+    top: "7%",
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    backgroundColor: Colors.cyan,
+    height: "13%",
+    width: "22%",
+  },
+  textButton: {
+    fontSize: 18,
+    color: Colors.white,
+    fontWeight: "bold",
+  },
+  textSay: {
+    fontSize: 16,
+    color: Colors.white,
+    fontWeight: "bold",
   },
   input: {
-    width: "50%",
+    top: "3%",
+    width: "80%",
     color: Colors.grey,
     backgroundColor: Colors.white,
     paddingLeft: 8,
@@ -73,17 +91,18 @@ class Write extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>¿Qué ves en el dibujo?</Text>
+        <Text style={styles.textSay}>¿Qué ves en el dibujo?</Text>
         <TextInput
           style={styles.input}
           value={this.state.respuestaAct}
           onChangeText={this.onAnswerChange}
+          placeholder="Peepo"
         />
         <TouchableOpacity
           style={styles.button}
           onPress={this.onPressSend.bind(this)}
         >
-          <Text>Send</Text>
+          <Text style={styles.textButton}>Send</Text>
         </TouchableOpacity>
       </View>
     );

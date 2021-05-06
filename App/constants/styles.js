@@ -9,7 +9,7 @@ const globalStyles = StyleSheet.create({
   },
   papuFont: {
     paddingTop: 10,
-    paddingBottom: 4,
+    paddingBottom: 10,
     fontWeight: "bold",
     fontSize: 18,
     color: "white",

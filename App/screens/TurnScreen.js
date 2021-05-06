@@ -106,21 +106,30 @@ class TurnScreen extends Component {
         break;
       case 2:
         return (
-          <View>
+          <View style={styles.containerLR}>
+            <Write />
             <Image
               source={{
                 uri: this.state.imagen,
               }}
               style={styles.picture}
             />
-            <Write />
           </View>
         );
         break;
       case 3:
         return (
-          <View>
-            <Text style={styles.texto}>{this.state.queDibujo}</Text>
+          <View style={styles.containerLR}>
+            <View
+              style={{
+                flexDirection: "column",
+                right: "6%",
+                top: "16%",
+              }}
+            >
+              <Text style={styles.texto}>Ahora dibuja:</Text>
+              <Text style={styles.texto}>{this.state.queDibujo}</Text>
+            </View>
             <Draw />
           </View>
         );
@@ -141,7 +150,7 @@ class TurnScreen extends Component {
             style={styles.return}
             onPress={() => this.props.navigation.navigate("Game")}
           >
-            <Fontisto name="arrow-return-left" size={26} color="black" />
+            <Fontisto name="arrow-return-left" size={26} color="white" />
           </TouchableOpacity>
           <Text style={styles.lobbyText}>Turn from: {this.state.partida}</Text>
         </View>
@@ -155,7 +164,7 @@ class TurnScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "green",
+    backgroundColor: Colors.background,
     flex: 1,
     flexDirection: "column",
   },
@@ -163,29 +172,37 @@ const styles = StyleSheet.create({
     paddingLeft: "5%",
     paddingTop: "3%",
     flexDirection: "row",
-    paddingBottom: "5%",
+    paddingBottom: "2%",
   },
   return: {},
   lobbyText: {
     fontSize: 20,
     fontWeight: "bold",
     left: "30%",
+    color: "white",
   },
   gamezone: {
-    height: "60%",
+    height: "82%",
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "baseline",
   },
   texto: {
-    bottom: "5%",
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  containerLR: {
+    backgroundColor: Colors.background,
+    flex: 1,
+    flexDirection: "row",
   },
   picture: {
     backgroundColor: "yellow",
-    top: screen.width * 0.05,
-    width: screen.width * 0.2,
-    height: screen.width * 0.2,
+    borderRadius: 10,
+    width: screen.width * 0.44,
+    height: screen.width * 0.44,
   },
 });
 

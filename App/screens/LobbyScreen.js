@@ -18,7 +18,6 @@ import Colors from "../constants/colors";
 
 const initState = { partida: "", isLoading: false };
 
-
 class Lobby extends Component {
   constructor() {
     super();
@@ -57,7 +56,7 @@ class Lobby extends Component {
               style={styles.return}
               onPress={() => this.props.navigation.navigate("Game")}
             >
-              <Fontisto name="arrow-return-left" size={26} color="black" />
+              <Fontisto name="arrow-return-left" size={26} color="white" />
             </TouchableOpacity>
             <Text style={styles.lobbyText}>
               Lobby from: {this.state.partida}
@@ -84,7 +83,7 @@ class Lobby extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "green",
+    backgroundColor: Colors.background,
     flex: 1,
     flexDirection: "row",
   },
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
     paddingTop: "3%",
     flexDirection: "column",
     width: "50%",
-    backgroundColor: "cyan",
+    backgroundColor: Colors.background,
   },
   upLeftContainer: {
     flexDirection: "row",
@@ -104,9 +103,12 @@ const styles = StyleSheet.create({
     paddingTop: "3%",
     flexDirection: "column",
     width: "50%",
+    borderLeftWidth: 2,
+    borderLeftColor: "cyan",
   },
   lobbyText: {
     fontSize: 20,
+    color: "white",
     fontWeight: "bold",
     left: "30%",
   },
