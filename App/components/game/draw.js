@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import ExpoDraw from "expo-draw";
+
 import { captureRef as takeSnapshotAsync } from "react-native-view-shot";
 
 import URI from "../../constants/apiUris";
@@ -71,20 +71,7 @@ class Draw extends Component {
             this.screenshot = shot;
           }}
         >
-          <ExpoDraw
-            strokes={[]}
-            containerStyle={styles.canvas}
-            rewind={(undo) => {
-              this._undo = undo;
-            }}
-            clear={(clear) => {
-              this._clear = clear;
-            }}
-            color={"#000000"}
-            strokeWidth={4}
-            enabled={true}
-            onChangeStrokes={(strokes) => console.log(strokes)}
-          />
+          
         </View>
         <TouchableOpacity
           style={styles.button}

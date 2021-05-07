@@ -26,16 +26,17 @@ class Votacion extends Component {
           </View>
       );
 
-      renderPlaceholder = i => <View style={styles.item} key={i} />;
+      renderPlaceholder = i => <View style={{ backgroundColor: "red" },styles.item} key={i}><Text>María</Text> </View> ;
     render(){
         return (
           <View style={styles.container}>
           <Text>Mejor sapo</Text>
             <Grid
               style={styles.list}
+              keyExtractor={(item) => String(item)} //TODO
               renderItem={this._renderItem}
               renderPlaceholder={this._renderPlaceholder}
-              data={['black', 'white', 'red', 'pink', 'blue','blue','black', 'white', 'red', 'pink', ]}
+              data={['black', 'white', 'red', 'pink', 'blue','blue', ]}
               numColumns={5}
             />
             </View>
