@@ -102,7 +102,7 @@ renderHilo(){
 
 renderVotacion(){
   return (
-    <View style={styles.gamezone}>
+    <View style={styles.votezone}>
     <Votacion/>
     </View>
     );
@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "green",
     flex: 1,
+    alignItems:"center",
     flexDirection: "column",
   },
   upLeftContainer: {
@@ -164,6 +165,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "baseline",
+  },
+  votezone: {
+    height:500,
+    width:800,
+    justifyContent: "center",
+    alignItems: "center",
+  
   },
 });
 
