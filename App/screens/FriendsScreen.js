@@ -8,110 +8,17 @@ import {
   TouchableOpacity,
   View,
   Alert,
+  ToastAndroid,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import ListaAmigos from "../components/ListaAmigos";
 import ListaPetis from "../components/ListaPetis";
 import Colors from "../constants/colors";
 import APIKit from "../util/APIKit";
+import globalStyles from "../constants/styles";
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "yellow",
-    flex: 1,
-    alignItems: "center",
 
-    justifyContent: "space-between",
-  },
-
-  addContainer: {
-    top: "3%",
-    start: "4%",
-    padding: "5%",
-    alignItems: "center",
-
-    //backgroundColor: "blue",
-    width: "85%",
-  },
-  textinput: {
-    width: "55%",
-    color: Colors.grey,
-    backgroundColor: Colors.white,
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-
-    elevation: 8,
-  },
-  addFriend: {
-    paddingLeft: 10,
-  },
-  searchBar: {
-    flexDirection: "row",
-    marginBottom: 10,
-  },
-  header: {
-    marginTop: 30,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    width: 220,
-    height: 40,
-    backgroundColor: "red",
-    marginLeft: 40,
-    marginRight: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  selectedButton: {
-    width: 220,
-    height: 40,
-    backgroundColor: "green",
-    marginLeft: 40,
-    marginRight: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  petitionsContainer: {
-    width: "110%",
-    height: "70%",
-    backgroundColor: Colors.white,
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-
-    elevation: 8,
-  },
-
-  friendsContainer: {
-    width: "35%",
-    height: "80%",
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    elevation: 8,
-    width: "85%",
-  },
-});
-const rnk = "Rankig";
+const rnk = "Ranking";
 const add = "Add friends";
 const initialState = {
   searchUser: "",
@@ -132,11 +39,15 @@ class Friends extends Component {
 
   onPressAdd() {
     const { searchUser } = this.state;
-    const payload = JSON.stringify({ nombre: searchUser });
+    const payload = JSON.stringify({ mail: searchUser });
     console.log("Se envía " + payload);
 
     const onSuccess = ({ data }) => {
       console.log("Enviado manin " + data);
+      ToastAndroid.show(
+        "Friend request sent to: " + searchUser,
+        ToastAndroid.SHORT
+      );
       this.setState({ isLoading: false });
     };
 
@@ -164,11 +75,11 @@ class Friends extends Component {
         }}
         style={
           this.state.selectedButton == name
-            ? styles.selectedButton
-            : styles.button
+            ? globalStyles.toggleSelectedButton
+            : globalStyles.toggleButton
         }
       >
-        <Text>{name}</Text>
+        <Text style={globalStyles.toggleFont}>{name}</Text>
       </TouchableOpacity>
     );
   }
@@ -196,7 +107,7 @@ class Friends extends Component {
             style={styles.addFriend}
             onPress={this.onPressAdd.bind(this)}
           >
-            <Entypo name="add-user" size={24} color="black" />
+            <Entypo name="add-user" size={24} color="white" />
           </TouchableOpacity>
         </View>
         <View style={styles.petitionsContainer}>
@@ -208,7 +119,7 @@ class Friends extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={globalStyles.background}>
         <View style={styles.header}>
           {this.button(rnk)}
           {this.button(add)}
@@ -220,5 +131,88 @@ class Friends extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "yellow",
+    flex: 1,
+    alignItems: "center",
+
+    justifyContent: "space-between",
+  },
+
+  addContainer: {
+    padding: "5%",
+    alignItems: "center",
+    //backgroundColor: "blue",
+    width: "85%",
+  },
+  textinput: {
+    width: "55%",
+    color: Colors.grey,
+    backgroundColor: Colors.white,
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+
+    elevation: 8,
+  },
+  addFriend: {
+    paddingLeft: 10,
+  },
+  searchBar: {
+    flexDirection: "row",
+  },
+  header: {
+    marginTop: 30,
+    marginBottom: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button: {
+    width: 220,
+    height: 40,
+    backgroundColor: "red",
+    marginLeft: 40,
+    marginRight: 40,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  selectedButton: {
+    width: 220,
+    height: 40,
+    backgroundColor: "green",
+    marginLeft: 40,
+    marginRight: 40,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  petitionsContainer: {
+    width: "110%",
+    height: "70%",
+  },
+
+  friendsContainer: {
+    width: "35%",
+    height: "80%",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
+    width: "85%",
+  },
+});
 
 export default Friends;

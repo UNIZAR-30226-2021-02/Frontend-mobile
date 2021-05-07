@@ -7,6 +7,7 @@ import {
   Image,
   View,
   Touchable,
+  Dimensions,
   Alert,
 } from "react-native";
 import {
@@ -16,21 +17,36 @@ import {
   MaterialCommunityIcons,
   Ionicons,
 } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import URI from "../constants/apiUris";
-import APIKit, { setClientName } from "../util/APIKit";
+import Colors from "../constants/colors";
+import APIKit, {
+  setClientName,
+  setClientToken,
+  setClientMail,
+} from "../util/APIKit";
+
+const screen = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "pink",
+    backgroundColor: Colors.background,
     flex: 1,
     alignItems: "center",
     justifyContent: "space-evenly",
   },
+  picContainer: {
+    top: "2%",
+    paddingTop: "13%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   containerPts: {
-    backgroundColor: "pink",
+    top: "3%",
+    backgroundColor: Colors.background,
     flexDirection: "row",
-    borderColor: "black",
+    borderColor: "white",
     borderRadius: 9,
     borderWidth: 1,
     shadowColor: "#000",
@@ -43,8 +59,10 @@ const styles = StyleSheet.create({
     elevation: 7,
   },
   nombre: {
-    fontSize: 18,
+    top: "3%",
+    fontSize: 20,
     fontWeight: "bold",
+    color: "white",
   },
   interiorIcon: {
     paddingTop: 2,
@@ -52,6 +70,7 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
   },
   interiorVal: {
+    color: "white",
     paddingTop: 2,
     paddingLeft: 5,
     paddingRight: 6,
@@ -59,8 +78,19 @@ const styles = StyleSheet.create({
   },
   separador: {
     borderRightWidth: 1,
+    borderColor: "white",
   },
-  picture: { width: 70, height: 70 },
+  pictureBackground: {
+    position: "absolute",
+    width: screen.width * 0.15,
+    height: screen.width * 0.15,
+  },
+  picture: {
+    position: "absolute",
+    top: screen.width * 0.005,
+    width: screen.width * 0.13,
+    height: screen.width * 0.12,
+  },
   cambiarView: {
     paddingLeft: "78%",
   },
@@ -68,7 +98,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "blue",
-    borderColor: "black",
+    borderColor: "white",
     borderRadius: 9,
     borderWidth: 1,
     shadowColor: "#000",
@@ -84,7 +114,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 205, 0.6)",
-    borderColor: "black",
+    borderColor: "grey",
     borderRadius: 9,
     borderWidth: 1,
     shadowColor: "#000",
@@ -97,7 +127,17 @@ const styles = StyleSheet.create({
     elevation: 7,
   },
   cambiarFont: {
+    color: "white",
     fontSize: 13,
+  },
+  cambiarFontTransp: {
+    color: "grey",
+    fontSize: 13,
+  },
+  signOutImage: {
+    top: "1%",
+    flexDirection: "row",
+    left: "5%",
   },
 });
 
@@ -107,8 +147,8 @@ const DiffName = (props) => {
     return (
       <View style={styles.cambiarView}>
         <View style={styles.cambiarButtonTransp}>
-          <Text style={styles.cambiarFont}>Change</Text>
-          <Text style={styles.cambiarFont}> Username </Text>
+          <Text style={styles.cambiarFontTransp}>Change</Text>
+          <Text style={styles.cambiarFontTransp}> Username </Text>
         </View>
       </View>
     );
@@ -208,15 +248,41 @@ class Profile extends Component {
 
   state = {};
 
+  signOut() {
+    setClientToken("");
+    AsyncStorage.setItem("@token", "");
+    setClientMail("");
+    AsyncStorage.setItem("@mail", "");
+    this.props.navigation.navigate("LoginScreen");
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Image
-          source={{
-            uri: this.state.fotPerf,
-          }}
-          style={styles.picture}
-        />
+        <View style={styles.signOutImage}>
+          <View style={styles.picContainer}>
+            <Image
+              source={require("../assets/images/background.png")}
+              style={styles.pictureBackground}
+            />
+            <Image
+              source={{
+                uri: this.state.fotPerf,
+              }}
+              style={styles.picture}
+            />
+          </View>
+          <View style={{ left: "290%" }}>
+            <TouchableOpacity>
+              <FontAwesome
+                onPress={() => this.signOut()}
+                name="sign-out"
+                size={40}
+                color="white"
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
         <View style={{ flexDirection: "row" }}>
           <TextInput
             style={styles.nombre}
@@ -237,7 +303,7 @@ class Profile extends Component {
             style={styles.interiorIcon}
             name="pencil"
             size={18}
-            color="black"
+            color="white"
           />
           <Text style={styles.interiorVal}>{this.state.pDibujo}</Text>
           <View style={styles.separador} />
@@ -245,7 +311,7 @@ class Profile extends Component {
             style={styles.interiorIcon}
             name="brain"
             size={18}
-            color="black"
+            color="white"
           />
           <Text style={styles.interiorVal}>{this.state.pListo}</Text>
           <View style={styles.separador} />
@@ -253,7 +319,7 @@ class Profile extends Component {
             style={styles.interiorIcon}
             name="md-happy-outline"
             size={18}
-            color="black"
+            color="white"
           />
           <Text style={styles.interiorVal}>{this.state.pGracioso}</Text>
         </View>
@@ -262,7 +328,7 @@ class Profile extends Component {
             style={styles.interiorIcon}
             name="staro"
             size={18}
-            color="black"
+            color="white"
           />
           <Text style={styles.interiorVal}>{this.state.estrellas}</Text>
         </View>
@@ -271,7 +337,7 @@ class Profile extends Component {
             style={styles.interiorIcon}
             name="coins"
             size={18}
-            color="black"
+            color="white"
           />
           <Text style={styles.interiorVal}>{this.state.monedas}</Text>
         </View>
@@ -280,7 +346,7 @@ class Profile extends Component {
             style={styles.interiorIcon}
             name="user"
             size={18}
-            color="black"
+            color="white"
           />
           <Text style={styles.interiorVal}>{this.state.nAmigos}</Text>
         </View>

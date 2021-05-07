@@ -14,13 +14,17 @@ import {
   Image,
   Alert,
 } from "react-native";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import URI from "../constants/apiUris";
+
+import APIKit, { setClientToken, setClientMail } from "../util/APIKit";
+import Colors from "../constants/colors"
+
 
 const screen = Dimensions.get("window");
 const state = { text: "Ususario" };
-
-import APIKit, { setClientToken, setClientName } from "../util/APIKit";
-import Colors from "../constants/colors";
+;
 
 const initialState = {
   mail: "",
@@ -101,11 +105,22 @@ class Register extends Component {
       console.log(payload);
 
       const onSuccess = ({ data }) => {
+          console.log(data);
+        
         // Set JSON Web Token on success
+        console.log(1);
         setClientToken(data.token);
-        setClientName(this.state.username);
+        console.log(2);
+        AsyncStorage.setItem("@token", data.token);
+        console.log(3);
+        setClientMail(data.mail);
+        console.log(4);
+        AsyncStorage.setItem("@mail", data.mail);
+        console.log(5);
         this.setState({ isLoading: false, isAuthorized: true });
+        console.log("holi");
         this.props.navigation.navigate("Home");
+        console.log("holi");
       };
 
       const onFailure = (error) => {
@@ -113,7 +128,7 @@ class Register extends Component {
         if (error.message == "Request failed with status code 417") {
           Alert.alert("El usuario o el mail introducidos ya están en uso.");
         }
-        this.setState({ errors: error.response.data, isLoading: false });
+        this.setState({ isLoading: false });
       };
 
       // Show spinner when call is made

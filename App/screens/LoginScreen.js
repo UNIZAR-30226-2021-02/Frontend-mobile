@@ -14,15 +14,17 @@ import {
   Image,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Colors from "../constants/colors";
 import URI from "../constants/apiUris";
 const screen = Dimensions.get("window");
 
-import APIKit, { setClientToken, setClientName } from "../util/APIKit";
+import APIKit, { setClientToken, setClientMail } from "../util/APIKit";
 
 const initialState = {
-  username: "",
+  usermail: "",
+   pp:"",
   password: "",
   errors: {},
   isAuthorized: false,
@@ -34,8 +36,8 @@ class Login extends Component {
 
   componentWillUnmount() {}
 
-  onUsernameChange = (username) => {
-    this.setState({ username });
+  onUsermailChange = (usermail) => {
+    this.setState({ usermail});
   };
 
   onPasswordChange = (password) => {
@@ -43,16 +45,18 @@ class Login extends Component {
   };
 
   onPressLogin() {
-    const { username, password } = this.state;
-    const payload = JSON.stringify({ nombre: username, password: password });
+    const { usermail, password } = this.state;
+    const payload = JSON.stringify({ mail: usermail, password: password });
     console.log(payload);
 
     const onSuccess = ({ data }) => {
       // Set JSON Web Token on success
       setClientToken(data.token);
-      setClientName(this.state.username);
+      AsyncStorage.setItem("@token", data.token);
+      setClientMail(data.mail);
+      AsyncStorage.setItem("@mail", data.mail);
       this.setState({ isLoading: false, isAuthorized: true });
-      this.props.navigation.navigate("Home");
+      this.props.navigation.navigate("Game");
     };
 
     const onFailure = (error) => {
@@ -94,13 +98,13 @@ class Login extends Component {
         <Spinner visible={isLoading} />
         <TextInput
           style={styles.input}
-          value={this.state.username}
+          value={this.state.usermail}
           maxLength={256}
-          placeholder="Username"
+          placeholder="Email"
           autoCapitalize="none"
           autoCorrect={false}
           returnKeyType="next"
-          onChangeText={this.onUsernameChange}
+          onChangeText={this.onUsermailChange}
           underlineColorAndroid="transparent"
           placeholderTextColor="#999"
         />

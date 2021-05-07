@@ -16,9 +16,6 @@ const AppContent = createSwitchNavigator(
     Game: {
       screen: GameScreen,
     },
-    Home: {
-      screen: HomeScreen,
-    },
     Profile: {
       screen: ProfileScreen,
     },
@@ -55,11 +52,7 @@ class TabBar extends React.PureComponent {
     const tabs = [
       {
         tabName: "Game",
-        tabIcon: "gamepad",
-      },
-      {
-        tabName: "Home",
-        tabIcon: "home",
+        tabIcon: "gamepad-variant-outline",
       },
       {
         tabName: "Profile",
@@ -71,7 +64,7 @@ class TabBar extends React.PureComponent {
       },
       {
         tabName: "Friends",
-        tabIcon: "user-friends",
+        tabIcon: "people-outline",
       },
     ];
     return (

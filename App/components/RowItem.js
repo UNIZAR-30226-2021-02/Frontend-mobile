@@ -50,8 +50,9 @@ const styles = StyleSheet.create({
   },
   separator: {
     backgroundColor: colors.border,
-    height: StyleSheet.hairlineWidth,
+
     marginLeft: 20,
+    height: 7,
   },
   picture: { width: 50, height: 50 },
 });

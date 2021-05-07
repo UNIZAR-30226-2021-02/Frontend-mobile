@@ -3,13 +3,10 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import URI from "../constants/apiUris";
 import APIKit from "../util/APIKit";
+import globalStyles from "../constants/styles";
+import Colors from "../constants/colors";
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "red",
-    flex: 1,
-    alignItems: "center",
-  },
   containerCoinsShop: {
     paddingEnd: "75%",
     flexDirection: "row",
@@ -17,9 +14,9 @@ const styles = StyleSheet.create({
     paddingTop: "4%",
   },
   containerPts: {
-    backgroundColor: "red",
+    backgroundColor: Colors.background,
     flexDirection: "row",
-    borderColor: "black",
+    borderColor: "white",
     borderRadius: 9,
     borderWidth: 1,
     shadowColor: "#000",
@@ -37,10 +34,20 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
   },
   interiorVal: {
+    color: "white",
     paddingTop: 2,
     paddingLeft: 5,
     paddingRight: 6,
     paddingBottom: 2,
+  },
+  shopStyle: {
+    color: "white",
+    paddingTop: 2,
+    left: "30%",
+    paddingRight: 6,
+    paddingBottom: 2,
+    fontWeight: "bold",
+    fontSize: 18,
   },
 });
 
@@ -51,7 +58,7 @@ class Shop extends Component {
     this.state = initialState;
     this.loadData();
   }
-  componentDidMount(){
+  componentDidMount() {
     this.loadData();
   }
   loadData = () => {
@@ -77,18 +84,18 @@ class Shop extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={globalStyles.background}>
         <View style={styles.containerCoinsShop}>
           <View style={styles.containerPts}>
             <FontAwesome5
               style={styles.interiorIcon}
               name="coins"
               size={18}
-              color="black"
+              color="white"
             />
             <Text style={styles.interiorVal}>{this.state.monedas}</Text>
           </View>
-          <Text>SHOP</Text>
+          <Text style={styles.shopStyle}>SHOP</Text>
         </View>
       </SafeAreaView>
     );
