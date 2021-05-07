@@ -12,7 +12,7 @@ class Votacion extends Component {
     constructor(){
         
         super();
-        this.state={mode:0,players:[]}
+        this.state={mode:0,players:[],voteTitle:"mejor dibujante"}
         this.mode=0;
      
         
@@ -80,16 +80,19 @@ class Votacion extends Component {
         case 0: //mejor dibujo
         console.log("dibujante "+usr)
         this.mandarVoto(usr,URI.voteDibujante)
+        this.setState({voteTitle:"más inteligente"})
         break;
 
         case 1://más inteligente
         console.log("clever "+usr)
         this.mandarVoto(usr,URI.voteListo)
+        this.setState({voteTitle:"más gracioso"})
         break;
 
         case 2://más divertido
         console.log("diver "+usr)
         this.mandarVoto(usr,URI.voteGracioso)
+        
         //ir a resultados
         break;
 
@@ -121,7 +124,7 @@ class Votacion extends Component {
       
         return (
           <View style={styles.container}>
-          <Text>Mejor sapo</Text>
+          <Text>{"Vota al "+this.state.voteTitle}</Text>
             <Grid
               style={styles.list}
               keyExtractor={(item) => String(item)} //TODO
