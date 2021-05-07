@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import ExpoDraw from "expo-draw";
+import ExpoDraw from "../canvas/view/pad";
 import { captureRef as takeSnapshotAsync } from "react-native-view-shot";
 
 import URI from "../../constants/apiUris";
