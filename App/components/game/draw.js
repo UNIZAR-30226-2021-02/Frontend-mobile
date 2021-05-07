@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,7 +9,7 @@ import {
   Alert,
   Dimensions,
 } from "react-native";
-import ExpoDraw from "expo-draw";
+import { Draw, DrawRef } from "@benjeau/react-native-draw";
 import { captureRef as takeSnapshotAsync } from "react-native-view-shot";
 import Colors from "../../constants/colors";
 import URI from "../../constants/apiUris";
@@ -19,14 +19,18 @@ const screen = Dimensions.get("window");
 const initialState = {
   color: "black",
   tama: 4,
+  hidden: false,
 };
-
-class Draw extends Component {
+let drawRef = useRef < DrawRef > null;
+const bn = [["black", "white"]];
+const colors = [["red", "orange", "yellow", "green", "blue", "purple"]];
+const colorines = [colors, bn];
+class Drawer extends Component {
   state = initialState;
   mySaveFx = async () => {
     const signatureResult = await takeSnapshotAsync(this.screenshot, {
       result: "tmpfile",
-      quality: 0.5,
+      quality: 0.6,
       format: "png",
     });
 
@@ -71,56 +75,48 @@ class Draw extends Component {
     return (
       <View style={styles.container}>
         <View
+          style={styles.screenshoto}
           collapsable={false}
           ref={(shot) => {
             this.screenshot = shot;
           }}
         >
-          <ExpoDraw
-            strokes={[]}
-            containerStyle={styles.canvas}
-            rewind={(undo) => {
-              this._undo = undo;
+          <Draw
+            ref={drawRef}
+            height={300}
+            width={300}
+            colors={colorines}
+            autoDismissColorPicker={true}
+            initialValues={{
+              color: "black",
+              thickness: 5,
+              opacity: 0.9,
+              paths: [],
             }}
-            clear={(clear) => {
-              this._clear = clear;
+            brushPreview="none"
+            canvasStyle={{
+              elevation: 0,
+              backgroundColor: "white",
+              borderRadius: 11,
             }}
-            color={this.state.color}
-            strokeWidth={4}
-            enabled={this.state.tama}
-            onChangeStrokes={(strokes) => console.log(strokes)}
+            buttonStyle={{
+              width: screen.height * 0.07,
+              height: screen.height * 0.07,
+              bottom: screen.height * 0.02,
+              justifyContent: "center",
+            }}
+            hideBottom={this.state.hidden}
           />
         </View>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
+            this.setState({ hidden: true });
             this.uploadImage();
           }}
         >
           <Text style={styles.textButton}>Send</Text>
         </TouchableOpacity>
-        <View style={styles.drawColors}>
-          <TouchableOpacity style={styles.pequeño}></TouchableOpacity>
-          <TouchableOpacity style={styles.mediano}></TouchableOpacity>
-          <TouchableOpacity style={styles.grande}></TouchableOpacity>
-          <TouchableOpacity
-            style={styles.negro}
-            onPress={() => this.setState({ color: "black" })}
-          ></TouchableOpacity>
-          <TouchableOpacity
-            style={styles.blanco}
-            onPress={() => this.setState({ color: "white" })}
-          ></TouchableOpacity>
-          <TouchableOpacity
-            style={styles.rojo}
-            onPress={() => this.setState({ color: "red" })}
-          ></TouchableOpacity>
-          <TouchableOpacity style={styles.naranja}></TouchableOpacity>
-          <TouchableOpacity style={styles.amarillo}></TouchableOpacity>
-          <TouchableOpacity style={styles.verde}></TouchableOpacity>
-          <TouchableOpacity style={styles.azul}></TouchableOpacity>
-          <TouchableOpacity style={styles.morado}></TouchableOpacity>
-        </View>
       </View>
     );
   }
@@ -166,94 +162,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
   },
-  pequeño: {
-    width: screen.height * 0.04,
-    height: screen.height * 0.04,
-    borderRadius: 20,
-    backgroundColor: "black",
-    left: screen.height * 0.02,
-    right: screen.height * 0.02,
-  },
-  mediano: {
-    width: screen.height * 0.05,
-    height: screen.height * 0.05,
-    borderRadius: 20,
-    backgroundColor: "black",
-    left: screen.height * 0.02,
-    right: screen.height * 0.02,
-  },
-  grande: {
-    width: screen.height * 0.06,
-    height: screen.height * 0.06,
-    borderRadius: 20,
-    backgroundColor: "black",
-    left: screen.height * 0.02,
-    right: screen.height * 0.02,
-  },
-  negro: {
-    width: screen.height * 0.06,
-    height: screen.height * 0.06,
-    borderRadius: 3,
-    backgroundColor: "black",
-    left: screen.height * 0.02,
-    right: screen.height * 0.02,
-  },
-  rojo: {
-    width: screen.height * 0.06,
-    height: screen.height * 0.06,
-    borderRadius: 3,
-    backgroundColor: "red",
-    left: screen.height * 0.02,
-    right: screen.height * 0.02,
-  },
-  naranja: {
-    width: screen.height * 0.06,
-    height: screen.height * 0.06,
-    borderRadius: 3,
-    backgroundColor: "orange",
-    left: screen.height * 0.02,
-    right: screen.height * 0.02,
-  },
-  amarillo: {
-    width: screen.height * 0.06,
-    height: screen.height * 0.06,
-    borderRadius: 3,
-    backgroundColor: "yellow",
-    left: screen.height * 0.02,
-    right: screen.height * 0.02,
-  },
-  verde: {
-    width: screen.height * 0.06,
-    height: screen.height * 0.06,
-    borderRadius: 3,
-    backgroundColor: "green",
-    left: screen.height * 0.02,
-    right: screen.height * 0.02,
-  },
-  azul: {
-    width: screen.height * 0.06,
-    height: screen.height * 0.06,
-    borderRadius: 3,
-    backgroundColor: "blue",
-    left: screen.height * 0.02,
-    right: screen.height * 0.02,
-  },
-  morado: {
-    width: screen.height * 0.06,
-    height: screen.height * 0.06,
-    borderRadius: 3,
-    backgroundColor: "purple",
-    left: screen.height * 0.02,
-    right: screen.height * 0.02,
-  },
-  blanco: {
-    width: screen.height * 0.06,
-    height: screen.height * 0.06,
-    borderRadius: 3,
-    backgroundColor: "white",
-    left: screen.height * 0.02,
-    right: screen.height * 0.02,
+  screenshoto: {
+    left: screen.height * 0.14,
+    bottom: screen.height * 0.03,
   },
 });
 
-export default Draw;
+export default Drawer;

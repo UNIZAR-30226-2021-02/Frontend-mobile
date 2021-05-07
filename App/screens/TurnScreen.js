@@ -152,7 +152,9 @@ class TurnScreen extends Component {
           >
             <Fontisto name="arrow-return-left" size={26} color="white" />
           </TouchableOpacity>
-          <Text style={styles.lobbyText}>Turn from: {this.state.partida}</Text>
+          <Text style={styles.lobbyText}>
+            Turn from:{"\n"} {this.state.partida}
+          </Text>
         </View>
         <View style={styles.gamezone}>
           {this.isLoading ? this.renderLoading() : this.renderMode()}
