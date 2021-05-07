@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Hilo from "../components/hilos/hilo";
 import { Fontisto } from "@expo/vector-icons";
 import URI from "../constants/apiUris"
+import Votacion from "../components/votaciones/votacion";
 
 
 
@@ -20,12 +21,8 @@ class HilosScreen extends Component {
         super()
         this.numHilo=0
         this.hilos=[]
-        this.state= {hiloAhora: []}
-     
-
-       
-        
-        
+        this.state= {hiloAhora: [],righBtn:"Siguiente hilo",hilos:true}
+    
     }
     componentDidMount(){
         this.loadData()
@@ -33,7 +30,8 @@ class HilosScreen extends Component {
 
     loadData =  async () =>  {
         const onSuccess = ({ data }) => {
-            
+            console.log(data)
+            console.log(data.length);
             this.hilos=data
             this.setState({hiloAhora:this.hilos[0]})
 
@@ -58,6 +56,7 @@ class HilosScreen extends Component {
         
 
         if(this.numHilo>0){
+          this.setState({righBtn:"Siguiente hilo"})
             this.numHilo--;
             this.setState({hiloAhora:this.hilos[this.numHilo]})
         console.log("Pasamos al hilo "+this.numHilo)
@@ -72,12 +71,44 @@ class HilosScreen extends Component {
             this.numHilo++;
             this.setState({hiloAhora:this.hilos[this.numHilo]})
         console.log("Pasamos al hilo "+this.numHilo)
+        //si es el ultimo hilo cambiamos mensaje
+          if(this.numHilo===this.hilos.length-1){
+            this.setState({righBtn:"Ir a votar"})
+           }
        
-        
+        } 
+        else if(this.numHilo===this.hilos.length-1){
+          this.setState({hilos:false})
+
         }
+        
         
    
     } 
+renderHilo(){
+  return (
+    <View style={styles.gamezone}>
+              
+    <View style={styles.hilos}>
+    <Button title={"Anterior hilo"} onPress={()=> this.anteriorHilo()}></Button>
+<Hilo hilo={this.state.hiloAhora.respuestas_} jugadorInicial={this.state.hiloAhora.jugadorInicial_} />
+<Button title={this.state.righBtn} onPress={()=> this.siguienteHilo()}></Button>
+</View>
+    
+  
+</View>
+    );
+}
+
+renderVotacion(){
+  return (
+    <View style={styles.gamezone}>
+    <Votacion/>
+    </View>
+    );
+}
+
+
 
     render(){
        
@@ -94,16 +125,7 @@ class HilosScreen extends Component {
               </TouchableOpacity>
               <Text style={styles.lobbyText}>Turn from: {this.state.partida}</Text>
             </View>
-            <View style={styles.gamezone}>
-              {
-                <View style={styles.hilos}>
-                <Button title={"Anterior hilo"} onPress={()=> this.anteriorHilo()}></Button>
-            <Hilo hilo={this.state.hiloAhora.respuestas_} jugadorInicial={this.state.hiloAhora.jugadorInicial_} />
-            <Button title={"Siguiente hilo"} onPress={()=> this.siguienteHilo()}></Button>
-           </View>
-                
-              }
-            </View>
+            {this.state.hilos?this.renderHilo():this.renderVotacion()}
           </View>
 
 
