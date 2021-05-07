@@ -7,14 +7,22 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  Dimensions,
 } from "react-native";
 import ExpoDraw from "expo-draw";
 import { captureRef as takeSnapshotAsync } from "react-native-view-shot";
 import Colors from "../../constants/colors";
 import URI from "../../constants/apiUris";
 import APIKit from "../../util/APIKit";
+const screen = Dimensions.get("window");
+
+const initialState = {
+  color: "black",
+  tama: 4,
+};
 
 class Draw extends Component {
+  state = initialState;
   mySaveFx = async () => {
     const signatureResult = await takeSnapshotAsync(this.screenshot, {
       result: "tmpfile",
@@ -77,9 +85,9 @@ class Draw extends Component {
             clear={(clear) => {
               this._clear = clear;
             }}
-            color={"#000000"}
+            color={this.state.color}
             strokeWidth={4}
-            enabled={true}
+            enabled={this.state.tama}
             onChangeStrokes={(strokes) => console.log(strokes)}
           />
         </View>
@@ -91,7 +99,28 @@ class Draw extends Component {
         >
           <Text style={styles.textButton}>Send</Text>
         </TouchableOpacity>
-        <View style={styles.drawColors}></View>
+        <View style={styles.drawColors}>
+          <TouchableOpacity style={styles.pequeño}></TouchableOpacity>
+          <TouchableOpacity style={styles.mediano}></TouchableOpacity>
+          <TouchableOpacity style={styles.grande}></TouchableOpacity>
+          <TouchableOpacity
+            style={styles.negro}
+            onPress={() => this.setState({ color: "black" })}
+          ></TouchableOpacity>
+          <TouchableOpacity
+            style={styles.blanco}
+            onPress={() => this.setState({ color: "white" })}
+          ></TouchableOpacity>
+          <TouchableOpacity
+            style={styles.rojo}
+            onPress={() => this.setState({ color: "red" })}
+          ></TouchableOpacity>
+          <TouchableOpacity style={styles.naranja}></TouchableOpacity>
+          <TouchableOpacity style={styles.amarillo}></TouchableOpacity>
+          <TouchableOpacity style={styles.verde}></TouchableOpacity>
+          <TouchableOpacity style={styles.azul}></TouchableOpacity>
+          <TouchableOpacity style={styles.morado}></TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -128,11 +157,102 @@ const styles = StyleSheet.create({
   },
   drawColors: {
     backgroundColor: "grey",
-    width: "90%",
+    width: "85%",
     height: "10%",
     bottom: "13%",
     left: "9.2%",
     borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  pequeño: {
+    width: screen.height * 0.04,
+    height: screen.height * 0.04,
+    borderRadius: 20,
+    backgroundColor: "black",
+    left: screen.height * 0.02,
+    right: screen.height * 0.02,
+  },
+  mediano: {
+    width: screen.height * 0.05,
+    height: screen.height * 0.05,
+    borderRadius: 20,
+    backgroundColor: "black",
+    left: screen.height * 0.02,
+    right: screen.height * 0.02,
+  },
+  grande: {
+    width: screen.height * 0.06,
+    height: screen.height * 0.06,
+    borderRadius: 20,
+    backgroundColor: "black",
+    left: screen.height * 0.02,
+    right: screen.height * 0.02,
+  },
+  negro: {
+    width: screen.height * 0.06,
+    height: screen.height * 0.06,
+    borderRadius: 3,
+    backgroundColor: "black",
+    left: screen.height * 0.02,
+    right: screen.height * 0.02,
+  },
+  rojo: {
+    width: screen.height * 0.06,
+    height: screen.height * 0.06,
+    borderRadius: 3,
+    backgroundColor: "red",
+    left: screen.height * 0.02,
+    right: screen.height * 0.02,
+  },
+  naranja: {
+    width: screen.height * 0.06,
+    height: screen.height * 0.06,
+    borderRadius: 3,
+    backgroundColor: "orange",
+    left: screen.height * 0.02,
+    right: screen.height * 0.02,
+  },
+  amarillo: {
+    width: screen.height * 0.06,
+    height: screen.height * 0.06,
+    borderRadius: 3,
+    backgroundColor: "yellow",
+    left: screen.height * 0.02,
+    right: screen.height * 0.02,
+  },
+  verde: {
+    width: screen.height * 0.06,
+    height: screen.height * 0.06,
+    borderRadius: 3,
+    backgroundColor: "green",
+    left: screen.height * 0.02,
+    right: screen.height * 0.02,
+  },
+  azul: {
+    width: screen.height * 0.06,
+    height: screen.height * 0.06,
+    borderRadius: 3,
+    backgroundColor: "blue",
+    left: screen.height * 0.02,
+    right: screen.height * 0.02,
+  },
+  morado: {
+    width: screen.height * 0.06,
+    height: screen.height * 0.06,
+    borderRadius: 3,
+    backgroundColor: "purple",
+    left: screen.height * 0.02,
+    right: screen.height * 0.02,
+  },
+  blanco: {
+    width: screen.height * 0.06,
+    height: screen.height * 0.06,
+    borderRadius: 3,
+    backgroundColor: "white",
+    left: screen.height * 0.02,
+    right: screen.height * 0.02,
   },
 });
 
