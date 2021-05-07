@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View ,TouchableOpacity,Image} from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import URI from "../constants/apiUris";
 import APIKit from "../util/APIKit";
+import Grid from 'react-native-grid-component';
 
 const styles = StyleSheet.create({
   container: {
@@ -42,6 +43,34 @@ const styles = StyleSheet.create({
     paddingRight: 6,
     paddingBottom: 2,
   },
+  list: {
+    width:600,
+    height: 120,
+  },
+  item: {
+    width:100,
+    height: 100,
+    margin: 10,
+    alignItems:"center",
+    justifyContent:"center",
+
+  },
+  shopZone:{
+    //width:500,
+
+    marginLeft:100,
+    alignItems:"center",
+    alignContent:"center",
+    justifyContent:"center",
+   
+
+
+  },
+  picture:{
+    height:60,
+    width:60
+  }
+  
 });
 
 const initialState = { hasPict: false };
@@ -75,6 +104,24 @@ class Shop extends Component {
   };
   state = {};
 
+  _renderItem = (item, i) => (
+    <View style={[ styles.item]} key={i} >
+          <TouchableOpacity onPress={()=>console.log("pagar "+item.price)}>
+        <Image
+            source={{
+              uri:  URI.img+item.img,
+            }}
+            style={styles.picture}
+          />
+          <Text>{item.price}</Text>
+          </TouchableOpacity>
+          </View>
+  );
+ 
+  _renderPlaceholder = i => <View style={styles.item} key={i} />;
+
+
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -90,8 +137,25 @@ class Shop extends Component {
           </View>
           <Text>SHOP</Text>
         </View>
+
+
+        <View style={styles.shopZone}>
+        <Grid
+        style={styles.list}
+        renderItem={this._renderItem}
+        renderPlaceholder={this._renderPlaceholder}
+        data={falseData}
+        numColumns={4}
+      />
+        </View>
       </SafeAreaView>
     );
   }
 }
 export default Shop;
+
+const falseData = [
+  {price:100,img:"foto0.png"},
+  {price:120,img: "foto1.png"},
+  {price:130,img:"foto2.png"},
+  {price:1000,img:"foto3.png"}]
