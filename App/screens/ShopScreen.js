@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   
 });
 
-const initialState = { hasPict: false };
+const initialState = { hasPict: false , avatares:[]};
 class Shop extends Component {
   constructor() {
     super();
@@ -83,13 +83,12 @@ class Shop extends Component {
   componentDidMount(){
     this.loadData();
   }
-  loadData = () => {
+
+  getMonedas(){
     this.setState({ loading: true });
     const onSuccess = ({ data }) => {
       console.log("Nos devuelve las peticiones: " + JSON.stringify(data));
-      this.setState({
-        data: data,
-      });
+     
       this.setState({
         monedas: data.monedas,
       });
@@ -101,6 +100,35 @@ class Shop extends Component {
     };
     this.setState({ loading: true });
     APIKit.get(URI.viewProfile).then(onSuccess).catch(onFailure);
+    
+  }
+
+  getAvatares(){
+    this.setState({
+      avatares: falseData,
+    });
+    const onSuccess = ({ data }) => {
+     
+     
+      
+      this.setState({ loading: false });
+    };
+    const onFailure = (error) => {
+      console.log(error && error.response);
+      this.setState({ errors: error.response.data, loading: false });
+    };
+    //this.setState({ loading: true });
+   // APIKit.get(URI.viewProfile).then(onSuccess).catch(onFailure);
+  }
+
+  loadData = () => {
+   
+    this.getMonedas()
+    this.getAvatares()
+
+
+
+
   };
   state = {};
 
@@ -144,7 +172,7 @@ class Shop extends Component {
         style={styles.list}
         renderItem={this._renderItem}
         renderPlaceholder={this._renderPlaceholder}
-        data={falseData}
+        data={this.state.avatares}
         numColumns={4}
       />
         </View>
