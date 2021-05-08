@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   Image,
+  Dimensions,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import URI from "../constants/apiUris";
@@ -13,6 +14,7 @@ import APIKit from "../util/APIKit";
 import Grid from "react-native-grid-component";
 import globalStyles from "../constants/styles";
 import Colors from "../constants/colors";
+const screen = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   containerCoinsShop: {
@@ -49,19 +51,33 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
   },
   list: {
+    top: "1.5%",
     width: 600,
     height: 120,
   },
   item: {
     width: 100,
     height: 100,
-    margin: 10,
+    margin: 8,
     alignItems: "center",
     justifyContent: "center",
   },
   shopZone: {
     //width:500,
-
+    borderRadius: 20,
+    marginLeft: 100,
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  back: {
+    position: "absolute",
+    right: "25%",
+    width: screen.width * 0.8,
+    height: screen.height * 0.8,
+    borderRadius: 20,
+    top: "3%",
+    backgroundColor: "white",
     marginLeft: 100,
     alignItems: "center",
     alignContent: "center",
@@ -71,7 +87,6 @@ const styles = StyleSheet.create({
     height: 60,
     width: 60,
   },
-
   shopStyle: {
     color: "white",
     paddingTop: 2,
@@ -80,6 +95,18 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
     fontWeight: "bold",
     fontSize: 18,
+  },
+  price: {
+    fontWeight: "bold",
+  },
+  round: {
+    top: "5%",
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: "black",
+    flexDirection: "row",
+    justifyContent: "center",
+    backgroundColor: "#e5e5e5",
   },
 });
 
@@ -142,7 +169,9 @@ class Shop extends Component {
           }}
           style={styles.picture}
         />
-        <Text>{item.price}</Text>
+        <View style={styles.round}>
+          <Text style={styles.price}>{item.price}</Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -166,6 +195,7 @@ class Shop extends Component {
         </View>
 
         <View style={styles.shopZone}>
+          <View style={styles.back} />
           <Grid
             style={styles.list}
             renderItem={this._renderItem}
