@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     height: 7,
   },
+  separatorThin: {
+    height: 4,
+  },
   picture: { width: 50, height: 50 },
 });
 
@@ -160,3 +163,4 @@ export const InviteFriendItem = ({ name, onPress, picture }) => {
 };
 
 export const RowSeparator = () => <View style={styles.separator} />;
+export const RowSeparatorThin = () => <View style={styles.separatorThin} />;
