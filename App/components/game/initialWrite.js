@@ -15,9 +15,8 @@ import APIKit from "../../util/APIKit";
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    justifyContent: "center",
     flexDirection: "column",
-    backgroundColor: "red",
+    backgroundColor: Colors.background,
     width: "75%",
     height: "100%",
   },
@@ -25,11 +24,32 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
   },
   input: {
-    width: "50%",
+    top: "23%",
+    width: "70%",
     color: Colors.grey,
     backgroundColor: Colors.white,
     paddingLeft: 8,
     borderRadius: 9,
+  },
+  button: {
+    top: "27%",
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    backgroundColor: Colors.cyan,
+    height: "13%",
+    width: "22%",
+  },
+  textButton: {
+    fontSize: 18,
+    color: Colors.white,
+    fontWeight: "bold",
+  },
+  textSay: {
+    top: "20%",
+    fontSize: 16,
+    color: Colors.white,
+    fontWeight: "bold",
   },
 });
 
@@ -51,7 +71,6 @@ class IniWrite extends Component {
     const onSuccess = ({ data }) => {
       console.log("OK :" + data);
       this.setState({ isLoading: false, isAuthorized: true });
-      
     };
 
     const onFailure = (error) => {
@@ -74,17 +93,20 @@ class IniWrite extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Dinos qué quieres que dibujen tus amigos.</Text>
+        <Text style={styles.textSay}>
+          Dinos qué quieres que dibujen tus amigos.
+        </Text>
         <TextInput
           style={styles.input}
           value={this.state.respuestaAct}
           onChangeText={this.onAnswerChange}
+          placeholder="Peepo"
         />
         <TouchableOpacity
           style={styles.button}
           onPress={this.onPressSend.bind(this)}
         >
-          <Text>Send</Text>
+          <Text style={styles.textButton}>Send</Text>
         </TouchableOpacity>
       </View>
     );

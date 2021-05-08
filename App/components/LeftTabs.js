@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, SafeAreaView, View } from "react-native";
 import {
   AntDesign,
-  FontAwesome5,
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
@@ -22,17 +21,34 @@ class Tab extends React.PureComponent {
       backgroundColor: "#EEE",
       padding: 12,
     };
-    if (tabName == "Friends" || tabName == "Game") {
+    if (tabName == "Friends") {
       return (
         <TouchableOpacity style={containerStyles} onPress={onPress}>
-          <FontAwesome5
+          <MaterialIcons
             style={styles.left}
             name={tabIcon}
-            size={25}
+            size={30}
             color="blue"
           />
           <MaterialIcons
             style={styles.lessleft}
+            name="arrow-left"
+            size={50}
+            color={color}
+          />
+        </TouchableOpacity>
+      );
+    } else if (tabName == "Game") {
+      return (
+        <TouchableOpacity style={containerStyles} onPress={onPress}>
+          <MaterialCommunityIcons
+            style={styles.left}
+            name={tabIcon}
+            size={29}
+            color="blue"
+          />
+          <MaterialIcons
+            style={{ left: "29%" }}
             name="arrow-left"
             size={50}
             color={color}

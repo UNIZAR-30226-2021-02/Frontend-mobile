@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
-
+import HomeScreen from "../screens/HomeScreen";
 
 import ProfileScreen from "../screens/ProfileScreen";
 import ShopScreen from "../screens/ShopScreen";
@@ -52,7 +52,7 @@ class TabBar extends React.PureComponent {
     const tabs = [
       {
         tabName: "Game",
-        tabIcon: "gamepad",
+        tabIcon: "gamepad-variant-outline",
       },
       {
         tabName: "Profile",
@@ -64,7 +64,7 @@ class TabBar extends React.PureComponent {
       },
       {
         tabName: "Friends",
-        tabIcon: "user-friends",
+        tabIcon: "people-outline",
       },
     ];
     return (

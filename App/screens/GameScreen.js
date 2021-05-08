@@ -19,7 +19,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import globalStyles from "../constants/styles";
 import ListaInvitaciones from "../components/ListaInvitaciones";
 
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "green",
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   listaPartidas: {
-    top: "12%",
+    top: "20%",
   },
   toggle: {
     top: "5%",
@@ -100,14 +99,12 @@ class Games extends Component {
       ToastAndroid.show("Game " + newGame + " created!", ToastAndroid.SHORT);
       this.setState({ isLoading: false });
       setGameId(data.id);
-      this.props.navigation.navigate("Lobby")
-
+      this.props.navigation.navigate("Lobby");
     };
 
     const onFailure = (error) => {
       console.log(error && error.response);
       this.setState({ isLoading: false });
-
     };
 
     this.setState({ isLoading: true });
