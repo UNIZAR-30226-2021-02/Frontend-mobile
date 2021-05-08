@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-
 import { captureRef as takeSnapshotAsync } from "react-native-view-shot";
 
 import URI from "../../constants/apiUris";
