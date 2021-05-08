@@ -130,7 +130,16 @@ class Votacion extends Component {
           }}
           style={styles.picture}
         />
-        <Text style={styles.nombre}>{item.nombre}</Text>
+        <View
+          style={{
+            top: "2%",
+            right: "3%",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={styles.nombre}>{item.nombre}</Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -147,6 +156,7 @@ class Votacion extends Component {
           <Text style={styles.votaAl}>{"Vota al " + this.state.voteTitle}</Text>
           <Iconos name={this.state.abc} />
         </View>
+        <View style={styles.back} />
         <Grid
           style={styles.list}
           keyExtractor={(item) => String(item)} //TODO
@@ -168,18 +178,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  list: {
+  back: {
+    position: "absolute",
     borderRadius: 20,
     backgroundColor: "white",
     width: screen.width * 0.8,
-    height: "80%",
+    height: screen.height * 0.63,
+    bottom: screen.height * 0.61,
+  },
+  list: {
+    borderRadius: 20,
+    width: screen.width * 0.8,
   },
   container: {
     alignItems: "center",
     justifyContent: "center",
     right: "9.9%",
   },
-  picture: { width: 40, height: 40 },
+  picture: { width: 48, height: 48 },
   votaAl: {
     fontWeight: "bold",
     color: "white",

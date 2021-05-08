@@ -51,7 +51,7 @@ export const ImgHiloItem = ({ name, img, answer }) => {
 
 const styles = StyleSheet.create({
   row: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 21,
     justifyContent: "flex-start",
     alignItems: "center",
     flexDirection: "row",
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   rowtext: {
     backgroundColor: "white",
     paddingHorizontal: 10,
-    paddingRight: 20,
+    paddingRight: 22,
     paddingVertical: 16,
     justifyContent: "flex-start",
     alignItems: "center",
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     bottom: 2,
   },
   contenido: {
-    left: 10,
+    left: 12,
     fontSize: 15,
   },
 });

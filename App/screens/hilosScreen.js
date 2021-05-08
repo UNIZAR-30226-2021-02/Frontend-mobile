@@ -73,31 +73,38 @@ class HilosScreen extends Component {
     return (
       <View style={styles.gamezone}>
         <View style={styles.hilos}>
-          <TouchableOpacity
-            style={styles.buttonleft}
-            title={"Anterior hilo"}
-            onPress={() => this.anteriorHilo()}
+          <View
+            style={{
+              top: "45%",
+              position: "absolute",
+              width: "100%",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
           >
-            <AntDesign name="arrowleft" size={24} color="white" />
-            <Text style={styles.textButton}>
-              Anterior{"\n"}
-              {"\t"} Hilo
-            </Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.buttonleft}
+              title={"Anterior hilo"}
+              onPress={() => this.anteriorHilo()}
+            >
+              <AntDesign name="arrowleft" size={24} color="white" />
+              <Text style={styles.textButton}>
+                Anterior{"\n"}
+                {"\t"} Hilo
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.buttonright}
+              onPress={() => this.siguienteHilo()}
+            >
+              <Text style={styles.textButtonR}>{this.state.righBtn}</Text>
+              <AntDesign name="arrowright" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
           <Hilo
             hilo={this.state.hiloAhora.respuestas_}
             jugadorInicial={this.state.hiloAhora.jugadorInicial_}
           />
-          <TouchableOpacity
-            style={styles.buttonright}
-            onPress={() => this.siguienteHilo()}
-          >
-            <Text style={styles.textButtonR}>
-              Siguiente{"\n"}
-              {"\t "} Hilo
-            </Text>
-            <AntDesign name="arrowright" size={24} color="white" />
-          </TouchableOpacity>
         </View>
       </View>
     );
@@ -163,7 +170,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "baseline",
-    left: "7%",
+    left: "14%",
   },
   votezone: {
     height: 500,
@@ -172,13 +179,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonleft: {
-    right: "5%",
+    left: "35%",
+    bottom: "2%",
     flexDirection: "row",
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "space-evenly",
     backgroundColor: Colors.cyan,
-    height: "10%",
+    height: "62%",
     width: "13%",
   },
   buttonright: {
@@ -188,8 +196,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
     backgroundColor: Colors.cyan,
-    height: "10%",
-    width: "15%",
+    height: "50%",
+    width: "20%",
   },
   textButton: {
     paddingRight: "8%",
