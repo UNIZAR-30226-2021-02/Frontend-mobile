@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
+  Button,
 } from "react-native";
 import { RowSeparator } from "../RowItem";
 import {
@@ -17,7 +18,7 @@ import {
 import globalStyles from "../../constants/styles";
 import Grid from "react-native-grid-component";
 import URI from "../../constants/apiUris";
-import APIKit from "../../util/APIKit";
+import APIKit, { setVoteName } from "../../util/APIKit";
 const screen = Dimensions.get("window");
 
 const Iconos = (props) => {
@@ -81,9 +82,11 @@ class Votacion extends Component {
   }
 
   mandarVoto(usr, kind) {
-    const payload = JSON.stringify({ usr: usr });
+    const post = "";
+    setVoteName(usr);
 
     const onSuccess = ({ data }) => {
+      console.log("Hola");
       this.setState({ players: data });
     };
 
@@ -91,7 +94,21 @@ class Votacion extends Component {
       console.log("Ha falladooooooooo");
       console.log(error);
     };
-    //APIKit.post(kind, payload).then(onSuccess).catch(onFailure);
+
+    APIKit.post(kind, post).then(onSuccess).catch(onFailure);
+  }
+
+  resetVoto() {
+    const onSuccess = ({ data }) => {
+      console.log("Hola" + data);
+    };
+
+    const onFailure = (error) => {
+      console.log("Ha falladooooooooo");
+      console.log(error);
+    };
+
+    APIKit.get(URI.resetVotos).then(onSuccess).catch(onFailure);
   }
 
   votar(usr) {
@@ -146,7 +163,7 @@ class Votacion extends Component {
 
   renderPlaceholder = (i) => (
     <View style={({ backgroundColor: "red" }, styles.item)} key={i}>
-      <Text>María</Text>{" "}
+      <Text>María</Text>
     </View>
   );
   render() {
@@ -155,6 +172,7 @@ class Votacion extends Component {
         <View style={styles.conImg}>
           <Text style={styles.votaAl}>{"Vota al " + this.state.voteTitle}</Text>
           <Iconos name={this.state.abc} />
+          <Button title="OWO" onPress={() => this.resetVoto()} />
         </View>
         <View style={styles.back} />
         <Grid

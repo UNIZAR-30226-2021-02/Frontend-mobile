@@ -32,4 +32,5 @@ export default {
   voteListo: "votarListo",
   voteGracioso: "votarGracioso",
   verResultados: "puntosPartida",
+  resetVotos: "resetVotos",
 };

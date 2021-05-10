@@ -26,4 +26,8 @@ export const setGameId = (name) => {
   APIKit.defaults.headers.common["idPartida"] = name;
 };
 
+export const setVoteName = (name) => {
+  APIKit.defaults.headers.common["votado"] = name;
+};
+
 export default APIKit;
