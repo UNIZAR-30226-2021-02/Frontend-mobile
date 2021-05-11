@@ -14,6 +14,7 @@ import Hilo from "../components/hilos/Hilo";
 import URI from "../constants/apiUris";
 import Votacion from "../components/votaciones/votacion";
 import Colors from "../constants/colors";
+import Puntuaciones from "../components/puntuaciones/Puntuaciones";
 
 class ScoreScreen extends Component {
   constructor() {
@@ -63,7 +64,7 @@ class ScoreScreen extends Component {
 
   renderWait() {
     return (
-      <View style={{ top: "20%" }}>
+      <View style={{ top: "20%", right: "8.5%" }}>
         <Text style={styles.lobbyText}>
           Espera a que los demás jugadores voten
         </Text>
@@ -74,7 +75,8 @@ class ScoreScreen extends Component {
   renderFin() {
     return (
       <View style={styles.containerLR}>
-        <View>
+        <Puntuaciones />
+        <View style={{ left: "50%" }}>
           <View>
             <FontAwesome5 name="coins" size={18} color="white" />
             <Text>{this.state.monedas}</Text>
@@ -102,7 +104,7 @@ class ScoreScreen extends Component {
             Turn from:{"\n"} {this.state.partida}
           </Text>
         </View>
-        {this.state.acabado ? this.renderWait() : this.renderFin()}
+        {this.state.acabado ? this.renderFin() : this.renderWait()}
       </View>
     );
   }

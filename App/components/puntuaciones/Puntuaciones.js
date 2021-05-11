@@ -5,6 +5,7 @@ import { RowSeparatorThin } from "../RowItem";
 import globalStyles from "../../constants/styles";
 import Colors from "../../constants/colors";
 import URI from "../../constants/apiUris";
+import APIKit from "../../util/APIKit";
 
 const initState = {};
 
@@ -14,11 +15,15 @@ class Puntuaciones extends Component {
     this.state = initState;
   }
 
+  componentDidMount() {
+    this.loadData();
+  }
+
   renderItem = ({ item }) => {
     return (
       <PuntuacionItem
-        name={item.autor_.nombre}
-        img={item.autor_.fotPerf}
+        name={item.idUsuario_}
+        img={"foto0.png"}
         pD={item.pDibujo_}
         pG={item.pGracioso_}
         pL={item.pListo_}
@@ -48,9 +53,9 @@ class Puntuaciones extends Component {
         <FlatList
           data={this.state.data}
           renderItem={this.renderItem}
-          keyExtractor={(item) => item.id_.toString()} //TODO
+          keyExtractor={(item) => item} //TODO
           ItemSeparatorComponent={RowSeparatorThin}
-          ListEmptyComponent={<Text style={globalStyles.owoFont}>xd</Text>}
+          ListEmptyComponent={<Text style={globalStyles.owoFont}>No hay</Text>}
           ListHeaderComponent={
             <Text style={globalStyles.papuFont}>Jugadores: </Text>
           }
@@ -66,6 +71,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column",
     backgroundColor: Colors.background,
+    left: "10%",
+    bottom: "3%",
   },
 });
 

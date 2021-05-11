@@ -20,23 +20,39 @@ export const PuntuacionItem = ({ name, img, pD, pL, pG }) => {
         />
         <Text style={styles.nombre}>{name}</Text>
       </View>
-      <FontAwesome name="pencil" size={18} color="black" />
-      <Text>{pD}</Text>
-      <MaterialCommunityIcons name="brain" size={18} color="black" />
-      <Text>{pL}</Text>
-      <Ionicons name="md-happy-outline" size={18} color="black" />
-      <Text>{pG}</Text>
+      <FontAwesome name="pencil" size={20} color="black" />
+      <Text style={{ left: 1, fontSize: 15, fontWeight: "bold" }}>{pD}</Text>
+      <MaterialCommunityIcons
+        style={{ left: 4 }}
+        name="brain"
+        size={20}
+        color="black"
+      />
+      <Text style={{ left: 4, fontSize: 15, fontWeight: "bold" }}>{pL}</Text>
+      <Ionicons
+        style={{ left: 6 }}
+        name="md-happy-outline"
+        size={20}
+        color="black"
+      />
+      <Text
+        style={{ left: 6, fontSize: 15, fontWeight: "bold", paddingRight: 6 }}
+      >
+        {pG}
+      </Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   rowImg: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 1,
     justifyContent: "flex-start",
     alignItems: "center",
     flexDirection: "row",
+    backgroundColor: "white",
+    borderRadius: 12,
   },
   picture: {
     top: 2,
@@ -46,9 +62,8 @@ const styles = StyleSheet.create({
   },
   nombreCara: {
     backgroundColor: "white",
-    padding: 8,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
+    padding: 6,
+    right: "4.5%",
   },
   nombre: {
     fontWeight: "bold",
