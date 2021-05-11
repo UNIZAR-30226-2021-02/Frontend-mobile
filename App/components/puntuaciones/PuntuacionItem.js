@@ -20,11 +20,11 @@ export const PuntuacionItem = ({ name, img, pD, pL, pG }) => {
         />
         <Text style={styles.nombre}>{name}</Text>
       </View>
-      <FontAwesome name="pencil" size={18} color="white" />
+      <FontAwesome name="pencil" size={18} color="black" />
       <Text>{pD}</Text>
-      <MaterialCommunityIcons name="brain" size={18} color="white" />
+      <MaterialCommunityIcons name="brain" size={18} color="black" />
       <Text>{pL}</Text>
-      <Ionicons name="md-happy-outline" size={18} color="white" />
+      <Ionicons name="md-happy-outline" size={18} color="black" />
       <Text>{pG}</Text>
     </View>
   );
