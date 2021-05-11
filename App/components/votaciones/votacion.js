@@ -82,7 +82,6 @@ class Votacion extends Component {
   }
 
   mandarVoto(usr, kind) {
-    const post = "";
     setVoteName(usr);
 
     const onSuccess = ({ data }) => {
@@ -95,7 +94,7 @@ class Votacion extends Component {
       console.log(error);
     };
 
-    APIKit.post(kind, post).then(onSuccess).catch(onFailure);
+    APIKit.get(kind).then(onSuccess).catch(onFailure);
   }
 
   resetVoto() {
