@@ -15,6 +15,7 @@ import TurnScreen from "./screens/TurnScreen";
 import LeftTabs from "./components/LeftTabs";
 import TabBar from "./components/TabBar";
 import LoadingScreen from "./screens/LoadingScreen";
+import ScoreScreen from "./screens/ScoreScreen";
 import hilosScreen from "./screens/HilosScreen";
 export default () => <AppNavigator />;
 
@@ -28,6 +29,7 @@ const appSwitchNavigator = createSwitchNavigator({
   Turn: TurnScreen,
   GameScreen: GameScreen,
   Hilos: hilosScreen,
+  Score: ScoreScreen,
 });
 
 const AppNavigator = createAppContainer(appSwitchNavigator);

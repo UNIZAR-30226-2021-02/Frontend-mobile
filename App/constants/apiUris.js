@@ -32,5 +32,6 @@ export default {
   voteListo: "votarListo",
   voteGracioso: "votarGracioso",
   verResultados: "puntosPartida",
+  verPuntuacion: "puntosJugador",
   resetVotos: "resetVotos",
 };
