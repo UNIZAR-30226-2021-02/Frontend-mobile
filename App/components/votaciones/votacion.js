@@ -85,8 +85,7 @@ class Votacion extends Component {
     setVoteName(usr);
 
     const onSuccess = ({ data }) => {
-      console.log("Hola");
-      this.setState({ players: data });
+      console.log("Hola " + data);
     };
 
     const onFailure = (error) => {

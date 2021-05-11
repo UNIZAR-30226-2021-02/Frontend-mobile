@@ -23,6 +23,7 @@ export const setInviteName = (name) => {
 };
 
 export const setGameId = (name) => {
+  console.log("AAAAA" + name);
   APIKit.defaults.headers.common["idPartida"] = name;
 };
 
