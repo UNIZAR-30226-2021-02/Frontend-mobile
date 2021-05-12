@@ -207,6 +207,8 @@ class Profile extends Component {
         pGracioso: data.pGracioso,
         nAmigos: data.nAmigos,
       });
+
+      console.log(this.state.fotPerf)
       this.setState({ loading: false });
     };
     const onFailure = (error) => {

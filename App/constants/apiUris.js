@@ -1,4 +1,4 @@
-const host = "35.246.75.160:433";
+const host = "35.246.75.160:443";
 
 export default {
   login: "login",
