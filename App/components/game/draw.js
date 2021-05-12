@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert,
   Dimensions,
+  ToastAndroid,
 } from "react-native";
 import { Draw, DrawRef } from "@benjeau/react-native-draw";
 import { captureRef as takeSnapshotAsync } from "react-native-view-shot";
@@ -46,6 +47,7 @@ class Drawer extends Component {
       .then((img) => {
         const onSuccess = ({ data }) => {
           console.log("OK :" + data);
+          ToastAndroid.show("Dibujo enviado", ToastAndroid.SHORT);
           this.props.reload();
         };
         const onFailure = (error) => {
