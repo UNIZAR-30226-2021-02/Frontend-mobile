@@ -171,7 +171,6 @@ class Votacion extends Component {
         <View style={styles.conImg}>
           <Text style={styles.votaAl}>{"Vota al " + this.state.voteTitle}</Text>
           <Iconos name={this.state.abc} />
-          <Button title="OWO" onPress={() => this.resetVoto()} />
         </View>
         <View style={styles.back} />
         <Grid
