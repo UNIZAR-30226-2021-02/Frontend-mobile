@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   picture: {
-    backgroundColor: "yellow",
+    backgroundColor: "white",
     borderRadius: 10,
     width: screen.width * 0.44,
     height: screen.width * 0.44,

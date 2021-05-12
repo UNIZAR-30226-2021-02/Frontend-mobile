@@ -9,6 +9,7 @@ import {
   View,
   ToastAndroid,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GameItem } from "../components/RowItem";
 import Colors from "../constants/colors";
 import { AntDesign, Entypo } from "@expo/vector-icons";
@@ -99,6 +100,7 @@ class Games extends Component {
       ToastAndroid.show("Game " + newGame + " created!", ToastAndroid.SHORT);
       this.setState({ isLoading: false });
       setGameId(data.id);
+      AsyncStorage.setItem("@partidaName", newGame);
       this.props.navigation.navigate("Lobby");
     };
 

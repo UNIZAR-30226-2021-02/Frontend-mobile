@@ -17,7 +17,6 @@ import Colors from "../constants/colors";
 import APIKit from "../util/APIKit";
 import globalStyles from "../constants/styles";
 
-
 const rnk = "Ranking";
 const add = "Add friends";
 const initialState = {
@@ -100,7 +99,7 @@ class Friends extends Component {
         <View style={styles.searchBar}>
           <TextInput
             style={styles.textinput}
-            placeholder=" Friend to search"
+            placeholder="Friend to search"
             onChangeText={this.onUserSearchChange}
           />
           <TouchableOpacity
@@ -148,6 +147,7 @@ const styles = StyleSheet.create({
     width: "85%",
   },
   textinput: {
+    paddingLeft: 6,
     width: "55%",
     color: Colors.grey,
     backgroundColor: Colors.white,

@@ -12,27 +12,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import URI from "../../constants/apiUris";
 import APIKit from "../../util/APIKit";
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-    backgroundColor: "red",
-    width: "75%",
-    height: "100%",
-  },
-  button: {
-    backgroundColor: "blue",
-  },
-  input: {
-    width: "50%",
-    color: Colors.grey,
-    backgroundColor: Colors.white,
-    paddingLeft: 8,
-    borderRadius: 9,
-  },
-});
-
 const initState = { respuestaAct: "" };
 class Wait extends Component {
   constructor() {
@@ -73,10 +52,27 @@ class Wait extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Espera</Text>
+        <Text style={styles.texto}>
+          Esperando a que los demás jugadores acaben...
+        </Text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.background,
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+  texto: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    bottom: "19%",
+  },
+});
 
 export default Wait;
