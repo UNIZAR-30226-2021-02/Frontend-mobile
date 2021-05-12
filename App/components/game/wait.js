@@ -61,7 +61,7 @@ class Wait extends Component {
           style={styles.button}
           onPress={() => {
             this.props.reload();
-            ToastAndroid.show(" Refrescando...", ToastAndroid.SHORT);
+            ToastAndroid.show(" Refrescando... ", ToastAndroid.SHORT);
           }}
         >
           <Ionicons

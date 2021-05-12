@@ -113,7 +113,7 @@ class HilosScreen extends Component {
   renderVotacion() {
     return (
       <View style={styles.votezone}>
-        <Votacion />
+        <Votacion terminar={() => this.props.navigation.navigate("Score")} />
       </View>
     );
   }

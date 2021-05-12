@@ -126,11 +126,12 @@ class Votacion extends Component {
       case 2: //más divertido
         console.log("diver " + usr);
         this.mandarVoto(usr, URI.voteGracioso);
+        this.props.terminar();
         //ir a resultados
         break;
 
       default:
-        console.log("no debo estar aki");
+        this.props.terminar();
         break;
     }
     this.mode++;
