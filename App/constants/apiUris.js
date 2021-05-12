@@ -27,4 +27,11 @@ export default {
   sendImg: "addImage",
   sendText: "addText",
   getTurn: "returnResponse",
+  getHilos: "returnAllResponses",
+  voteDibujante: "votarDibujo",
+  voteListo: "votarListo",
+  voteGracioso: "votarGracioso",
+  verResultados: "puntosPartida",
+  verPuntuacion: "puntosJugador",
+  resetVotos: "resetVotos",
 };

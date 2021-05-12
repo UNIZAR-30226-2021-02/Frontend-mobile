@@ -38,7 +38,7 @@ class ListaPartidas extends Component {
     this.setState({ loading: true });
 
     const onSuccess = ({ data }) => {
-    //  console.log("Nos devuelve las peticiones: " + JSON.stringify(data));
+      //  console.log("Nos devuelve las peticiones: " + JSON.stringify(data));
       this.setState({
         data: data,
       });
@@ -58,7 +58,7 @@ class ListaPartidas extends Component {
     return (
       <View>
         <FlatList
-          style={{height:"60%"}}
+          style={{ height: "60%" }}
           data={this.state.data}
           renderItem={this.renderItem}
           keyExtractor={(item) => String(item.id)} //TODO
@@ -69,7 +69,6 @@ class ListaPartidas extends Component {
           onRefresh={this.loadData}
           refreshing={this.state.loading}
           ItemSeparatorComponent={RowSeparator}
-          
         />
       </View>
     );

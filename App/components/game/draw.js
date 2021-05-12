@@ -19,7 +19,7 @@ const screen = Dimensions.get("window");
 const initialState = {
   color: "black",
   tama: 4,
-  hidden: false,
+  hidden: true,
 };
 let drawRef = useRef < DrawRef > null;
 const bn = [["black", "white"]];

@@ -66,7 +66,7 @@ class IniWrite extends Component {
 
   onPressSend() {
     const { respuestaAct } = this.state;
-    const payload = JSON.stringify({ contenido: respuestaAct });
+    const payload = respuestaAct;
     console.log(payload);
     const onSuccess = ({ data }) => {
       console.log("OK :" + data);

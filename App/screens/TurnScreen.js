@@ -57,6 +57,10 @@ class TurnScreen extends Component {
         //Esperar siguiente turno
         console.log("partida acabada");
         this.setState({ mode: 4 });
+      } else if (data.id_ == -4) {
+        //Esperar siguiente turno
+        console.log("votaciones acabadas");
+        this.setState({ mode: 5 });
       } else {
         console.log("es dibujo " + data.esDibujo);
         if (data.esDibujo) {
@@ -135,7 +139,10 @@ class TurnScreen extends Component {
         );
         break;
       case 4:
-        return <Text>Mostrar historias y votar</Text>;
+        this.props.navigation.navigate("Hilos");
+        break;
+      case 5:
+        this.props.navigation.navigate("Score");
         break;
       default:
         return <Text>k verga hago aki</Text>;
@@ -176,7 +183,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingBottom: "2%",
   },
-  return: {},
   lobbyText: {
     fontSize: 20,
     fontWeight: "bold",
