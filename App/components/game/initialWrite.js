@@ -72,6 +72,7 @@ class IniWrite extends Component {
     const onSuccess = ({ data }) => {
       console.log("OK :" + data);
       ToastAndroid.show("Enviado: " + respuestaAct, ToastAndroid.SHORT);
+      this.props.reload();
       this.setState({ isLoading: false, isAuthorized: true });
     };
 

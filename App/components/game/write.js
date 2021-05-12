@@ -68,6 +68,7 @@ class Write extends Component {
     console.log(payload);
     const onSuccess = ({ data }) => {
       console.log("OK :" + data);
+      this.props.reload();
       this.setState({ isLoading: false, isAuthorized: true });
     };
 

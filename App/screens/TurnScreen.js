@@ -103,15 +103,15 @@ class TurnScreen extends Component {
     console.log(this.state.mode);
     switch (this.state.mode) {
       case 0:
-        return <IniWrite />;
+        return <IniWrite reload={() => this.checkTurn()} />;
         break;
       case 1:
-        return <Wait />;
+        return <Wait reload={() => this.checkTurn()} />;
         break;
       case 2:
         return (
           <View style={styles.containerLR}>
-            <Write />
+            <Write reload={() => this.checkTurn()} />
             <Image
               source={{
                 uri: this.state.imagen,
@@ -134,7 +134,7 @@ class TurnScreen extends Component {
               <Text style={styles.texto}>Ahora dibuja:</Text>
               <Text style={styles.texto}>{this.state.queDibujo}</Text>
             </View>
-            <Draw />
+            <Draw reload={() => this.checkTurn()} />
           </View>
         );
         break;

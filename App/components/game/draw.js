@@ -46,6 +46,7 @@ class Drawer extends Component {
       .then((img) => {
         const onSuccess = ({ data }) => {
           console.log("OK :" + data);
+          this.props.reload();
         };
         const onFailure = (error) => {
           console.log(error.message);
