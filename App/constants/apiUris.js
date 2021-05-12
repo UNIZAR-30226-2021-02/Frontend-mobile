@@ -1,4 +1,4 @@
-const ip = "10.0.2.2";
+const host = "35.246.75.160:433";
 
 export default {
   login: "login",
@@ -22,8 +22,8 @@ export default {
   startGame: "startGame",
   addRespuesta: "addRespuesta",
   all: "all",
-  img: "http://10.0.2.2:8080/api/returnImageProfile/",
-  turnImg: "http://10.0.2.2:8080/api/returnImageResponse/",
+  img: "http://"+host+"/api/returnImageProfile/",
+  turnImg: "http://"+host+"/api/returnImageResponse/",
   sendImg: "addImage",
   sendText: "addText",
   getTurn: "returnResponse",
