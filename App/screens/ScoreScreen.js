@@ -6,8 +6,14 @@ import {
   Text,
   Button,
   TouchableOpacity,
+  ToastAndroid,
 } from "react-native";
-import { FontAwesome5, AntDesign, Fontisto } from "@expo/vector-icons";
+import {
+  FontAwesome5,
+  AntDesign,
+  Fontisto,
+  Ionicons,
+} from "@expo/vector-icons";
 import APIKit, { setClientToken, setClientMail } from "../util/APIKit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Hilo from "../components/hilos/Hilo";
@@ -34,7 +40,6 @@ class ScoreScreen extends Component {
   loadData = async () => {
     const onSuccess = ({ data }) => {
       console.log(data);
-      console.log(data.length);
       this.setState({ acabado: true });
       this.recompensas();
     };
@@ -50,8 +55,8 @@ class ScoreScreen extends Component {
   recompensas = async () => {
     const onSuccess = ({ data }) => {
       console.log(data);
-      //TODO
-      this.setState({ estrellas: data.estrellas, monedas: data.monedas });
+      console.log(data[0]);
+      this.setState({ estrellas: data[0], monedas: data[1] });
     };
 
     const onFailure = (error) => {
@@ -64,10 +69,23 @@ class ScoreScreen extends Component {
 
   renderWait() {
     return (
-      <View style={{ top: "20%", right: "8.5%" }}>
+      <View style={{ top: "15%", right: "9%" }}>
         <Text style={styles.lobbyText}>
           Espera a que los demás jugadores voten
         </Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.loadData();
+            ToastAndroid.show(" Refrescando... ", ToastAndroid.SHORT);
+          }}
+        >
+          <Ionicons
+            name="refresh-circle-outline"
+            size={60}
+            color={Colors.cyan}
+          />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -76,15 +94,35 @@ class ScoreScreen extends Component {
     return (
       <View style={styles.containerLR}>
         <Puntuaciones />
-        <View style={{ left: "50%" }}>
-          <View>
-            <FontAwesome5 name="coins" size={18} color="white" />
-            <Text>{this.state.monedas}</Text>
+        <View style={{ left: "68%" }}>
+          <View style={styles.containerAcabada}>
+            <Text style={styles.textAcabada}>Partida acabada</Text>
           </View>
-          <View>
-            <AntDesign name="staro" size={23} color="white" />
-            <Text>{this.state.estrellas}</Text>
+          <View style={{ flexDirection: "row", left: "4%", top: "15%" }}>
+            <FontAwesome5
+              style={{ paddingRight: 4 }}
+              name="coins"
+              size={30}
+              color="white"
+            />
+            <Text style={styles.rewardText}>{this.state.monedas}</Text>
           </View>
+          <View style={{ flexDirection: "row", left: "4%", top: "17%" }}>
+            <AntDesign name="staro" size={33} color="white" />
+            <Text style={styles.rewardText}>{this.state.estrellas}</Text>
+          </View>
+          <Text
+            style={{
+              bottom: "38%",
+              alignSelf: "center",
+              right: "32%",
+              color: "white",
+              fontSize: 15,
+            }}
+          >
+            Recibirás las siguientes recompensas {"\n\t\t\t"}cuando todos los
+            jugadores {"\n\t\t "} hayan llegado a esta pantalla:
+          </Text>
         </View>
       </View>
     );
@@ -128,9 +166,36 @@ const styles = StyleSheet.create({
     left: "30%",
     color: "white",
   },
+  rewardText: {
+    fontSize: 22,
+    fontWeight: "bold",
+    left: "30%",
+    color: "white",
+  },
   containerLR: {
     flex: 1,
     flexDirection: "row",
+    left: "8%",
+  },
+  button: {
+    top: "10%",
+    left: "55%",
+  },
+  containerAcabada: {
+    bottom: "25%",
+    backgroundColor: "grey",
+    right: "27%",
+    width: "90%",
+    alignItems: "center",
+    borderRadius: 10,
+    borderWidth: 2,
+  },
+  textAcabada: {
+    paddingVertical: "4%",
+    paddingHorizontal: "4%",
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "white",
   },
 });
 
