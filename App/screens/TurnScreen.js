@@ -128,7 +128,7 @@ class TurnScreen extends Component {
               style={{
                 flexDirection: "column",
                 right: "6%",
-                top: "16%",
+                top: screen.height * 0.2,
               }}
             >
               <Text style={styles.texto}>Ahora dibuja:</Text>
