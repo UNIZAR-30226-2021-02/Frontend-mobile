@@ -19,7 +19,7 @@ import URI from "../constants/apiUris";
 import { ScrollView } from "react-native-gesture-handler";
 import globalStyles from "../constants/styles";
 import ListaInvitaciones from "../components/ListaInvitaciones";
-
+import {registerForPushNotificationsAsync} from "../util/notifications"
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "green",
@@ -72,6 +72,9 @@ class Games extends Component {
   constructor() {
     super();
     this.state = initialState;
+  }
+  componentDidMount(){
+    registerForPushNotificationsAsync();
   }
 
   onNewGameChange = (newGame) => {
