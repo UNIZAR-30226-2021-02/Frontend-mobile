@@ -14,7 +14,7 @@ import Constants from 'expo-constants';
         alert('Failed to get push token for push notification!');
         return;
       }
-      const token = (await Notifications.Notifications.getDevicePushTokenAsync()).data;
+      const token = (await Notifications.getDevicePushTokenAsync()).data;
       console.log(token);
       this.setState({ expoPushToken: token });
     } else {
