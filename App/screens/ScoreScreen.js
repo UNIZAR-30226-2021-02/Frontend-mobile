@@ -7,6 +7,7 @@ import {
   Button,
   TouchableOpacity,
   ToastAndroid,
+  Dimensions,
 } from "react-native";
 import {
   FontAwesome5,
@@ -21,6 +22,7 @@ import URI from "../constants/apiUris";
 import Votacion from "../components/votaciones/votacion";
 import Colors from "../constants/colors";
 import Puntuaciones from "../components/puntuaciones/Puntuaciones";
+const screen = Dimensions.get("window");
 
 class ScoreScreen extends Component {
   constructor() {
@@ -69,8 +71,14 @@ class ScoreScreen extends Component {
 
   renderWait() {
     return (
-      <View style={{ top: "15%", right: "9%" }}>
-        <Text style={styles.lobbyText}>
+      <View
+        style={{
+          top: "15%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Text style={styles.waitText}>
           Espera a que los demás jugadores voten
         </Text>
         <TouchableOpacity
@@ -94,7 +102,7 @@ class ScoreScreen extends Component {
     return (
       <View style={styles.containerLR}>
         <Puntuaciones />
-        <View style={{ left: "68%" }}>
+        <View style={{ left: screen.width * 0.36 }}>
           <View style={styles.containerAcabada}>
             <Text style={styles.textAcabada}>Partida acabada</Text>
           </View>
@@ -166,6 +174,11 @@ const styles = StyleSheet.create({
     left: "30%",
     color: "white",
   },
+  waitText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+  },
   rewardText: {
     fontSize: 22,
     fontWeight: "bold",
@@ -179,7 +192,6 @@ const styles = StyleSheet.create({
   },
   button: {
     top: "10%",
-    left: "55%",
   },
   containerAcabada: {
     bottom: "25%",
