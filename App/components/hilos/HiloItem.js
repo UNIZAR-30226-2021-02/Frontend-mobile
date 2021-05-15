@@ -89,6 +89,8 @@ const styles = StyleSheet.create({
   imgResponse: {
     height: 200,
     width: 200,
+    backgroundColor: "white",
+    borderRadius: 10,
   },
   nombre: {
     fontWeight: "bold",

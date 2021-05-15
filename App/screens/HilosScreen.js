@@ -24,7 +24,12 @@ class HilosScreen extends Component {
       this.setState({ partida: item });
       console.log("Soy " + this.state.partida);
     });
-    this.state = { hiloAhora: [], righBtn: "Siguiente hilo", hilos: true };
+    this.state = {
+      hiloAhora: [],
+      righBtn: "Siguiente hilo",
+      hilos: true,
+      iniAct: "",
+    };
   }
   componentDidMount() {
     this.loadData();
@@ -36,6 +41,8 @@ class HilosScreen extends Component {
       console.log(data.length);
       this.hilos = data;
       this.setState({ hiloAhora: this.hilos[0] });
+      this.setState({ iniAct: this.state.hiloAhora.jugadorInicial_.nombre });
+      console.log("iniAct " + this.state.iniAct);
     };
 
     const onFailure = (error) => {
@@ -51,7 +58,9 @@ class HilosScreen extends Component {
     if (this.numHilo > 0) {
       this.setState({ righBtn: "Siguiente hilo" });
       this.numHilo--;
-      this.setState({ hiloAhora: this.hilos[this.numHilo] });
+      const hiloAnt = this.hilos[this.numHilo];
+      this.setState({ iniAct: hiloAnt.jugadorInicial_.nombre });
+      this.setState({ hiloAhora: hiloAnt });
       console.log("Pasamos al hilo " + this.numHilo);
     }
   }
@@ -59,7 +68,10 @@ class HilosScreen extends Component {
   siguienteHilo() {
     if (this.numHilo < this.hilos.length - 1) {
       this.numHilo++;
-      this.setState({ hiloAhora: this.hilos[this.numHilo] });
+      const hiloSig = this.hilos[this.numHilo];
+      this.setState({ iniAct: hiloSig.jugadorInicial_.nombre });
+      this.setState({ hiloAhora: hiloSig });
+
       console.log("Pasamos al hilo " + this.numHilo);
       //si es el ultimo hilo cambiamos mensaje
       if (this.numHilo === this.hilos.length - 1) {
@@ -103,7 +115,7 @@ class HilosScreen extends Component {
           </View>
           <Hilo
             hilo={this.state.hiloAhora.respuestas_}
-            jugadorInicial={this.state.hiloAhora.jugadorInicial_}
+            jugadorInicial={this.state.iniAct}
           />
         </View>
       </View>
