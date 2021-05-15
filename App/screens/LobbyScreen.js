@@ -59,7 +59,7 @@ class Lobby extends Component {
               <Fontisto name="arrow-return-left" size={26} color="white" />
             </TouchableOpacity>
             <Text style={styles.lobbyText}>
-              Lobby from: {this.state.partida}
+              Lobby from: {"\n"} {this.state.partida}
             </Text>
           </View>
           <ListaInLobby />
