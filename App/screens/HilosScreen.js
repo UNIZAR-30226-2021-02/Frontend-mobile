@@ -24,12 +24,14 @@ class HilosScreen extends Component {
       this.setState({ partida: item });
       console.log("Soy " + this.state.partida);
     });
+    
     this.state = {
       hiloAhora: [],
       righBtn: "Siguiente hilo",
       hilos: true,
       iniAct: "",
     };
+
   }
   componentDidMount() {
     this.loadData();
@@ -61,6 +63,7 @@ class HilosScreen extends Component {
       const hiloAnt = this.hilos[this.numHilo];
       this.setState({ iniAct: hiloAnt.jugadorInicial_.nombre });
       this.setState({ hiloAhora: hiloAnt });
+
       console.log("Pasamos al hilo " + this.numHilo);
     }
   }
@@ -71,7 +74,6 @@ class HilosScreen extends Component {
       const hiloSig = this.hilos[this.numHilo];
       this.setState({ iniAct: hiloSig.jugadorInicial_.nombre });
       this.setState({ hiloAhora: hiloSig });
-
       console.log("Pasamos al hilo " + this.numHilo);
       //si es el ultimo hilo cambiamos mensaje
       if (this.numHilo === this.hilos.length - 1) {
