@@ -16,7 +16,7 @@ class ListaInvitaciones extends Component {
   removeRequest = (name) => {
     console.log("antes " + this.state.data);
     const newLs = this.state.data.filter((rqt) => {
-      return rqt.nombre != name;
+      return rqt.partida.id != name;
     });
     this.setState({ data: newLs });
     console.log("despues " + this.state.data);
@@ -31,7 +31,7 @@ class ListaInvitaciones extends Component {
           setGameId(item.partida.id);
           const onSuccess = ({ data }) => {
             console.log("Aceptado manin " + data);
-            this.removeRequest(item.nombre);
+            this.removeRequest(item.partida.id);
           };
           const onFailure = (error) => {
             console.log(error && error.response);

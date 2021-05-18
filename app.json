@@ -26,6 +26,8 @@
       "backgroundColor": "#17151C"
     },
     "android": {
+      "package": "es.proyecto_PictyoPhone",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

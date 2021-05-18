@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   list: {
     top: "1.5%",
-    width: 600,
+    width: "100%",
     height: 120,
   },
   item: {
@@ -65,14 +65,13 @@ const styles = StyleSheet.create({
   shopZone: {
     //width:500,
     borderRadius: 20,
-    marginLeft: 100,
+    marginLeft: "20%",
     alignItems: "center",
     alignContent: "center",
     justifyContent: "center",
   },
   back: {
-    position: "absolute",
-    right: "25%",
+    right: screen.width * 0.16,
     width: screen.width * 0.8,
     height: screen.height * 0.8,
     borderRadius: 20,
@@ -195,14 +194,15 @@ class Shop extends Component {
         </View>
 
         <View style={styles.shopZone}>
-          <View style={styles.back} />
-          <Grid
-            style={styles.list}
-            renderItem={this._renderItem}
-            renderPlaceholder={this._renderPlaceholder}
-            data={this.state.avatares}
-            numColumns={4}
-          />
+          <View style={styles.back}>
+            <Grid
+              style={styles.list}
+              renderItem={this._renderItem}
+              renderPlaceholder={this._renderPlaceholder}
+              data={this.state.avatares}
+              numColumns={4}
+            />
+          </View>
         </View>
       </SafeAreaView>
     );

@@ -103,15 +103,15 @@ class TurnScreen extends Component {
     console.log(this.state.mode);
     switch (this.state.mode) {
       case 0:
-        return <IniWrite />;
+        return <IniWrite reload={() => this.checkTurn()} />;
         break;
       case 1:
-        return <Wait />;
+        return <Wait reload={() => this.checkTurn()} />;
         break;
       case 2:
         return (
           <View style={styles.containerLR}>
-            <Write />
+            <Write reload={() => this.checkTurn()} />
             <Image
               source={{
                 uri: this.state.imagen,
@@ -128,13 +128,13 @@ class TurnScreen extends Component {
               style={{
                 flexDirection: "column",
                 right: "6%",
-                top: "16%",
+                top: screen.height * 0.2,
               }}
             >
               <Text style={styles.texto}>Ahora dibuja:</Text>
               <Text style={styles.texto}>{this.state.queDibujo}</Text>
             </View>
-            <Draw />
+            <Draw reload={() => this.checkTurn()} />
           </View>
         );
         break;
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   picture: {
-    backgroundColor: "yellow",
+    backgroundColor: "white",
     borderRadius: 10,
     width: screen.width * 0.44,
     height: screen.width * 0.44,

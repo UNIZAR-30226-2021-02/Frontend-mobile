@@ -36,7 +36,7 @@ export const PuntuacionItem = ({ name, img, pD, pL, pG }) => {
         color="black"
       />
       <Text
-        style={{ left: 6, fontSize: 15, fontWeight: "bold", paddingRight: 6 }}
+        style={{ left: 6, fontSize: 15, fontWeight: "bold", paddingRight: 10 }}
       >
         {pG}
       </Text>

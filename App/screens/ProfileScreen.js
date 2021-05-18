@@ -9,6 +9,7 @@ import {
   Touchable,
   Dimensions,
   Alert,
+  ToastAndroid,
 } from "react-native";
 import {
   FontAwesome5,
@@ -207,6 +208,8 @@ class Profile extends Component {
         pGracioso: data.pGracioso,
         nAmigos: data.nAmigos,
       });
+
+      console.log(this.state.fotPerf);
       this.setState({ loading: false });
     };
     const onFailure = (error) => {
@@ -223,18 +226,28 @@ class Profile extends Component {
     console.log(payload);
 
     const onSuccess = ({ data }) => {
-      setClientName(this.state.nombre);
-      console.log("Cambiado " + this.state.nombre);
-      this.setState({ isLoading: false });
+      ToastAndroid.show(
+        "El nombre de: " +
+          this.state.nombreViejo +
+          " se ha cambiado a: " +
+          this.state.nombre,
+        ToastAndroid.SHORT
+      );
+      this.setState({
+        isLoading: false,
+        nombreViejo: nombre,
+        transparent: true,
+      });
     };
 
     const onFailure = (error) => {
-      console.log("Petición fallida ");
+      console.log("Petición fallida " + error);
 
       this.setState({ isLoading: false });
       if (error.message == "Request failed with status code 417") {
         Alert.alert("Ya existe un usuario con ese nombre, inténtelo con otro.");
       } else {
+        console.log(error.status);
         Alert.alert(
           "No se puede conectar con el servidor, inténtelo más tarde."
         );

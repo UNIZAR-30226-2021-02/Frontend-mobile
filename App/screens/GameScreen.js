@@ -9,6 +9,7 @@ import {
   View,
   ToastAndroid,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GameItem } from "../components/RowItem";
 import Colors from "../constants/colors";
 import { AntDesign, Entypo } from "@expo/vector-icons";
@@ -18,7 +19,7 @@ import URI from "../constants/apiUris";
 import { ScrollView } from "react-native-gesture-handler";
 import globalStyles from "../constants/styles";
 import ListaInvitaciones from "../components/ListaInvitaciones";
-
+import {registerForPushNotificationsAsync} from "../util/notifications"
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "green",
@@ -72,6 +73,9 @@ class Games extends Component {
     super();
     this.state = initialState;
   }
+  componentDidMount(){
+    registerForPushNotificationsAsync();
+  }
 
   onNewGameChange = (newGame) => {
     this.setState({ newGame });
@@ -99,6 +103,7 @@ class Games extends Component {
       ToastAndroid.show("Game " + newGame + " created!", ToastAndroid.SHORT);
       this.setState({ isLoading: false });
       setGameId(data.id);
+      AsyncStorage.setItem("@partidaName", newGame);
       this.props.navigation.navigate("Lobby");
     };
 
