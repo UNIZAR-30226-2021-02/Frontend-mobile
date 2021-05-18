@@ -151,7 +151,7 @@ class Shop extends Component {
       this.setState({ errors: error.response.data, loading: false });
     };
     //this.setState({ loading: true });
-    // APIKit.get(URI.viewProfile).then(onSuccess).catch(onFailure);
+    APIKit.get(URI.getShop).then(onSuccess).catch(onFailure);
   }
 
   loadData = () => {
