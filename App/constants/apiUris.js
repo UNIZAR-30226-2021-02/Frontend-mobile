@@ -35,6 +35,8 @@ export default {
   verPuntuacion: "puntosJugador",
   resetVotos: "resetVotos",
   changeImgProfile: "changeImageProfile",
-  getShop: "",
-  buyAvatar: "",
+  getShop: "listLockedPictures",
+  getShopUnlocked: "listUnlockedPictures",
+  buyAvatar: "unlockPicture",
+  gimmeMoney: "setMonedas",
 };
