@@ -7,10 +7,13 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  Button,
+  Alert,
+  ToastAndroid,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import URI from "../constants/apiUris";
-import APIKit from "../util/APIKit";
+import APIKit, { setMonedas, setCompra, setEquipado } from "../util/APIKit";
 import Grid from "react-native-grid-component";
 import globalStyles from "../constants/styles";
 import Colors from "../constants/colors";
@@ -51,13 +54,17 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
   },
   list: {
-    top: "1.5%",
-    width: "100%",
-    height: 120,
+    top: "18%",
+    left: "2%",
+    width: 600,
+  },
+  list2: {
+    bottom: "5%",
+    left: "2%",
+    width: 600,
   },
   item: {
-    width: 100,
-    height: 100,
+    width: "13%",
     margin: 8,
     alignItems: "center",
     justifyContent: "center",
@@ -83,8 +90,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   picture: {
-    height: 60,
-    width: 60,
+    height: 50,
+    width: 50,
   },
   shopStyle: {
     color: "white",
@@ -109,7 +116,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const initialState = { hasPict: false, avatares: [] };
+const initialState = { hasPict: false, avatares: [], avataresComprados: [] };
 class Shop extends Component {
   constructor() {
     super();
@@ -118,6 +125,21 @@ class Shop extends Component {
   }
   componentDidMount() {
     this.loadData();
+  }
+
+  getMilMonedas() {
+    this.setState({ loading: true });
+    setMonedas(1000);
+    const onSuccess = ({ data }) => {
+      console.log("Toma dinero uwu");
+      this.setState({ loading: false });
+    };
+    const onFailure = (error) => {
+      console.log("WTFFFFFFFFFFFFFFFFFFFFFFF");
+      this.setState({ errors: error.response.data, loading: false });
+    };
+    this.setState({ loading: true });
+    APIKit.get(URI.gimmeMoney).then(onSuccess).catch(onFailure);
   }
 
   getMonedas() {
@@ -139,38 +161,122 @@ class Shop extends Component {
   }
 
   getAvatares() {
-    this.setState({
-      avatares: falseData,
-    });
     const onSuccess = ({ data }) => {
       this.setState({ loading: false });
+      console.log("AAAAA " + JSON.stringify(data));
+      this.setState({
+        avatares: data,
+      });
     };
     const onFailure = (error) => {
       console.log(error && error.response);
       this.setState({ errors: error.response.data, loading: false });
     };
     //this.setState({ loading: true });
-    // APIKit.get(URI.viewProfile).then(onSuccess).catch(onFailure);
+    APIKit.get(URI.getShop).then(onSuccess).catch(onFailure);
+  }
+
+  onPressBuy(idFoto) {
+    setCompra(idFoto);
+    const onSuccess = ({ data }) => {
+      console.log("Cambiado ");
+      this.setState({ isLoading: false });
+      this.getAvataresComprados();
+      this.getMonedas();
+      this.getAvatares();
+      ToastAndroid.show("Nuevo avatar comprado", ToastAndroid.SHORT);
+    };
+
+    const onFailure = (error) => {
+      console.log("Petición fallida ");
+
+      this.setState({ isLoading: false });
+      if (error.message == "Request failed with status code 417") {
+        Alert.alert("No puedes comprar este avatar.");
+      } else {
+        Alert.alert(
+          "No se puede conectar con el servidor, inténtelo más tarde."
+        );
+      }
+    };
+    this.setState({ isLoading: true });
+    APIKit.get(URI.buyAvatar).then(onSuccess).catch(onFailure);
+  }
+
+  onPressChange(idFoto) {
+    setEquipado(idFoto);
+    const onSuccess = ({ data }) => {
+      this.setState({ isLoading: false });
+      ToastAndroid.show("Avatar cambiado", ToastAndroid.SHORT);
+    };
+
+    const onFailure = (error) => {
+      console.log("Petición fallida " + error);
+
+      this.setState({ isLoading: false });
+      if (error.message == "Request failed with status code 417") {
+        Alert.alert("No puedes comprar este avatar.");
+      } else {
+        Alert.alert(
+          "No se puede conectar con el servidor, inténtelo más tarde."
+        );
+      }
+    };
+
+    this.setState({ isLoading: true });
+
+    APIKit.get(URI.changeImgProfile).then(onSuccess).catch(onFailure);
+  }
+
+  getAvataresComprados() {
+    const onSuccess = ({ data }) => {
+      this.setState({ loading: false });
+      console.log("BBBB " + JSON.stringify(data));
+      this.setState({
+        avataresComprados: data,
+      });
+    };
+    const onFailure = (error) => {
+      console.log(error && error.response);
+      this.setState({ errors: error.response.data, loading: false });
+    };
+    //this.setState({ loading: true });
+    APIKit.get(URI.getShopUnlocked).then(onSuccess).catch(onFailure);
   }
 
   loadData = () => {
     this.getMonedas();
     this.getAvatares();
+    //this.getMilMonedas();
+    this.getAvataresComprados();
   };
   state = {};
 
   _renderItem = (item, i) => (
     <View style={[styles.item]} key={i}>
-      <TouchableOpacity onPress={() => console.log("pagar " + item.price)}>
+      <TouchableOpacity onPress={() => this.onPressBuy(item.idFoto)}>
         <Image
           source={{
-            uri: URI.img + item.img,
+            uri: URI.img + item.idFoto,
           }}
           style={styles.picture}
         />
         <View style={styles.round}>
-          <Text style={styles.price}>{item.price}</Text>
+          <Text style={styles.price}>{item.precio}</Text>
         </View>
+      </TouchableOpacity>
+    </View>
+  );
+
+  _renderItemComprado = (item, i) => (
+    <View style={[styles.item]} key={i}>
+      <TouchableOpacity onPress={() => this.onPressChange(item.idFoto)}>
+        <Image
+          source={{
+            uri: URI.img + item.idFoto,
+          }}
+          style={styles.picture}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -194,25 +300,45 @@ class Shop extends Component {
         </View>
 
         <View style={styles.shopZone}>
-          <View style={styles.back}>
-            <Grid
-              style={styles.list}
-              renderItem={this._renderItem}
-              renderPlaceholder={this._renderPlaceholder}
-              data={this.state.avatares}
-              numColumns={4}
-            />
-          </View>
+          <View style={styles.back} />
+          <Text
+            style={{
+              top: "8%",
+              fontSize: 17,
+              fontWeight: "bold",
+              right: "34%",
+            }}
+          >
+            Avatares listos para equipar:
+          </Text>
+          <Grid
+            style={styles.list}
+            renderItem={this._renderItemComprado}
+            renderPlaceholder={this._renderPlaceholder}
+            data={this.state.avataresComprados}
+            numColumns={5}
+          />
+          <Text
+            style={{
+              fontSize: 17,
+              fontWeight: "bold",
+              right: "36%",
+              bottom: "3%",
+            }}
+          >
+            Avatares desbloqueables:
+          </Text>
+          <Grid
+            style={styles.list2}
+            renderItem={this._renderItem}
+            renderPlaceholder={this._renderPlaceholder}
+            data={this.state.avatares}
+            numColumns={5}
+          />
+
         </View>
       </SafeAreaView>
     );
   }
 }
 export default Shop;
-
-const falseData = [
-  { price: 100, img: "foto0.png" },
-  { price: 120, img: "foto1.png" },
-  { price: 130, img: "foto2.png" },
-  { price: 1000, img: "foto3.png" },
-];

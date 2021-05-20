@@ -32,4 +32,16 @@ export const setVoteName = (name) => {
   APIKit.defaults.headers.common["votado"] = name;
 };
 
+export const setMonedas = (monedas) => {
+  APIKit.defaults.headers.common["monedas"] = monedas;
+};
+
+export const setCompra = (idFoto) => {
+  APIKit.defaults.headers.common["idFoto"] = idFoto;
+};
+
+export const setEquipado = (idFoto) => {
+  APIKit.defaults.headers.common["idFoto"] = idFoto;
+};
+
 export default APIKit;

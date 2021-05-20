@@ -34,4 +34,9 @@ export default {
   verResultados: "puntosPartida",
   verPuntuacion: "puntosJugador",
   resetVotos: "resetVotos",
+  changeImgProfile: "changeImageProfile",
+  getShop: "listLockedPictures",
+  getShopUnlocked: "listUnlockedPictures",
+  buyAvatar: "unlockPicture",
+  gimmeMoney: "setMonedas",
 };
