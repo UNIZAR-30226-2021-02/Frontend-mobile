@@ -78,7 +78,7 @@ class ListaInLobbyAdd extends Component {
           keyExtractor={(item) => item.nombre} //TODO
           ItemSeparatorComponent={RowSeparator}
           ListEmptyComponent={
-            <Text style={globalStyles.owoFont}>No tienes amigos.</Text>
+            <Text style={globalStyles.owoFont}>No tienes más amigos.</Text>
           }
           onRefresh={this.loadData}
           refreshing={this.state.loading}

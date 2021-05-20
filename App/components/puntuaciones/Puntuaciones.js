@@ -22,8 +22,8 @@ class Puntuaciones extends Component {
   renderItem = ({ item }) => {
     return (
       <PuntuacionItem
-        name={item.idUsuario_}
-        img={"foto0.png"}
+        name={item.idUsuario_.nombre}
+        img={item.idUsuario_.fotPerf}
         pD={item.pDibujo_}
         pG={item.pGracioso_}
         pL={item.pListo_}

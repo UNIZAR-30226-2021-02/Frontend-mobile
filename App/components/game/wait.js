@@ -6,32 +6,13 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  ToastAndroid,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import URI from "../../constants/apiUris";
 import APIKit from "../../util/APIKit";
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-    backgroundColor: "red",
-    width: "75%",
-    height: "100%",
-  },
-  button: {
-    backgroundColor: "blue",
-  },
-  input: {
-    width: "50%",
-    color: Colors.grey,
-    backgroundColor: Colors.white,
-    paddingLeft: 8,
-    borderRadius: 9,
-  },
-});
 
 const initState = { respuestaAct: "" };
 class Wait extends Component {
@@ -73,10 +54,47 @@ class Wait extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Espera</Text>
+        <Text style={styles.texto}>
+          Esperando a que los demás jugadores acaben...
+        </Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.props.reload();
+            ToastAndroid.show(" Refrescando... ", ToastAndroid.SHORT);
+          }}
+        >
+          <Ionicons
+            name="refresh-circle-outline"
+            size={60}
+            color={Colors.cyan}
+          />
+        </TouchableOpacity>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.background,
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  texto: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    bottom: "15%",
+  },
+  button: {
+    justifyContent: "space-evenly",
+    height: "13%",
+    width: "28%",
+    bottom: "8%",
+  },
+});
 
 export default Wait;

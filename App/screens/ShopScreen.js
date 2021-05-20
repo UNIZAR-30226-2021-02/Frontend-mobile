@@ -72,14 +72,13 @@ const styles = StyleSheet.create({
   shopZone: {
     //width:500,
     borderRadius: 20,
-    marginLeft: 100,
+    marginLeft: "20%",
     alignItems: "center",
     alignContent: "center",
     justifyContent: "center",
   },
   back: {
-    position: "absolute",
-    right: "25%",
+    right: screen.width * 0.16,
     width: screen.width * 0.8,
     height: screen.height * 0.8,
     borderRadius: 20,
@@ -336,6 +335,7 @@ class Shop extends Component {
             data={this.state.avatares}
             numColumns={5}
           />
+
         </View>
       </SafeAreaView>
     );

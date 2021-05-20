@@ -48,11 +48,7 @@ class Hilo extends Component {
           ListEmptyComponent={<Text style={globalStyles.owoFont}>xd</Text>}
           ListHeaderComponent={
             <Text style={globalStyles.papuFont}>
-              Hilo de
-              {
-                //TODO
-                //this.props.jugadorInicial
-              }
+              Hilo de {this.props.jugadorInicial}
             </Text>
           }
         />

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert,
   Dimensions,
+  ToastAndroid,
 } from "react-native";
 import { Draw, DrawRef } from "@benjeau/react-native-draw";
 import { captureRef as takeSnapshotAsync } from "react-native-view-shot";
@@ -19,7 +20,7 @@ const screen = Dimensions.get("window");
 const initialState = {
   color: "black",
   tama: 4,
-  hidden: true,
+  hidden: false,
 };
 let drawRef = useRef < DrawRef > null;
 const bn = [["black", "white"]];
@@ -40,12 +41,13 @@ class Drawer extends Component {
   };
   uploadImage = () => {
     // Check if any file is selected or not
-
     // If file selected then create FormData
     this.mySaveFx()
       .then((img) => {
         const onSuccess = ({ data }) => {
           console.log("OK :" + data);
+          ToastAndroid.show("Dibujo enviado", ToastAndroid.SHORT);
+          this.props.reload();
         };
         const onFailure = (error) => {
           console.log(error.message);
@@ -83,8 +85,8 @@ class Drawer extends Component {
         >
           <Draw
             ref={drawRef}
-            height={300}
-            width={300}
+            height={320}
+            width={320}
             colors={colorines}
             autoDismissColorPicker={true}
             initialValues={{
@@ -110,8 +112,9 @@ class Drawer extends Component {
         </View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => {
+          onPress={async () => {
             this.setState({ hidden: true });
+            await new Promise((r) => setTimeout(r, 200));
             this.uploadImage();
           }}
         >

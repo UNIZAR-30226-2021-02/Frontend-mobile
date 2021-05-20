@@ -1,11 +1,17 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, SafeAreaView, View } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+  View,
+  Dimensions,
+} from "react-native";
 import {
   AntDesign,
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
-
+const screen = Dimensions.get("window");
 class Tab extends React.PureComponent {
   render() {
     const { isSelected, tabIcon, tabName, onPress } = this.props;
@@ -48,7 +54,7 @@ class Tab extends React.PureComponent {
             color="blue"
           />
           <MaterialIcons
-            style={{ left: "29%" }}
+            style={{ left: screen.width * 0.024 }}
             name="arrow-left"
             size={50}
             color={color}
@@ -113,10 +119,10 @@ const styles = StyleSheet.create({
     left: "49%",
   },
   lessleft: {
-    left: "27%",
+    left: screen.width * 0.023,
   },
   moreleft: {
-    left: "33%",
+    left: screen.width * 0.027,
   },
 });
 export default LeftTabs;

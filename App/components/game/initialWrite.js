@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  ToastAndroid,
 } from "react-native";
 import Colors from "../../constants/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -70,6 +71,8 @@ class IniWrite extends Component {
     console.log(payload);
     const onSuccess = ({ data }) => {
       console.log("OK :" + data);
+      ToastAndroid.show("Enviado: " + respuestaAct, ToastAndroid.SHORT);
+      this.props.reload();
       this.setState({ isLoading: false, isAuthorized: true });
     };
 

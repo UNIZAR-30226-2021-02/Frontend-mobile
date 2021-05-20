@@ -24,7 +24,7 @@ export const TextHiloItem = ({ name, img, answer }) => {
 };
 
 export const ImgHiloItem = ({ name, img, answer }) => {
-  console.log("http://10.0.2.2:8080/api/returnImageResponse/" + answer);
+  console.log(URI.turnImg + answer);
 
   return (
     <View style={styles.rowImg}>
@@ -40,7 +40,7 @@ export const ImgHiloItem = ({ name, img, answer }) => {
 
       <Image
         source={{
-          uri: "http://10.0.2.2:8080/api/returnImageResponse/" + answer,
+          uri: URI.turnImg + answer,
           //uri:URI.img+ img,
         }}
         style={styles.imgResponse}
@@ -89,6 +89,8 @@ const styles = StyleSheet.create({
   imgResponse: {
     height: 200,
     width: 200,
+    backgroundColor: "white",
+    borderRadius: 10,
   },
   nombre: {
     fontWeight: "bold",
