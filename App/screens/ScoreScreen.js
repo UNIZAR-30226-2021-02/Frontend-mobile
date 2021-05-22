@@ -102,7 +102,7 @@ class ScoreScreen extends Component {
     return (
       <View style={styles.containerLR}>
         <Puntuaciones />
-        <View style={{ left: screen.width * 0.36 }}>
+        <View style={{ left: screen.width * 0.3 }}>
           <View style={styles.containerAcabada}>
             <Text style={styles.textAcabada}>Partida acabada</Text>
           </View>

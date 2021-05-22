@@ -24,14 +24,13 @@ class HilosScreen extends Component {
       this.setState({ partida: item });
       console.log("Soy " + this.state.partida);
     });
-    
+
     this.state = {
       hiloAhora: [],
       righBtn: "Siguiente hilo",
       hilos: true,
       iniAct: "",
     };
-
   }
   componentDidMount() {
     this.loadData();
@@ -111,7 +110,11 @@ class HilosScreen extends Component {
               style={styles.buttonright}
               onPress={() => this.siguienteHilo()}
             >
-              <Text style={styles.textButtonR}>{this.state.righBtn}</Text>
+              {this.state.righBtn == "Siguiente hilo" ? (
+                <Text style={styles.textButtonR}> Siguiente{"\n\t\t"}Hilo</Text>
+              ) : (
+                <Text style={styles.textButtonR}>{this.state.righBtn}</Text>
+              )}
               <AntDesign name="arrowright" size={24} color="white" />
             </TouchableOpacity>
           </View>
@@ -193,8 +196,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonleft: {
-    left: "35%",
     bottom: "2%",
+    right: "20%",
     flexDirection: "row",
     borderRadius: 12,
     alignItems: "center",
@@ -204,14 +207,14 @@ const styles = StyleSheet.create({
     width: "13%",
   },
   buttonright: {
-    left: "1%",
+    right: "29%",
     flexDirection: "row",
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "space-evenly",
     backgroundColor: Colors.cyan,
-    height: "50%",
-    width: "20%",
+    height: "60%",
+    width: "14.5%",
   },
   textButton: {
     paddingRight: "8%",
