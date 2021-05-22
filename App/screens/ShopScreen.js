@@ -55,12 +55,12 @@ const styles = StyleSheet.create({
   },
   list: {
     top: "18%",
-    left: "2%",
+    left: "8.5%",
     width: 600,
   },
   list2: {
     bottom: "5%",
-    left: "2%",
+    left: "8.5%",
     width: 600,
   },
   item: {
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     top: "3%",
     backgroundColor: "white",
     marginLeft: 100,
+    paddingLeft: "15%",
     alignItems: "center",
     alignContent: "center",
     justifyContent: "center",
@@ -253,7 +254,7 @@ class Shop extends Component {
   state = {};
 
   _renderItem = (item, i) => (
-    <View style={[styles.item]} key={i}>
+    <View style={[styles.item]} key={item.idFoto}>
       <TouchableOpacity onPress={() => this.onPressBuy(item.idFoto)}>
         <Image
           source={{
@@ -269,7 +270,7 @@ class Shop extends Component {
   );
 
   _renderItemComprado = (item, i) => (
-    <View style={[styles.item]} key={i}>
+    <View style={[styles.item]} key={item.idFoto}>
       <TouchableOpacity onPress={() => this.onPressChange(item.idFoto)}>
         <Image
           source={{
@@ -300,42 +301,42 @@ class Shop extends Component {
         </View>
 
         <View style={styles.shopZone}>
-          <View style={styles.back} />
-          <Text
-            style={{
-              top: "8%",
-              fontSize: 17,
-              fontWeight: "bold",
-              right: "34%",
-            }}
-          >
-            Avatares listos para equipar:
-          </Text>
-          <Grid
-            style={styles.list}
-            renderItem={this._renderItemComprado}
-            renderPlaceholder={this._renderPlaceholder}
-            data={this.state.avataresComprados}
-            numColumns={5}
-          />
-          <Text
-            style={{
-              fontSize: 17,
-              fontWeight: "bold",
-              right: "36%",
-              bottom: "3%",
-            }}
-          >
-            Avatares desbloqueables:
-          </Text>
-          <Grid
-            style={styles.list2}
-            renderItem={this._renderItem}
-            renderPlaceholder={this._renderPlaceholder}
-            data={this.state.avatares}
-            numColumns={5}
-          />
-
+          <View style={styles.back}>
+            <Text
+              style={{
+                top: "8%",
+                fontSize: 17,
+                fontWeight: "bold",
+                right: "34%",
+              }}
+            >
+              Avatares listos para equipar:
+            </Text>
+            <Grid
+              style={styles.list}
+              renderItem={this._renderItemComprado}
+              renderPlaceholder={this._renderPlaceholder}
+              data={this.state.avataresComprados}
+              numColumns={5}
+            />
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                right: "36%",
+                bottom: "3%",
+              }}
+            >
+              Avatares desbloqueables:
+            </Text>
+            <Grid
+              style={styles.list2}
+              renderItem={this._renderItem}
+              renderPlaceholder={this._renderPlaceholder}
+              data={this.state.avatares}
+              numColumns={5}
+            />
+          </View>
         </View>
       </SafeAreaView>
     );
