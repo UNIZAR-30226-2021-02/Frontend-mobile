@@ -179,7 +179,7 @@ class Votacion extends Component {
           renderItem={this._renderItem}
           renderPlaceholder={this._renderPlaceholder}
           data={this.state.players}
-          numColumns={5}
+          numColumns={4}
         />
       </View>
     );
