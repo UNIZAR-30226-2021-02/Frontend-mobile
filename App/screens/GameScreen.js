@@ -19,7 +19,7 @@ import URI from "../constants/apiUris";
 import { ScrollView } from "react-native-gesture-handler";
 import globalStyles from "../constants/styles";
 import ListaInvitaciones from "../components/ListaInvitaciones";
-import {registerForPushNotificationsAsync} from "../util/notifications"
+import { registerForPushNotificationsAsync } from "../util/notifications";
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "green",
@@ -50,6 +50,10 @@ const styles = StyleSheet.create({
   },
   listaPartidas: {
     top: "20%",
+    height: "90%",
+  },
+  listaInvitaciones: {
+    top: "10%",
   },
   toggle: {
     top: "5%",
@@ -73,7 +77,7 @@ class Games extends Component {
     super();
     this.state = initialState;
   }
-  componentDidMount(){
+  componentDidMount() {
     registerForPushNotificationsAsync();
   }
 
@@ -142,7 +146,7 @@ class Games extends Component {
 
   PetisList() {
     return (
-      <View style={styles.listaPartidas}>
+      <View style={styles.listaInvitaciones}>
         <ListaInvitaciones />
       </View>
     );

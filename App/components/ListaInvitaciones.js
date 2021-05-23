@@ -83,7 +83,7 @@ class ListaInvitaciones extends Component {
   render() {
     //this.loadData();
     return (
-      <View>
+      <View style={{ height: "87%" }}>
         <FlatList
           data={this.state.data}
           renderItem={this.renderItem}

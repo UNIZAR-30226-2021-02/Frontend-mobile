@@ -78,12 +78,11 @@ class ListaAmigos extends Component {
   render() {
     //this.loadData();
     return (
-      <View>
+      <View style={{ height: "91%", bottom: "2%" }}>
         <FlatList
           data={this.state.data}
           renderItem={this.renderItem}
           keyExtractor={(item) => item.nombre} //TODO
-          ItemSeparatorComponent={RowSeparator}
           ListEmptyComponent={
             <Text style={globalStyles.owoFont}>No tienes amigos.</Text>
           }

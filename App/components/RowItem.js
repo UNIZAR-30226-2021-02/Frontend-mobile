@@ -44,6 +44,24 @@ const styles = StyleSheet.create({
 
     elevation: 8,
   },
+  semirowIn: {
+    paddingHorizontal: 15,
+    paddingVertical: 12,
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+    backgroundColor: colors.white,
+    width: "82%",
+    borderRadius: 9,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    bottom: 15,
+  },
   title: {
     color: colors.text,
     fontSize: 16,
@@ -129,17 +147,16 @@ export const GameItem = ({ name, onPressPlay }) => (
 export const InLobbyItem = ({ name, onPress, picture }) => {
   console.log(picture);
   return (
-    <View style={styles.semirow}>
+    <View style={styles.semirowIn}>
       <Image
         source={{
           uri: picture,
         }}
         style={styles.picture}
       />
-      <Text style={styles.title}>{name}</Text>
-      <TouchableOpacity onPress={onPress}>
-        <MaterialCommunityIcons name="close-circle" size={24} color="black" />
-      </TouchableOpacity>
+      <Text style={{ color: colors.text, fontSize: 16, right: "65%" }}>
+        {name}
+      </Text>
     </View>
   );
 };

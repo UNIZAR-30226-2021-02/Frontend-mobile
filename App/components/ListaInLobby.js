@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { RowSeparator, InLobbyItem } from "./RowItem";
+import { RowSeparatorThin, InLobbyItem } from "./RowItem";
 import APIKit from "../util/APIKit";
 import globalStyles from "../constants/styles";
 import URI from "../constants/apiUris";
@@ -32,25 +32,6 @@ class ListaInLobby extends Component {
       <Text></Text>
       <InLobbyItem
         name={item.nombre}
-        onPress={() => {
-          /*
-          const payload = JSON.stringify({ nombre: item.nombre });
-          console.log("Se envía " + payload);
-
-          const onSuccess = ({ data }) => {
-            console.log("Eliminado manin " + data);
-            this.removePlayer(item.nombre);
-            this.removeRequest(item.nombre);
-          };
-          const onFailure = (error) => {
-            console.log(error && error.response);
-          };
-
-          APIKit.post(URI.deleteFriend, payload)
-            .then(onSuccess)
-            .catch(onFailure);*/
-          null;
-        }}
         picture={URI.img + item.fotPerf}
       ></InLobbyItem>
     </View>
@@ -77,12 +58,11 @@ class ListaInLobby extends Component {
   render() {
     //this.loadData();
     return (
-      <View>
+      <View style={{ height: "80%" }}>
         <FlatList
           data={this.state.data}
           renderItem={this.renderItem}
           keyExtractor={(item) => item.nombre} //TODO
-          ItemSeparatorComponent={RowSeparator}
           ListEmptyComponent={
             <Text style={globalStyles.owoFont}>No nay nadie en el lobby.</Text>
           }

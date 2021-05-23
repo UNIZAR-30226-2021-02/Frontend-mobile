@@ -56,7 +56,7 @@ class ListaPartidas extends Component {
   render() {
     //this.loadData();
     return (
-      <View>
+      <View style={{ height: "90%" }}>
         <FlatList
           style={{ height: "60%" }}
           data={this.state.data}

@@ -57,6 +57,8 @@ class Friends extends Component {
         Alert.alert(
           "Este usuario ya tiene una petición de amistad suya o ya es su amigo."
         );
+      } else {
+        Alert.alert("Nombre de usuario no válido.");
       }
     };
 
@@ -194,8 +196,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   petitionsContainer: {
+    top: "2%",
     width: "110%",
-    height: "70%",
+    height: "80%",
   },
 
   friendsContainer: {
