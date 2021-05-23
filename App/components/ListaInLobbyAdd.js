@@ -71,7 +71,7 @@ class ListaInLobbyAdd extends Component {
   render() {
     //this.loadData();
     return (
-      <View>
+      <View style={{ bottom: "3%" }}>
         <FlatList
           data={this.state.data}
           renderItem={this.renderItem}
