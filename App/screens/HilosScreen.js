@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     paddingBottom: "5%",
   },
   lobbyText: {
-    fontSize: 20,
+    fontSize: 19,
     fontWeight: "bold",
     left: "30%",
     color: "white",
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     width: "13%",
   },
   buttonright: {
-    right: "29%",
+    right: "26.5%",
     flexDirection: "row",
     borderRadius: 12,
     alignItems: "center",

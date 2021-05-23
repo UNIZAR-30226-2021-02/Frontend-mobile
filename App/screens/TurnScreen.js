@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     paddingBottom: "2%",
   },
   lobbyText: {
-    fontSize: 20,
+    fontSize: 19,
     fontWeight: "bold",
     left: "30%",
     color: "white",

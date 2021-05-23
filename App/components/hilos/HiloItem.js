@@ -94,11 +94,11 @@ const styles = StyleSheet.create({
   },
   nombre: {
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 16,
     bottom: 2,
   },
   contenido: {
     left: 12,
-    fontSize: 15,
+    fontSize: 14,
   },
 });
