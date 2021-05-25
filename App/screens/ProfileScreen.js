@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   picContainer: {
     top: "2%",
     paddingTop: "13%",
+    right: "9%",
     alignItems: "center",
     justifyContent: "center",
   },

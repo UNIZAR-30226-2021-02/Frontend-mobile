@@ -83,6 +83,16 @@ class Drawer extends Component {
             this.screenshot = shot;
           }}
         >
+          <View
+            style={{
+              borderRadius: 10,
+              position: "absolute",
+              height: "49%",
+              width: "100%",
+              bottom: "13.5%",
+              backgroundColor: "#d0d0d0",
+            }}
+          />
           <Draw
             ref={drawRef}
             height={320}

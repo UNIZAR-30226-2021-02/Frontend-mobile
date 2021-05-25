@@ -41,6 +41,12 @@ class Lobby extends Component {
         Alert.alert("Sólo el host puede iniciar la partida.");
       } else if (error.message == "Request failed with status code 503") {
         Alert.alert("La partida ya está empezada.");
+      } else if (error.message == "Request failed with status code 423") {
+        Alert.alert(
+          "No se puede empezar una partida con menos de 3 jugadores."
+        );
+      } else {
+        Alert.alert("Error desconocido.");
       }
     };
 

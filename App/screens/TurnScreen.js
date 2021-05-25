@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: screen.width * 0.44,
     height: screen.width * 0.44,
+    bottom: "3%",
   },
 });
 
