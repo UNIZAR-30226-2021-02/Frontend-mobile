@@ -82,7 +82,7 @@ class TurnScreen extends Component {
     const onFailure = (error) => {
       console.log("Ha fallado");
       this.setState({ isLoading: false });
-      this.props.navigation.navigate("GameScreen");
+      this.props.navigation.navigate("Home");
       ToastAndroid.show("No se pudo encontrar la partida", ToastAndroid.SHORT);
       // console.log(error && error.response);
     };
