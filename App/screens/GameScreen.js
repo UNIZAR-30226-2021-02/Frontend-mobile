@@ -136,7 +136,24 @@ class Games extends Component {
         </View>
         <View style={styles.listaPartidas}>
           <ListaPartidas
-            action={() => this.props.navigation.navigate("Lobby")}
+            action={() => {
+              const onSuccess = ({ data }) => {
+                this.props.navigation.navigate("Turn");
+              };
+
+              const onFailure = (error) => {
+                console.log("Ha fallado");
+                this.setState({ isLoading: false });
+                if (error.message == "Request failed with status code 417") {
+                  this.props.navigation.navigate("Lobby");
+                }
+              };
+
+              this.setState({ isLoading: true });
+
+              APIKit.get(URI.getTurn).then(onSuccess).catch(onFailure);
+              this.props.navigation.navigate("Lobby");
+            }}
             action2={() => this.props.navigation.navigate("Turn")}
           />
         </View>
