@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   Dimensions,
   Image,
+  ToastAndroid,
 } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
 
@@ -81,7 +82,8 @@ class TurnScreen extends Component {
     const onFailure = (error) => {
       console.log("Ha fallado");
       this.setState({ isLoading: false });
-
+      this.props.navigation.navigate("GameScreen");
+      ToastAndroid.show("No se pudo encontrar la partida", ToastAndroid.SHORT);
       // console.log(error && error.response);
     };
 
