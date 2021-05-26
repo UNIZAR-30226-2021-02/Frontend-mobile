@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { FlatList, StyleSheet, Text, View, Alert } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  ToastAndroid,
+} from "react-native";
 import { RowSeparator, InviteFriendItem } from "./RowItem";
 import APIKit, { setInviteName } from "../util/APIKit";
 import globalStyles from "../constants/styles";
@@ -35,7 +42,10 @@ class ListaInLobbyAdd extends Component {
 
         const onSuccess = ({ data }) => {
           console.log("Eliminado manin " + data);
-          this.removeFriend(item.nombre);
+          ToastAndroid.show(
+            "Enviada la invitación a: " + item.nombre,
+            ToastAndroid.SHORT
+          );
         };
         const onFailure = (error) => {
           console.log(error && error.response);
