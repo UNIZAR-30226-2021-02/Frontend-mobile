@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
     elevation: 7,
   },
   interiorIcon: {
+    right: "10%",
+    top: "0.5%",
     paddingTop: 2,
     paddingLeft: 6,
     paddingBottom: 2,
@@ -105,9 +107,11 @@ const styles = StyleSheet.create({
   },
   price: {
     fontWeight: "bold",
+    left: "8%",
   },
   round: {
     top: "5%",
+    paddingHorizontal: 3,
     borderWidth: 2,
     borderRadius: 10,
     borderColor: "black",
@@ -264,6 +268,12 @@ class Shop extends Component {
         />
         <View style={styles.round}>
           <Text style={styles.price}>{item.precio}</Text>
+          <FontAwesome5
+            style={styles.interiorIcon}
+            name="coins"
+            size={15}
+            color="black"
+          />
         </View>
       </TouchableOpacity>
     </View>

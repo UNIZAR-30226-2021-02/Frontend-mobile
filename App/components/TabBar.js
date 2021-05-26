@@ -52,19 +52,19 @@ class TabBar extends React.PureComponent {
     const tabs = [
       {
         tabName: "Game",
-        tabIcon: "gamepad-variant-outline",
+        tabIcon: "videogame-asset",
       },
       {
         tabName: "Profile",
-        tabIcon: "user",
+        tabIcon: "person",
       },
       {
         tabName: "Shop",
-        tabIcon: "shoppingcart",
+        tabIcon: "shopping-cart",
       },
       {
         tabName: "Friends",
-        tabIcon: "people-outline",
+        tabIcon: "people-alt",
       },
     ];
     return (

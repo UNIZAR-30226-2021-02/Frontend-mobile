@@ -17,6 +17,7 @@ import {
   FontAwesome,
   MaterialCommunityIcons,
   Ionicons,
+  MaterialIcons,
 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
@@ -288,9 +289,9 @@ class Profile extends Component {
           </View>
           <View style={{ left: "290%" }}>
             <TouchableOpacity>
-              <FontAwesome
+              <MaterialIcons
                 onPress={() => this.signOut()}
-                name="sign-out"
+                name="logout"
                 size={40}
                 color="white"
               />

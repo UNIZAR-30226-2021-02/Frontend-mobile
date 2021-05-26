@@ -11,11 +11,12 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
+import Colors from "../constants/colors";
 const screen = Dimensions.get("window");
 class Tab extends React.PureComponent {
   render() {
     const { isSelected, tabIcon, tabName, onPress } = this.props;
-    const color = !isSelected ? "#EEE" : "blue";
+    const color = !isSelected ? "#EEE" : Colors.background;
     const textStyles = {
       color,
       fontSize: 32,
@@ -27,58 +28,22 @@ class Tab extends React.PureComponent {
       backgroundColor: "#EEE",
       padding: 12,
     };
-    if (tabName == "Friends") {
-      return (
-        <TouchableOpacity style={containerStyles} onPress={onPress}>
-          <MaterialIcons
-            style={styles.left}
-            name={tabIcon}
-            size={30}
-            color="blue"
-          />
-          <MaterialIcons
-            style={styles.lessleft}
-            name="arrow-left"
-            size={50}
-            color={color}
-          />
-        </TouchableOpacity>
-      );
-    } else if (tabName == "Game") {
-      return (
-        <TouchableOpacity style={containerStyles} onPress={onPress}>
-          <MaterialCommunityIcons
-            style={styles.left}
-            name={tabIcon}
-            size={29}
-            color="blue"
-          />
-          <MaterialIcons
-            style={{ left: screen.width * 0.024 }}
-            name="arrow-left"
-            size={50}
-            color={color}
-          />
-        </TouchableOpacity>
-      );
-    } else {
-      return (
-        <TouchableOpacity style={containerStyles} onPress={onPress}>
-          <AntDesign
-            style={styles.left}
-            name={tabIcon}
-            size={25}
-            color="blue"
-          />
-          <MaterialIcons
-            style={styles.moreleft}
-            name="arrow-left"
-            size={50}
-            color={color}
-          />
-        </TouchableOpacity>
-      );
-    }
+    return (
+      <TouchableOpacity style={containerStyles} onPress={onPress}>
+        <MaterialIcons
+          style={styles.left}
+          name={tabIcon}
+          size={30}
+          color={Colors.background}
+        />
+        <MaterialIcons
+          style={styles.lessleft}
+          name="arrow-left"
+          size={50}
+          color={color}
+        />
+      </TouchableOpacity>
+    );
   }
 }
 
