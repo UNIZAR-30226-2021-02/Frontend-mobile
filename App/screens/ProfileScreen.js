@@ -248,6 +248,8 @@ class Profile extends Component {
       this.setState({ isLoading: false });
       if (error.message == "Request failed with status code 417") {
         Alert.alert("Ya existe un usuario con ese nombre, inténtelo con otro.");
+      } else if (error.message == "Request failed with status code 405") {
+        Alert.alert("No se permiten nombres de más de 15 carácteres.");
       } else {
         console.log(error.status);
         Alert.alert(

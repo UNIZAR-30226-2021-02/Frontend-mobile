@@ -118,7 +118,14 @@ class Games extends Component {
 
     this.setState({ isLoading: true });
 
-    APIKit.post(URI.newGame, payload).then(onSuccess).catch(onFailure);
+    if (this.state.newGame != "") {
+      APIKit.post(URI.newGame, payload).then(onSuccess).catch(onFailure);
+    } else {
+      ToastAndroid.show(
+        "No se puede crear una partida sin nombre.",
+        ToastAndroid.SHORT
+      );
+    }
   }
 
   GameList() {
