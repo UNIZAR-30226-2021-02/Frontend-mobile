@@ -82,6 +82,11 @@ class IniWrite extends Component {
         Alert.alert(
           "El jugador no pertenece a la partida o ya ha jugado ese turno."
         );
+      } else if (error.message == "Request failed with status code 400") {
+        ToastAndroid.show(
+          "No se puede enviar una respuesta vacía",
+          ToastAndroid.SHORT
+        );
       }
       this.setState({ isLoading: false });
       //Alert.alert("No se puede conectar al servidor, pruebe más tarde ");
