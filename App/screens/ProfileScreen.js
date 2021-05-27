@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
   },
   nombre: {
     top: "3%",
+    right: screen.width * 0.012,
     fontSize: 20,
     fontWeight: "bold",
     color: "white",
