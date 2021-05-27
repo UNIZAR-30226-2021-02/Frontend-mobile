@@ -95,7 +95,14 @@ class IniWrite extends Component {
     // Show spinner when call is made
     this.setState({ isLoading: true });
 
-    APIKit.post(URI.sendText, payload).then(onSuccess).catch(onFailure);
+    if (this.state.respuestaAct.length <= 30) {
+      APIKit.post(URI.sendText, payload).then(onSuccess).catch(onFailure);
+    } else {
+      ToastAndroid.show(
+        "No se pueden introducir respuestas de más de 30 carácteres.",
+        ToastAndroid.SHORT
+      );
+    }
   }
 
   render() {

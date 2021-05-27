@@ -19,13 +19,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import URI from "../constants/apiUris";
 
 import APIKit, { setClientToken, setClientMail } from "../util/APIKit";
-import Colors from "../constants/colors"
-
+import Colors from "../constants/colors";
 
 const screen = Dimensions.get("window");
 const state = { text: "Ususario" };
-;
-
 const initialState = {
   mail: "",
   username: "",
@@ -64,7 +61,6 @@ class Register extends Component {
 
   onPasswordAChange = (passwordA) => {
     this.state.passwordA = passwordA;
-    console.log("Son: " + this.state.passwordA + "  " + this.state.passwordB);
     if (this.state.passwordA === this.state.passwordB) {
       this.setState({ hide: true });
     } else {
@@ -74,7 +70,6 @@ class Register extends Component {
 
   onPasswordBChange = (passwordB) => {
     this.state.passwordB = passwordB;
-    console.log("Son: " + this.state.passwordA + "  " + this.state.passwordB);
     if (this.state.passwordB === this.state.passwordA) {
       this.setState({ hide: true });
     } else {
@@ -105,8 +100,8 @@ class Register extends Component {
       console.log(payload);
 
       const onSuccess = ({ data }) => {
-          console.log(data);
-        
+        console.log(data);
+
         // Set JSON Web Token on success
         console.log(1);
         setClientToken(data.token);

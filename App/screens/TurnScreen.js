@@ -128,15 +128,19 @@ class TurnScreen extends Component {
           <View style={styles.containerLR}>
             <View
               style={{
+                width: "35%",
                 flexDirection: "column",
-                right: "6%",
+                position: "absolute",
+                right: "32%",
                 top: screen.height * 0.2,
               }}
             >
               <Text style={styles.texto}>Ahora dibuja:</Text>
               <Text style={styles.texto}>{this.state.queDibujo}</Text>
             </View>
-            <Draw reload={() => this.checkTurn()} />
+            <View style={{ width: "50%", left: "30%", bottom: "2%" }}>
+              <Draw reload={() => this.checkTurn()} />
+            </View>
           </View>
         );
         break;
