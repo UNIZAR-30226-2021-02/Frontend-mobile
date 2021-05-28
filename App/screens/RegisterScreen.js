@@ -129,7 +129,13 @@ class Register extends Component {
       // Show spinner when call is made
       this.setState({ isLoading: true });
 
-      APIKit.post(URI.register, payload).then(onSuccess).catch(onFailure);
+      if (
+        /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.exec(this.state.mail)
+      ) {
+        APIKit.post(URI.register, payload).then(onSuccess).catch(onFailure);
+      } else {
+        Alert.alert("El mail introducido no es válido.");
+      }
     } else if (
       !(this.state.mail.includes("@") && this.state.mail.includes("."))
     ) {
